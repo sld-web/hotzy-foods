@@ -20,13 +20,26 @@ export const productAdminRouter = router({
 
     const orderBy: any = {};
     switch (sort) {
-      case 'name_asc': orderBy.name = 'asc'; break;
-      case 'name_desc': orderBy.name = 'desc'; break;
-      case 'price_asc': orderBy.price = 'asc'; break;
-      case 'price_desc': orderBy.price = 'desc'; break;
-      case 'newest': orderBy.createdAt = 'desc'; break;
-      case 'oldest': orderBy.createdAt = 'asc'; break;
-      default: orderBy.createdAt = 'desc';
+      case 'name_asc':
+        orderBy.name = 'asc';
+        break;
+      case 'name_desc':
+        orderBy.name = 'desc';
+        break;
+      case 'price_asc':
+        orderBy.price = 'asc';
+        break;
+      case 'price_desc':
+        orderBy.price = 'desc';
+        break;
+      case 'newest':
+        orderBy.createdAt = 'desc';
+        break;
+      case 'oldest':
+        orderBy.createdAt = 'asc';
+        break;
+      default:
+        orderBy.createdAt = 'desc';
     }
 
     const [items, total] = await Promise.all([
@@ -72,6 +85,13 @@ export const productAdminRouter = router({
         include: { images: true, category: true },
       });
     }),
+
+  byId: adminProcedure.input(z.object({ id: z.string() })).query(async ({ input }) => {
+    return prisma.product.findUnique({
+      where: { id: input.id },
+      include: { images: { orderBy: { sortOrder: 'asc' } }, category: true },
+    });
+  }),
 
   delete: adminProcedure.input(z.object({ id: z.string() })).mutation(async ({ input }) => {
     await prisma.productImage.deleteMany({ where: { productId: input.id } });

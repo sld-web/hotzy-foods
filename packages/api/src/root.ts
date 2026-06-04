@@ -13,6 +13,7 @@ import { authRouter } from './routers/auth';
 import { productAdminRouter } from './routers/product-admin';
 import { orderAdminRouter } from './routers/order-admin';
 import { settingsRouter, teamRouter } from './routers/settings';
+import { categoryAdminRouter } from './routers/category-admin';
 
 export const appRouter = router({
   product: productRouter,
@@ -30,6 +31,7 @@ export const appRouter = router({
     campaign: campaignRouter,
     settings: settingsRouter,
     team: teamRouter,
+    category: categoryAdminRouter,
   }),
 });
 

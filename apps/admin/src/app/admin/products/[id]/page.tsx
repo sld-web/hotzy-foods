@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { trpc } from '@/lib/trpc';
@@ -18,16 +18,20 @@ const HEAT_LEVELS = [
 
 const DIETARY_OPTIONS = ['Vegan', 'Gluten Free', 'No MSG', 'Organic', 'Keto', 'Sugar Free'];
 
-export default function AddProductPage() {
+export default function EditProductPage() {
   const router = useRouter();
+  const params = useParams();
+  const id = params.id as string;
+
   const [selectedHeat, setSelectedHeat] = useState(0);
   const [dietaryTags, setDietaryTags] = useState<string[]>([]);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [imageInput, setImageInput] = useState('');
 
   const { data: categories } = trpc.admin.category.list.useQuery();
+  const { data: product, isLoading: productLoading } = trpc.admin.product.byId.useQuery({ id });
 
-  const createMutation = trpc.admin.product.create.useMutation({
+  const updateMutation = trpc.admin.product.update.useMutation({
     onSuccess: () => {
       router.push('/admin/inventory');
     },
@@ -38,6 +42,7 @@ export default function AddProductPage() {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm<CreateProductInput>({
     resolver: zodResolver(createProductSchema),
     defaultValues: {
@@ -52,8 +57,49 @@ export default function AddProductPage() {
     },
   });
 
+  useEffect(() => {
+    if (product) {
+      reset({
+        name: product.name,
+        slug: product.slug,
+        sku: product.sku,
+        description: product.description,
+        price: Number(product.price),
+        compareAtPrice: product.compareAtPrice ? Number(product.compareAtPrice) : undefined,
+        costPrice: product.costPrice ? Number(product.costPrice) : undefined,
+        stockLevel: product.stockLevel,
+        lowStockThreshold: product.lowStockThreshold,
+        heatLevel: product.heatLevel as any,
+        shuMin: product.shuMin ?? undefined,
+        shuMax: product.shuMax ?? undefined,
+        weight: product.weight ? Number(product.weight) : undefined,
+        isActive: product.isActive,
+        isFeatured: product.isFeatured,
+        isBestseller: product.isBestseller,
+        isNew: product.isNew,
+        dietaryTags: product.dietaryTags,
+        metaTitle: product.metaTitle ?? undefined,
+        metaDesc: product.metaDesc ?? undefined,
+        categoryId: product.categoryId,
+        images: product.images.map((img) => ({
+          url: img.url,
+          alt: img.alt ?? undefined,
+          sortOrder: img.sortOrder,
+        })),
+      });
+
+      setDietaryTags(product.dietaryTags);
+      setImageUrls(product.images.map((img) => img.url));
+
+      if (product.heatLevel) {
+        const idx = HEAT_LEVELS.findIndex((h) => h.value === product.heatLevel);
+        if (idx >= 0) setSelectedHeat(idx + 1);
+      }
+    }
+  }, [product, reset]);
+
   const onSubmit = (data: CreateProductInput) => {
-    createMutation.mutate(data);
+    updateMutation.mutate({ id, ...data });
   };
 
   const toggleDietaryTag = (tag: string) => {
@@ -85,21 +131,38 @@ export default function AddProductPage() {
     );
   };
 
+  if (productLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="animate-spin h-8 w-8 border-2 border-primary border-t-transparent rounded-full" />
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="text-center py-12">
+        <h1 className="text-headline-lg text-on-surface mb-2">Product not found</h1>
+        <Button variant="outline" onClick={() => router.push('/admin/inventory')}>
+          Back to Inventory
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <p className="text-label-sm text-on-surface-variant mb-1">
-            Inventory &gt; Add New Product
-          </p>
-          <h1 className="text-headline-lg text-on-surface">Create New Product</h1>
+          <p className="text-label-sm text-on-surface-variant mb-1">Inventory &gt; Edit Product</p>
+          <h1 className="text-headline-lg text-on-surface">Edit: {product.name}</h1>
         </div>
         <div className="flex gap-3">
           <Button variant="ghost" onClick={() => router.push('/admin/inventory')}>
-            Discard changes
+            Cancel
           </Button>
-          <Button onClick={handleSubmit(onSubmit)} loading={createMutation.isPending}>
-            Save Product
+          <Button onClick={handleSubmit(onSubmit)} loading={updateMutation.isPending}>
+            Save Changes
           </Button>
         </div>
       </div>
@@ -306,7 +369,6 @@ export default function AddProductPage() {
             <div className="bg-white rounded-xl border border-surface-container p-6 space-y-4">
               <h2 className="text-headline-md text-on-surface">Product Media</h2>
 
-              {/* Image URL input */}
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -320,7 +382,6 @@ export default function AddProductPage() {
                 </Button>
               </div>
 
-              {/* Image previews */}
               {imageUrls.length > 0 ? (
                 <div className="grid grid-cols-2 gap-2">
                   {imageUrls.map((url, i) => (
@@ -390,9 +451,9 @@ export default function AddProductPage() {
             <Button
               className="w-full"
               onClick={handleSubmit(onSubmit)}
-              loading={createMutation.isPending}
+              loading={updateMutation.isPending}
             >
-              Save Product
+              Save Changes
             </Button>
           </div>
         </div>
