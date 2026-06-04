@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hotzy Foods - Xtreme Chili Sauce</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#006539",
+                      "on-secondary-fixed-variant": "#584400",
+                      "surface-tint": "#bd0a2e",
+                      "tertiary-fixed": "#86fab0",
+                      "surface-container-lowest": "#ffffff",
+                      "on-background": "#1b1b1b",
+                      "fresh-mint": "#3CB371",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#241a00",
+                      "on-tertiary-container": "#d7ffdf",
+                      "surface-white": "#FFFFFF",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#ffb3b2",
+                      "secondary": "#745b00",
+                      "on-tertiary-fixed": "#00210f",
+                      "surface-container-low": "#f3f3f3",
+                      "surface-container-high": "#e8e8e8",
+                      "secondary-container": "#fecb00",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#f1f1f1",
+                      "on-primary-container": "#fff2f1",
+                      "outline": "#906f6e",
+                      "secondary-fixed": "#ffe08b",
+                      "tertiary-fixed-dim": "#69dd96",
+                      "surface-bright": "#f9f9f9",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e2e2e2",
+                      "surface": "#f9f9f9",
+                      "surface-container": "#eeeeee",
+                      "on-primary-fixed-variant": "#92001f",
+                      "surface-container-highest": "#e2e2e2",
+                      "primary-container": "#d7263d",
+                      "on-surface": "#1b1b1b",
+                      "secondary-fixed-dim": "#f1c100",
+                      "on-tertiary-fixed-variant": "#00522d",
+                      "on-secondary-container": "#6e5700",
+                      "on-primary-fixed": "#410008",
+                      "golden-glaze": "#FFCC00",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#ffdad9",
+                      "on-error": "#ffffff",
+                      "on-surface-variant": "#5b403f",
+                      "inverse-surface": "#303030",
+                      "primary": "#b20028",
+                      "background": "#f9f9f9",
+                      "tertiary-container": "#008149",
+                      "chili-red": "#D7263D",
+                      "surface-gray": "#F8F8F8",
+                      "outline-variant": "#e4bdbc",
+                      "surface-dim": "#dadada",
+                      "primary-fixed-dim": "#ffb3b2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "stack-sm": "4px",
+                      "stack-md": "16px",
+                      "stack-lg": "32px",
+                      "margin-mobile": "16px",
+                      "container-max": "1200px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Work Sans"
+                      ],
+                      "label-md": [
+                              "Work Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Work Sans"
+                      ],
+                      "body-lg": [
+                              "Work Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "34px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "42px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+      </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface-white dark:bg-surface-container-lowest sticky top-0 z-50 border-b border-surface-container dark:border-outline-variant flat no shadows">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<button class="text-chili-red dark:text-primary-fixed-dim hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors scale-95 duration-100 ease-in-out">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-headline-md font-headline-md font-bold text-chili-red dark:text-primary-fixed-dim tracking-tight">Hotzy Foods</div>
+<button class="text-chili-red dark:text-primary-fixed-dim hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors scale-95 duration-100 ease-in-out relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute -top-1 -right-1 bg-chili-red text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">2</span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex-1">
+<!-- Breadcrumb & Back -->
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-md flex items-center gap-2 text-on-surface-variant">
+<button class="flex items-center gap-1 hover:text-chili-red transition-colors text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                Back to Sauces
+            </button>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pb-stack-lg">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Product Image -->
+<div class="col-span-1 md:col-span-6 lg:col-span-7 flex flex-col gap-stack-md">
+<div class="relative bg-surface-white rounded-lg border border-surface-container overflow-hidden aspect-square md:aspect-[4/3] flex items-center justify-center group">
+<img alt="Xtreme Chili Sauce Bottle" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sleek, modern glass bottle of premium dark red chili sauce positioned cleanly in the center of a bright, white studio backdrop. The lighting is high-key and soft, creating a crisp, professional product photography aesthetic. The label features bold, high-contrast modern typography in black and white with a subtle chili red accent. The overall mood is energetic, premium, and appetizing, fitting perfectly within a clean, modern corporate food brand context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk9rsCDyXoRXBHtUbVNm7vasl5TIpzCJP7Q33EybQYBvWTuYD3QClW4JfaQBQSY_MqGMsKfBqsXOdabvnNcNEoHxE_qqecmQq-zWhjkThggX8ZwJf8CrD9sDb_F4W-O7PdAEWtQqYkDNADYmK2ADSxWX_J7Am5RoOTby6tiITiCvevu1bDZtCvQIQ-rXs2T-EesGNJiGU-9-KD0SelirSJHgTqKbEdZjhWmY0owm68rvzZbX2Evwe-lED-BR0hv9e64jbhqRekf8ON"/>
+<!-- Badges -->
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-chili-red/10 text-chili-red px-3 py-1 rounded-full text-label-sm font-label-sm uppercase tracking-wider backdrop-blur-sm border border-chili-red/20 font-bold shadow-sm">Bestseller</span>
+<span class="bg-golden-glaze/90 text-on-secondary-fixed-variant px-3 py-1 rounded-full text-label-sm font-label-sm uppercase tracking-wider backdrop-blur-sm shadow-sm font-bold">Signature Range</span>
+</div>
+</div>
+<!-- Thumbnails (Optional Desktop Enhancement) -->
+<div class="hidden md:flex gap-4">
+<div class="w-24 h-24 bg-surface-white rounded border-2 border-chili-red overflow-hidden cursor-pointer">
+<img alt="Thumbnail 1" class="w-full h-full object-cover" data-alt="A macro shot of the premium dark red chili sauce bottle label, highlighting the bold modern typography and clean white studio lighting. High contrast, crisp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVqgd2NWJ6r7b3Zfr5rH5xwYSjuixo4WiHIyLeqWWoq6NPHFdzgXWyMvaWXtdw9W_MESltb7fuuS2cj9o3A7VF4rii5CPt7paMo9Jum_V04CFFZ0FzD_7DkLOb-DwE1Bw5R3BfrCOMv65nB5d3rJmunCPPAN-lzR1XBXQC26ggeGHabBdBsSrcjjAvXNe9heDqcdPx97IrbD7eRdc41CzoZQJYE4-eXXd-28DE-7D3ZmycTL7tO4s5LfFLWoGoMpbS399xKEbBdj4c"/>
+</div>
+<div class="w-24 h-24 bg-surface-white rounded border border-surface-container overflow-hidden cursor-pointer hover:border-chili-red/50 transition-colors">
+<img alt="Thumbnail 2" class="w-full h-full object-cover" data-alt="A stylized shot of spicy food, perhaps grilled chicken or tacos, drizzled generously with vibrant red chili sauce. Bright, clean lighting with a fresh mint garnish in the background. Appetizing and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJhGF6HlaEKTjg6-YCxSWzYuj7vaz2-8Zxd9gRW9LGoRTQbDuYtiSRE5ZA1wylY0mfW_lS5vyaQxfY8orAVN6FbcxlOI6JEDtfI9I4ARmi8Xz98Oy8ov19f80eRtBh9I122-TjdcJ9EW2JbcLj3X96oH6tv9hRtw96dWcNCAVTfp_vFwWtHImkiqRMZ7Il8yT02vMxPEHxP0kiUOmLL6lEcWvN0y1s0w0n2-fUbNsiNrmRO3RKKPqZlY4zrIPAMOpFeeTV4oK0zpub"/>
+</div>
+</div>
+</div>
+<!-- Right Column: Product Details -->
+<div class="col-span-1 md:col-span-6 lg:col-span-5 flex flex-col gap-stack-lg sticky top-24 self-start">
+<!-- Header Info -->
+<div class="flex flex-col gap-stack-sm border-b border-surface-container pb-stack-md">
+<h1 class="text-display-lg font-display-lg text-on-surface">Xtreme Chili Sauce</h1>
+<p class="text-headline-lg font-headline-lg text-chili-red">$12.99 <span class="text-body-md font-body-md text-on-surface-variant line-through ml-2">$14.99</span></p>
+<!-- Spice Level Gauge -->
+<div class="flex items-center gap-2 mt-4 bg-surface-container-low p-3 rounded-lg border border-surface-container-highest">
+<span class="material-symbols-outlined text-chili-red fill text-xl">local_fire_department</span>
+<span class="text-label-md font-label-md text-on-surface font-bold">Spice Level:</span>
+<div class="flex-1 flex gap-1 items-center ml-2">
+<div class="h-2 flex-1 bg-chili-red rounded-full"></div>
+<div class="h-2 flex-1 bg-chili-red rounded-full"></div>
+<div class="h-2 flex-1 bg-chili-red rounded-full"></div>
+<div class="h-2 flex-1 bg-chili-red rounded-full"></div>
+<div class="h-2 flex-1 bg-chili-red rounded-full"></div>
+</div>
+<span class="text-label-sm font-label-sm text-chili-red font-bold uppercase tracking-wider ml-2">Xtreme Heat</span>
+</div>
+</div>
+<!-- Description -->
+<div class="flex flex-col gap-stack-sm">
+<p class="text-body-lg font-body-lg text-on-surface-variant">
+                            Our signature Xtreme Chili Sauce is not for the faint of heart. Crafted with a proprietary blend of habanero and ghost peppers, it delivers an unapologetic kick of heat followed by a complex, smoky finish. Perfect for elevating tacos, wings, or anything that needs a bold wake-up call.
+                        </p>
+</div>
+<!-- Dietary Highlights Chips -->
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-1 bg-fresh-mint/10 text-tertiary-container px-3 py-1.5 rounded-full border border-fresh-mint/20">
+<span class="material-symbols-outlined text-sm">eco</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider">Vegan</span>
+</div>
+<div class="flex items-center gap-1 bg-secondary-container/20 text-on-secondary-container px-3 py-1.5 rounded-full border border-secondary-container/30">
+<span class="material-symbols-outlined text-sm">grain</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider">Gluten Free</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container text-on-surface-variant px-3 py-1.5 rounded-full border border-surface-container-highest">
+<span class="material-symbols-outlined text-sm">science</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider">No Artificial Preservatives</span>
+</div>
+</div>
+<!-- Quantity & CTA -->
+<div class="flex flex-col gap-4 mt-auto">
+<div class="flex items-center gap-4">
+<div class="flex items-center border border-surface-container rounded-lg overflow-hidden bg-surface-white">
+<button class="px-4 py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-chili-red transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="px-4 py-3 text-label-md font-label-md text-on-surface font-bold min-w-[3rem] text-center">1</span>
+<button class="px-4 py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-chili-red transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<button class="flex-1 bg-chili-red text-on-primary py-4 px-6 rounded-lg text-label-md font-label-md font-bold uppercase tracking-wider hover:bg-primary transition-colors flex justify-center items-center gap-2 shadow-sm active:scale-95 duration-100">
+<span class="material-symbols-outlined">shopping_bag</span>
+                                Add to Bag - $12.99
+                            </button>
+</div>
+<button class="w-full border border-surface-container py-3 rounded-lg text-label-md font-label-md text-on-surface hover:bg-surface-container-low transition-colors font-bold">
+                            Subscribe &amp; Save 10%
+                        </button>
+</div>
+<!-- Expandable Sections (Accordion) -->
+<div class="flex flex-col border-t border-surface-container mt-stack-md">
+<details class="group border-b border-surface-container">
+<summary class="flex justify-between items-center font-label-md text-label-md text-on-surface cursor-pointer list-none py-4 hover:text-chili-red transition-colors font-bold uppercase tracking-wider">
+                                Ingredients &amp; Nutrition
+                                <span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined">expand_more</span>
+</span>
+</summary>
+<div class="text-body-md font-body-md text-on-surface-variant pb-4 animate-fade-in">
+<p class="mb-2"><strong class="text-on-surface">Ingredients:</strong> Water, Habanero Peppers, Vinegar, Salt, Garlic, Ghost Pepper Mash, Xanthan Gum, Natural Smoke Flavor.</p>
+<div class="bg-surface-container-low p-4 rounded mt-4 border border-surface-container-highest">
+<h4 class="font-bold text-label-sm mb-2 uppercase text-on-surface">Nutrition Facts</h4>
+<div class="flex justify-between border-b border-surface-container py-1"><span class="text-label-sm">Serving Size</span> <span class="text-label-sm font-bold">1 tsp (5g)</span></div>
+<div class="flex justify-between border-b border-surface-container py-1"><span class="text-label-sm">Calories</span> <span class="text-label-sm font-bold">0</span></div>
+<div class="flex justify-between py-1"><span class="text-label-sm">Sodium</span> <span class="text-label-sm font-bold">45mg (2% DV)</span></div>
+</div>
+</div>
+</details>
+<details class="group border-b border-surface-container">
+<summary class="flex justify-between items-center font-label-md text-label-md text-on-surface cursor-pointer list-none py-4 hover:text-chili-red transition-colors font-bold uppercase tracking-wider">
+                                Shipping &amp; Returns
+                                <span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined">expand_more</span>
+</span>
+</summary>
+<div class="text-body-md font-body-md text-on-surface-variant pb-4 animate-fade-in">
+                                Free shipping on orders over $30. Returns accepted within 14 days of delivery for unopened items.
+                            </div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-high w-full mt-stack-lg border-t border-surface-container-highest dark:border-outline-variant flat no shadows">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-lg w-full max-w-container-max mx-auto gap-stack-md">
+<div class="text-headline-md font-headline-md text-chili-red font-bold">Hotzy Foods</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant">© 2024 Hotzy Foods Inc. Boldly Spicy.</div>
+<nav class="flex gap-4 flex-wrap justify-center">
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Nutrition Info</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Accessibility</a>
+</nav>
+</div>
+</footer>
+<style>
+        .animate-fade-in {
+            animation: fadeIn 0.2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+<script>
+        // Simple quantity counter logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const minusBtn = document.querySelector('button:has(.material-symbols-outlined:contains("remove"))');
+            const plusBtn = document.querySelector('button:has(.material-symbols-outlined:contains("add"))');
+            const qtySpan = document.querySelector('.min-w-\\[3rem\\]');
+
+            // Fallback for basic functionality if complex selectors aren't fully supported
+            const btns = document.querySelectorAll('.border-surface-container button');
+            if(btns.length >= 2) {
+                let qty = 1;
+                btns[0].addEventListener('click', () => {
+                    if (qty > 1) qty--;
+                    qtySpan.textContent = qty;
+                });
+                btns[1].addEventListener('click', () => {
+                    qty++;
+                    qtySpan.textContent = qty;
+                });
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hotzy Foods Admin Dashboard</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#bd0a2e",
+                        "secondary-fixed": "#ffe08b",
+                        "on-primary-container": "#fff2f1",
+                        "on-secondary-container": "#6e5700",
+                        "inverse-primary": "#ffb3b2",
+                        "secondary": "#745b00",
+                        "background": "#f9f9f9",
+                        "on-background": "#1b1b1b",
+                        "tertiary-fixed-dim": "#69dd96",
+                        "surface": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#ffdad9",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#5b403f",
+                        "surface-container-high": "#e8e8e8",
+                        "on-surface": "#1b1b1b",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary-fixed-variant": "#00522d",
+                        "on-tertiary-fixed": "#00210f",
+                        "on-error-container": "#93000a",
+                        "surface-white": "#FFFFFF",
+                        "inverse-surface": "#303030",
+                        "surface-dim": "#dadada",
+                        "primary": "#b20028",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#d7ffdf",
+                        "on-primary-fixed": "#410008",
+                        "on-primary": "#ffffff",
+                        "surface-gray": "#F8F8F8",
+                        "primary-container": "#d7263d",
+                        "surface-container-low": "#f3f3f3",
+                        "secondary-container": "#fecb00",
+                        "tertiary-fixed": "#86fab0",
+                        "secondary-fixed-dim": "#f1c100",
+                        "tertiary-container": "#008149",
+                        "surface-container": "#eeeeee",
+                        "on-secondary-fixed": "#241a00",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#584400",
+                        "golden-glaze": "#FFCC00",
+                        "outline-variant": "#e4bdbc",
+                        "on-tertiary": "#ffffff",
+                        "fresh-mint": "#3CB371",
+                        "chili-red": "#D7263D",
+                        "outline": "#906f6e",
+                        "tertiary": "#006539",
+                        "on-primary-fixed-variant": "#92001f",
+                        "primary-fixed-dim": "#ffb3b2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "container-max": "1200px",
+                        "margin-desktop": "40px",
+                        "stack-sm": "4px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "label-sm": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-0 md:left-64 h-16 flex justify-between items-center px-6 z-40 bg-surface border-b border-outline-variant flat no shadows">
+<div class="flex items-center gap-4">
+<!-- Search Bar on Left -->
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="pl-10 pr-4 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-label-sm font-label-sm text-on-surface focus:border-chili-red focus:ring-1 focus:ring-chili-red transition-colors w-64" placeholder="Search orders, products..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Trailing Icons -->
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<!-- Profile Image -->
+<div class="h-8 w-8 rounded-full bg-surface-container-highest border border-outline-variant overflow-hidden ml-2 cursor-pointer">
+<img alt="Admin User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2KqCP2R2UkSRdNtYUnovGRYe18YsWPvMNGdec-J90KC4DUhoq7fpx1FTWAuHXs3cTTSuv8vmMgRVIh14zQTmuYuwgCNfUIoivLWMztbPd5-SQ0ilmJYoMuO8JzAIUkvZwalwCaH-zapHpeUqrn2yzmGbtpky3QNmV0RHCAEuPCyURED84-cmYhi_3ztk4Xe-GABg6m59N1LrMYEAVV2KK7O04A61tzeUVvO2LMFpd4KXHEhxtZBelK0M9b41Q5Dt5rHZcSOtfFA3X"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 bottom-0 flex flex-col p-4 z-50 h-screen w-64 border-r border-outline-variant bg-surface-container-lowest hidden md:flex flat no shadows">
+<!-- Brand Logo -->
+<div class="mb-8 px-2">
+<span class="font-headline-md text-headline-md font-bold text-primary">Hotzy Admin</span>
+</div>
+<!-- Profile Section (from JSON header_*) -->
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold">
+                HA
+            </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Hotzy Admin</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Managing Spicy Excellence</p>
+</div>
+</div>
+<!-- Main Navigation Tabs -->
+<div class="flex-1 flex flex-col gap-2">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-primary-fixed rounded-lg font-bold scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors hover:text-primary" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors hover:text-primary" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors hover:text-primary" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors hover:text-primary" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-label-md text-label-md">Promotions</span>
+</a>
+</div>
+<!-- CTA -->
+<button class="mt-auto mb-6 w-full py-3 bg-chili-red text-surface-white font-label-md text-label-md rounded-lg hover:opacity-90 transition-opacity flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+            Create New Order
+        </button>
+<!-- Footer Tabs -->
+<div class="border-t border-outline-variant pt-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors hover:text-primary" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors hover:text-primary" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-16 p-4 md:p-gutter min-h-screen max-w-container-max mx-auto">
+<div class="mb-stack-lg flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-1">Overview</h1>
+<p class="text-on-surface-variant">Here's what's happening with Hotzy Foods today.</p>
+</div>
+<div class="hidden sm:flex gap-2">
+<button class="px-4 py-2 border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                    Last 30 Days
+                </button>
+</div>
+</div>
+<!-- High-level Metrics (Bento-style Grid) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Sales</span>
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">$124,500.00</h2>
+<p class="font-label-sm text-label-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +14.5% from last month
+                    </p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Orders</span>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</div>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">1,240</h2>
+<p class="font-label-sm text-label-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +8.2% from last month
+                    </p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">New Customers</span>
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">person_add</span>
+</div>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">342</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">horizontal_rule</span> Steady growth
+                    </p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Avg Order Value</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+</div>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">$100.40</h2>
+<p class="font-label-sm text-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_down</span> -2.1% from last month
+                    </p>
+</div>
+</div>
+</div>
+<!-- Charts and Top Products Row -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-stack-lg">
+<!-- Spicy Sales Trends Chart -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl border border-outline-variant p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Spicy Sales Trends</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex-1 w-full rounded-lg overflow-hidden relative bg-surface-container-highest min-h-[300px]">
+<!-- Placeholder for Chart Image -->
+<img alt="Sales Trends Chart" class="w-full h-full object-cover mix-blend-multiply opacity-80" data-alt="A clean, professional data visualization dashboard showing a line chart on a pristine white background. The primary chart line is a bold, vibrant chili red tracking upwards, indicating positive sales trends. The axes and gridlines are subtle, low-contrast grays to maintain a modern corporate aesthetic. Small tooltips or data points highlight key moments of growth in the spicy food sector." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAIAokZDAogD3FypwNubD5tNlo5tYhyfKiIoRsMl1sPhrV5BY572n1QvcWR32cBL8t3hrXuxzBG_OLCTuxG8y87K_lqiLi26dRUo-dkJwDJCOAHPXYJPeYKrRuBI10fN03lN-qfDsUX4yNwHKt_woTYGUjYRCmzuXVTd2sS6CsGpzntDTd1lHgG8g71HT8vg0NPJ_FwcZElDMZtzNFZyzD1MqGmNGv2p9c_ieDCikKMktSgpiRdpi9AkVHp5TdV2pP5o1UVKMDpyMX"/>
+</div>
+</div>
+<!-- Top-Selling Heat-Seeker Products -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Heat-Seekers</h3>
+<div class="flex flex-col gap-4">
+<!-- Product Item 1 -->
+<div class="flex items-center gap-4 p-2 hover:bg-surface-container transition-colors rounded-lg">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0">
+<img alt="Product Image" class="w-full h-full object-cover" data-alt="A close-up, high-quality photograph of a small glass bottle filled with vibrant, bright red hot sauce. The bottle has a clean, minimalist label. It is placed against a stark white background with a soft, natural drop shadow, emphasizing a premium food product aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiC0OS6RLnmvKufptcfT00be1KVdDa1igNXzJa5Qtu-N5gYivYMYGhuV_xGsLZNIYdZMWNRTVmlAYMlEkjY2EcvyCMHNh3o1tIBFXJ3FC0_B4nb7N7yy7eY6F4CkXTZfLggNI6L9lEhInIjdyVf5xLZAiz7hJxjwbumGt1wHDuizm4wpRsKLu7rXYHyrL0dDuKRS9hnBwJwtvVUinnAJCikhsZEOVc9z8IIdWG56jbrZKyVc1Dw6ETKiTBuVALHHpGEfVjJR29wIDn"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-on-surface truncate">Ghost Pepper Reserve</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate">450 units sold</p>
+</div>
+<div class="px-2 py-1 bg-primary-fixed text-primary rounded-full font-label-sm text-[10px] uppercase font-bold tracking-wider shrink-0">
+                            High Heat
+                        </div>
+</div>
+<!-- Product Item 2 -->
+<div class="flex items-center gap-4 p-2 hover:bg-surface-container transition-colors rounded-lg">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0">
+<img alt="Product Image" class="w-full h-full object-cover" data-alt="A macro shot of spicy chili oil in a small clear jar. The oil is a deep, rich reddish-gold color with visible chili flakes settling at the bottom. The lighting is bright and directional, highlighting the rich texture of the food on a clean, light surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCA79SkHyg_6fzsTRK_YcbR_Ogee0LeO7--7YALPfKY_ZqBxPAqHohTNBn9dmDRxHVM40-Ct1lEHZa4SptQmRiWptLN3GQMI9d2OphhuXdmuFJc2LXZMsJmECJqu37oiWIuU_teosFaem52TFDt1VzL3u3Ko263Cq3477C-84B5sN7RDQ1vhqVIPVg11hv4RebKgrEKdVAxQ_4SM24F8_CY-0237_ocf4qHMlTpZI4WXhqFzexuURgloOJo6mHBMmPQG_ynG_PiHBE"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-on-surface truncate">Crispy Chili Crisp</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate">380 units sold</p>
+</div>
+<div class="px-2 py-1 bg-secondary-fixed text-on-secondary-container rounded-full font-label-sm text-[10px] uppercase font-bold tracking-wider shrink-0">
+                            Medium
+                        </div>
+</div>
+<!-- Product Item 3 -->
+<div class="flex items-center gap-4 p-2 hover:bg-surface-container transition-colors rounded-lg">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0">
+<img alt="Product Image" class="w-full h-full object-cover" data-alt="A top-down view of a small bowl containing a bright green, fresh jalapeno sauce. The sauce looks vibrant and herbaceous. The bowl sits on a pristine white marble countertop, reflecting a clean, modern culinary style with bright, natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjk5hVImaT0Rke-IXWp922m-5Klg13bL39n-tUDVsxmzqOygQ77jCgkwjZpuH8ynjBrGsjVN3D-QYRITPlmbLmpRcBuciAXnWVSUjTiR7qkUfLwkDzAeOaumpvb6CIROY8InVYMiykCL5esUQC8Yowpu8xiIDWbd4UJogs2_JGCrzrythf94zYy3nVz_6Y_7ktPbRYg96naLwj4ySfjWWePkW_OhQhgIAjrmzSWo5-T9MyanojYGtlg3gt_8ZB5wPUOoWVwRYnMSL1"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-on-surface truncate">Jalapeno Lime Splash</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate">290 units sold</p>
+</div>
+<div class="px-2 py-1 bg-[#d7ffdf] text-[#00522d] rounded-full font-label-sm text-[10px] uppercase font-bold tracking-wider shrink-0">
+                            Mild
+                        </div>
+</div>
+</div>
+<button class="mt-auto pt-4 text-primary font-label-md text-label-md hover:underline text-left">View All Products →</button>
+</div>
+</div>
+<!-- Recent Orders Table -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-gray">
+<h3 class="font-headline-md text-headline-md text-on-surface">Recent Orders</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filter
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant text-on-surface-variant">
+<th class="p-4 font-label-md text-label-md font-semibold">Order ID</th>
+<th class="p-4 font-label-md text-label-md font-semibold">Customer</th>
+<th class="p-4 font-label-md text-label-md font-semibold">Date</th>
+<th class="p-4 font-label-md text-label-md font-semibold">Amount</th>
+<th class="p-4 font-label-md text-label-md font-semibold">Status</th>
+</tr>
+</thead>
+<tbody class="text-on-surface font-body-md text-body-md">
+<tr class="border-b border-outline-variant hover:bg-surface-container transition-colors">
+<td class="p-4 font-label-md text-label-md">#HZ-8892</td>
+<td class="p-4">Sarah Jenkins</td>
+<td class="p-4 text-on-surface-variant text-sm">Oct 24, 2023</td>
+<td class="p-4 font-label-md text-label-md">$142.50</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded-full bg-[#d7ffdf] text-[#00522d] font-label-sm text-[12px] flex items-center w-fit gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00522d]"></span> Completed
+                                </span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container transition-colors">
+<td class="p-4 font-label-md text-label-md">#HZ-8891</td>
+<td class="p-4">Mike Rutherford</td>
+<td class="p-4 text-on-surface-variant text-sm">Oct 24, 2023</td>
+<td class="p-4 font-label-md text-label-md">$89.00</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded-full bg-secondary-fixed text-on-secondary-container font-label-sm text-[12px] flex items-center w-fit gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-on-secondary-container"></span> Processing
+                                </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="p-4 font-label-md text-label-md">#HZ-8890</td>
+<td class="p-4">Elena Rossi</td>
+<td class="p-4 text-on-surface-variant text-sm">Oct 23, 2023</td>
+<td class="p-4 font-label-md text-label-md">$210.00</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded-full bg-[#d7ffdf] text-[#00522d] font-label-sm text-[12px] flex items-center w-fit gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00522d]"></span> Completed
+                                </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</body></html>

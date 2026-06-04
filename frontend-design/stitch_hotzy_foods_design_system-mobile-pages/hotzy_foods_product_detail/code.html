@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hotzy Foods - Xtreme Chili Sauce</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+        
+        /* Hide scrollbar for clean look in horizontal lists if needed */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<!-- Tailwind CSS with specific configuration -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dadada",
+                    "on-tertiary-fixed-variant": "#00522d",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#ffb3b2",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary-container": "#6e5700",
+                    "surface-container-low": "#f3f3f3",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#e4bdbc",
+                    "surface-white": "#FFFFFF",
+                    "golden-glaze": "#FFCC00",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#ffb3b2",
+                    "tertiary-fixed": "#86fab0",
+                    "secondary-fixed": "#ffe08b",
+                    "on-primary-fixed": "#410008",
+                    "inverse-surface": "#303030",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-surface": "#1b1b1b",
+                    "on-primary": "#ffffff",
+                    "surface-gray": "#F8F8F8",
+                    "on-primary-fixed-variant": "#92001f",
+                    "secondary": "#745b00",
+                    "secondary-container": "#fecb00",
+                    "on-primary-container": "#fff2f1",
+                    "outline": "#906f6e",
+                    "surface-container": "#eeeeee",
+                    "secondary-fixed-dim": "#f1c100",
+                    "on-background": "#1b1b1b",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "chili-red": "#D7263D",
+                    "error-container": "#ffdad6",
+                    "primary-fixed": "#ffdad9",
+                    "surface": "#f9f9f9",
+                    "on-tertiary-container": "#d7ffdf",
+                    "tertiary-fixed-dim": "#69dd96",
+                    "surface-container-high": "#e8e8e8",
+                    "fresh-mint": "#3CB371",
+                    "background": "#f9f9f9",
+                    "surface-tint": "#bd0a2e",
+                    "surface-bright": "#f9f9f9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#241a00",
+                    "tertiary": "#006539",
+                    "on-tertiary-fixed": "#00210f",
+                    "primary": "#b20028",
+                    "primary-container": "#d7263d",
+                    "on-surface-variant": "#5b403f",
+                    "tertiary-container": "#008149",
+                    "on-secondary-fixed-variant": "#584400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "stack-lg": "32px",
+                    "stack-sm": "4px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "container-max": "1200px",
+                    "margin-desktop": "40px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Work Sans"],
+                    "label-sm": ["Work Sans"],
+                    "body-lg": ["Work Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "display-lg-mobile": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md antialiased pb-24"> <!-- Padding bottom for sticky action bar -->
+<!-- Navigation Drawer Overlay (Hidden by default) -->
+<div class="fixed inset-0 bg-on-surface/20 z-50 hidden opacity-0 transition-opacity duration-300" id="nav-drawer-overlay"></div>
+<!-- Navigation Drawer component from JSON -->
+<nav class="fixed inset-y-0 left-0 w-80 bg-surface-white shadow-md z-50 transform -translate-x-full transition-transform duration-300 flex flex-col h-full py-stack-md" id="nav-drawer">
+<div class="px-4 mb-stack-md flex justify-between items-center">
+<span class="text-headline-lg font-headline-lg text-chili-red">Hotzy Menu</span>
+<button class="text-on-surface-variant hover:text-chili-red p-2" id="close-drawer">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="local_fire_department">local_fire_department</span>
+<span class="text-label-md font-label-md">Hot Deals</span>
+</a>
+<!-- Active State: Our Products -->
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg mx-2 my-1 px-3 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu" data-weight="fill">restaurant_menu</span>
+<span class="text-label-md font-label-md">Our Products</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="text-label-md font-label-md">Store Finder</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-label-md font-label-md">Order History</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="text-label-md font-label-md">Contact Us</span>
+</a>
+</div>
+</nav>
+<!-- TopAppBar component from JSON -->
+<header class="sticky top-0 z-40 w-full bg-surface-white border-b border-surface-container">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<button aria-label="Open menu" class="text-chili-red hover:text-primary-fixed-dim transition-colors flex items-center p-1" id="menu-btn">
+<span class="material-symbols-outlined text-[28px]" data-icon="menu">menu</span>
+</button>
+<div class="text-headline-md font-headline-md font-bold text-chili-red tracking-tight text-center">
+                Hotzy Foods
+            </div>
+<button aria-label="View cart" class="text-chili-red hover:text-primary-fixed-dim transition-colors flex items-center p-1 relative">
+<span class="material-symbols-outlined text-[28px]" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-golden-glaze text-on-secondary-fixed text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-surface-white">2</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="w-full max-w-container-max mx-auto md:px-margin-desktop pb-stack-lg">
+<div class="grid grid-cols-1 md:grid-cols-12 md:gap-gutter pt-4 md:pt-stack-lg">
+<!-- Product Hero Image Section -->
+<div class="md:col-span-6 lg:col-span-7 px-margin-mobile md:px-0">
+<div class="w-full aspect-[4/5] md:aspect-square bg-surface-container-low rounded-lg overflow-hidden relative shadow-sm">
+<img alt="Xtreme Chili Sauce bottle surrounded by fresh red peppers on a stark white surface" class="w-full h-full object-cover" data-alt="A striking, high-contrast studio photograph of a vibrant, glossy bottle of bright red hot sauce, labeled 'Hotzy', surrounded by dynamic splashes of liquid and scattered fresh red chili peppers. The scene is set on a pristine, minimalist white surface under bright, clean light-mode studio lighting that emphasizes the rich, energetic red color. The aesthetic is bold, modern corporate, appetizing, and highly commercial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOQ3zDPbjDECJr-nHiUgHn96x2IWZx9DleV0fZL36OkY_n-4AaiXUrW16fJOwyc7cc5VNCZW84jCqL-fqVkKjreJ5fcnrYLFJUJcStCCa7PjU6H3SD1jV4Zlsv9PXit-cHmzzINt-CyGgEZT4YgWuY9-UzetvDdVP009-lqDhvpCt3x-2oEktRhbD6W4j84jwbjnz6plHA31SBjYLfm2_M7qg7dNken0h9FcjYmrDDqz81bInwicavcA3paJxEDGuFqAW9vMcZg_gt"/>
+<!-- Floating Badges on Image -->
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-surface-white/90 backdrop-blur-sm text-chili-red px-3 py-1.5 rounded-full text-label-sm font-label-sm shadow-sm flex items-center gap-1 border border-outline-variant/30">
+<span class="material-symbols-outlined text-[16px]" data-icon="verified">verified</span>
+                            Bestseller
+                        </span>
+</div>
+</div>
+<!-- Thumbnails (Desktop) -->
+<div class="hidden md:flex gap-4 mt-4">
+<div class="w-20 h-20 rounded-md border-2 border-chili-red overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Thumbnail of hot sauce bottle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ3A9TWmu_VtVqcgPk4fV5Ud0P73TNXUsPaR0zcDzIe5rcjtMcTWtVxQ4suHu2-rf-ThZNe16wQVpAMXFhZ-kRGFMAO3PxncO7VfzaN6mF1Sc6jDPLlXcY34--8yXzgjHRcixtEsFKYjVkGeqGIND7sd07oiwAU_1SWbISemh_8l6bzk-9lERoeInbaoOuYj2T6bdZiJZejJEIgc1WAtF9crtzxVWl2umF6R_1vAB4xqeIi-_hdm-6F0Op89D5Rd4qHOJOO-wjykmW"/>
+</div>
+<div class="w-20 h-20 rounded-md border border-surface-container overflow-hidden cursor-pointer opacity-70 hover:opacity-100 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="A close-up high-contrast image of a bright red chili pepper sliced open revealing seeds, set against a pristine white background. The lighting is crisp and modern, matching the bold, energetic corporate identity of a premium hot sauce brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfbX-aF5Zjnc71JP294V7dRzopKZvpLTRxLOgWQYwuq2Xl9rBCXjLLk8PoR1GSwHPdyLnfU4n9UZVWENY-FbEjovABOHlYL0tfsPC3-5T0Ke6znSyUnD9Ee7FU1zAPf9mXNJ1GDBMH_MWVuyCPou4OFuh9uDxDgIsD9USprJIkJ5eA79F69yRzDxvNr2RCK-Y9Lbmfw1QMrnqgdD5iuX3fK6TPxqyOm8VauniWSEYcPAfeMOAGABJOGTbCY9zD8k4K52HroHoGkNN2"/>
+</div>
+</div>
+</div>
+<!-- Product Details Section -->
+<div class="md:col-span-6 lg:col-span-5 px-margin-mobile md:px-0 mt-stack-md md:mt-0 flex flex-col">
+<!-- Title & Price Area -->
+<div class="flex flex-col gap-2 mb-stack-md">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-primary text-on-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Signature Range</span>
+</div>
+<h1 class="text-headline-lg-mobile md:text-display-lg font-headline-lg-mobile md:font-display-lg text-on-surface">Xtreme Chili Sauce</h1>
+<div class="flex items-end gap-3 mt-2">
+<span class="text-headline-md font-headline-md text-chili-red">$12.99</span>
+<span class="text-body-md font-body-md text-on-surface-variant line-through mb-1">$15.99</span>
+</div>
+</div>
+<!-- Spice Level Indicator (Custom UI pattern) -->
+<div class="bg-surface-gray rounded-lg p-4 mb-stack-md border border-surface-container">
+<div class="flex justify-between items-center mb-2">
+<span class="text-label-md font-label-md text-on-surface">Spice Level</span>
+<span class="text-label-sm font-label-sm text-chili-red font-bold">Xtreme Heat</span>
+</div>
+<div class="flex gap-1 h-3">
+<div class="h-full flex-1 bg-surface-variant rounded-l-full"></div>
+<div class="h-full flex-1 bg-surface-variant"></div>
+<div class="h-full flex-1 bg-surface-variant"></div>
+<div class="h-full flex-1 bg-surface-variant"></div>
+<div class="h-full flex-1 bg-chili-red rounded-r-full shadow-[0_0_8px_rgba(215,38,61,0.6)]"></div>
+</div>
+<div class="flex justify-between mt-2">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Mild</span>
+<span class="text-[10px] font-bold text-chili-red uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="local_fire_department">local_fire_department</span>
+                            Caution
+                        </span>
+</div>
+</div>
+<!-- Short Description -->
+<p class="text-body-md font-body-md text-on-surface-variant mb-stack-lg leading-relaxed">
+                    Our boldest creation yet. The Xtreme Chili Sauce combines aged Carolina Reapers with a proprietary blend of savory spices. It's not just heat; it's a flavor explosion designed to awaken your senses. Perfect for daring foodies.
+                </p>
+<!-- Bento Grid Info Layout -->
+<div class="grid grid-cols-2 gap-4 mb-stack-lg">
+<div class="bg-surface-white border border-surface-container p-4 rounded-lg flex flex-col items-center justify-center text-center">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-fresh-mint mb-2">
+<span class="material-symbols-outlined" data-icon="eco">eco</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface">100% Vegan</span>
+<span class="text-[11px] text-on-surface-variant mt-1">Plant-based recipe</span>
+</div>
+<div class="bg-surface-white border border-surface-container p-4 rounded-lg flex flex-col items-center justify-center text-center">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-golden-glaze mb-2">
+<span class="material-symbols-outlined" data-icon="grain">grain</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface">Gluten Free</span>
+<span class="text-[11px] text-on-surface-variant mt-1">Certified pure</span>
+</div>
+<div class="bg-surface-white border border-surface-container p-4 rounded-lg flex flex-col items-center justify-center text-center col-span-2">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-chili-red mb-2">
+<span class="material-symbols-outlined" data-icon="science">science</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface">1.2M Scoville Units</span>
+<span class="text-[11px] text-on-surface-variant mt-1">Lab tested for maximum intensity</span>
+</div>
+</div>
+<!-- Ingredients Accordion (Static for presentation) -->
+<div class="border border-surface-container rounded-lg overflow-hidden mb-stack-md bg-surface-white">
+<div class="p-4 flex justify-between items-center cursor-pointer hover:bg-surface-gray transition-colors">
+<h3 class="text-label-md font-label-md text-on-surface">Ingredients &amp; Nutrition</h3>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</div>
+<div class="p-4 pt-0 border-t border-surface-container">
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-3 leading-loose">
+                            Aged Red Peppers, Distilled Vinegar, Water, Salt, Carolina Reaper Powder, Garlic Powder, Onion Powder, Xanthan Gum, Natural Capsaicin Extract.
+                        </p>
+<div class="mt-4 bg-surface-gray p-3 rounded text-[11px] font-body-md text-on-surface-variant">
+<strong>Nutrition Facts (Per 1 tsp):</strong> Calories: 5, Total Fat: 0g, Sodium: 110mg (5% DV), Total Carb: 1g, Protein: 0g.
+                        </div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer component from JSON -->
+<footer class="w-full mt-stack-lg bg-surface-container-low border-t border-surface-container-highest pb-24 md:pb-8">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-lg w-full max-w-container-max mx-auto">
+<div class="mb-4 md:mb-0 text-center md:text-left">
+<h2 class="text-headline-md font-headline-md text-chili-red mb-2">Hotzy Foods</h2>
+<p class="text-label-sm font-label-sm text-on-surface-variant">© 2024 Hotzy Foods Inc. Boldly Spicy.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-4 text-center">
+<a class="text-on-surface-variant text-label-sm font-label-sm hover:text-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant text-label-sm font-label-sm hover:text-on-surface transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant text-label-sm font-label-sm hover:text-on-surface transition-colors" href="#">Nutrition Info</a>
+<a class="text-on-surface-variant text-label-sm font-label-sm hover:text-on-surface transition-colors" href="#">Accessibility</a>
+</div>
+</div>
+</footer>
+<!-- Sticky Bottom Action Bar (Mobile Priority) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-white border-t border-surface-container p-margin-mobile z-40 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] md:hidden">
+<div class="flex items-center gap-4 max-w-container-max mx-auto">
+<!-- Quantity Selector -->
+<div class="flex items-center border border-surface-container rounded-lg bg-surface-gray h-12">
+<button class="w-10 h-full flex items-center justify-center text-on-surface-variant hover:text-chili-red">
+<span class="material-symbols-outlined text-[20px]" data-icon="remove">remove</span>
+</button>
+<span class="text-label-md font-label-md text-on-surface w-6 text-center">1</span>
+<button class="w-10 h-full flex items-center justify-center text-on-surface-variant hover:text-chili-red">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+</button>
+</div>
+<!-- Primary Action -->
+<button class="flex-1 bg-chili-red text-on-primary text-label-md font-label-md h-12 rounded-lg flex justify-center items-center gap-2 active:scale-95 transition-transform shadow-md shadow-chili-red/20">
+<span class="material-symbols-outlined text-[20px]" data-icon="shopping_bag">shopping_bag</span>
+                Add to Bag
+            </button>
+</div>
+</div>
+<!-- Desktop Sticky Add to Cart (Visible only on md+) -->
+<div class="hidden md:block fixed bottom-8 left-1/2 transform -translate-x-1/2 w-full max-w-[600px] bg-surface-white border border-surface-container rounded-full p-2 z-40 shadow-lg">
+<div class="flex items-center justify-between pl-6 pr-2">
+<div class="flex items-center gap-4">
+<img class="w-10 h-10 rounded-full object-cover border border-surface-container" data-alt="Thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZUXPDQVv3Ppj5nl2IHvojD72ebAVa5KUsB5olKBlbLXykJbkQ1g-cPmOzacV_5rcSYRJQfoAvMdY1MvEN5bQE46spD6Kb3ZIVlzs1KLdXvKmfhTK45n0j_rZGUT_bb3ywdksV1GONqxSEs12eZ8G_PVmeM5oMD_Ouh5X1HMOZqlXnbi53tSDoj2GTfYEJT_iwzy2rfq4a0VGMIJMkkHNEzwibokky1-P_NYE1SgwvFp1hWVzmyTTTFPHTlRXS7xSvPbW86kj9rgjV"/>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface">Xtreme Chili Sauce</span>
+<span class="text-label-sm font-label-sm text-chili-red">$12.99</span>
+</div>
+</div>
+<button class="bg-chili-red text-on-primary text-label-md font-label-md px-8 py-3 rounded-full flex justify-center items-center gap-2 hover:bg-surface-tint active:scale-95 transition-all">
+                Add to Bag
+            </button>
+</div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menu-btn');
+            const closeBtn = document.getElementById('close-drawer');
+            const drawer = document.getElementById('nav-drawer');
+            const overlay = document.getElementById('nav-drawer-overlay');
+
+            function openDrawer() {
+                drawer.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                // Small delay to allow display:block to apply before opacity transition
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+
+            function closeDrawer() {
+                drawer.classList.add('-translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300); // Wait for transition
+                document.body.style.overflow = '';
+            }
+
+            menuBtn.addEventListener('click', openDrawer);
+            closeBtn.addEventListener('click', closeDrawer);
+            overlay.addEventListener('click', closeDrawer);
+        });
+    </script>
+</body></html>

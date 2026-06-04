@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Order Fulfillment - Hotzy Foods</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .order-card-expanded {
+      grid-template-rows: 1fr;
+      padding-top: 16px;
+      opacity: 1;
+    }
+    .order-card-collapsed {
+      grid-template-rows: 0fr;
+      padding-top: 0;
+      opacity: 0;
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-secondary-container": "#6e5700",
+                  "secondary-fixed-dim": "#f1c100",
+                  "on-primary": "#ffffff",
+                  "on-primary-fixed": "#410008",
+                  "primary-container": "#d7263d",
+                  "surface-tint": "#bd0a2e",
+                  "on-tertiary": "#ffffff",
+                  "surface-container-low": "#f3f3f3",
+                  "on-tertiary-fixed-variant": "#00522d",
+                  "on-error-container": "#93000a",
+                  "secondary-container": "#fecb00",
+                  "surface-container": "#eeeeee",
+                  "inverse-on-surface": "#f1f1f1",
+                  "surface-container-lowest": "#ffffff",
+                  "on-tertiary-fixed": "#00210f",
+                  "primary": "#b20028",
+                  "surface-variant": "#e2e2e2",
+                  "tertiary-container": "#008149",
+                  "on-background": "#1b1b1b",
+                  "on-secondary-fixed": "#241a00",
+                  "inverse-surface": "#303030",
+                  "on-tertiary-container": "#d7ffdf",
+                  "surface-bright": "#f9f9f9",
+                  "outline-variant": "#e4bdbc",
+                  "inverse-primary": "#ffb3b2",
+                  "on-primary-fixed-variant": "#92001f",
+                  "surface-dim": "#dadada",
+                  "on-error": "#ffffff",
+                  "primary-fixed": "#ffdad9",
+                  "on-surface-variant": "#5b403f",
+                  "tertiary-fixed-dim": "#69dd96",
+                  "background": "#f9f9f9",
+                  "surface-white": "#FFFFFF",
+                  "surface": "#f9f9f9",
+                  "secondary": "#745b00",
+                  "chili-red": "#D7263D",
+                  "on-surface": "#1b1b1b",
+                  "surface-container-highest": "#e2e2e2",
+                  "error": "#ba1a1a",
+                  "primary-fixed-dim": "#ffb3b2",
+                  "outline": "#906f6e",
+                  "on-primary-container": "#fff2f1",
+                  "tertiary-fixed": "#86fab0",
+                  "fresh-mint": "#3CB371",
+                  "golden-glaze": "#FFCC00",
+                  "error-container": "#ffdad6",
+                  "on-secondary-fixed-variant": "#584400",
+                  "tertiary": "#006539",
+                  "surface-container-high": "#e8e8e8",
+                  "secondary-fixed": "#ffe08b",
+                  "on-secondary": "#ffffff",
+                  "surface-gray": "#F8F8F8"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "stack-md": "16px",
+                  "margin-desktop": "40px",
+                  "container-max": "1200px",
+                  "base": "8px",
+                  "stack-lg": "32px",
+                  "gutter": "24px",
+                  "stack-sm": "4px",
+                  "margin-mobile": "16px"
+          },
+          "fontFamily": {
+                  "display-lg-mobile": ["Plus Jakarta Sans"],
+                  "display-lg": ["Plus Jakarta Sans"],
+                  "label-md": ["Work Sans"],
+                  "headline-lg": ["Plus Jakarta Sans"],
+                  "body-lg": ["Work Sans"],
+                  "label-sm": ["Work Sans"],
+                  "headline-md": ["Plus Jakarta Sans"],
+                  "headline-lg-mobile": ["Plus Jakarta Sans"],
+                  "body-md": ["Work Sans"]
+          },
+          "fontSize": {
+                  "display-lg-mobile": ["36px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                  "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-surface border-b border-surface-container flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-stack-md">
+<button aria-label="Menu" class="active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-chili-red tracking-tight">Hotzy Foods</h1>
+</div>
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden border border-outline-variant">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a modern kitchen manager in a bright, clean culinary environment. The lighting is soft and natural, emphasizing a high-contrast corporate aesthetic. The manager wears a crisp white chef coat, reflecting the brand's commitment to quality and cleanliness. Behind him, a blurred background of a high-tech kitchen setup with warm golden highlights and cool steel tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9eV1gJHeudtPc5RQ9bzW6n7eMfQCktSvjQ9kxgeP7GCUjW0EVa1-VucRKGgW8qyf1vBa2-orvLKlIquYJkI0qSmrUh_PJgoatgPHGw_wYhOMBrZ1eG3jGKGg057APKEneLOLx8od483j7aOhVr3W50deZEOn99JKK8hVjU9zYWl7V8P80Gv9GIicQxdkcSDft4PrSwV2ubdhByvzbe4uk6CpkLmMz3SLizsHfytRJp8CfMUyOO0bMz5WvwndB8jyMB_9yED09E4c9"/>
+</div>
+</div>
+</header>
+<main class="px-margin-mobile pt-stack-md">
+<!-- Hero Title & Context -->
+<div class="mb-stack-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Order Fulfillment</h2>
+<p class="font-body-md text-on-surface-variant">Managing 14 active orders for today.</p>
+</div>
+<!-- Horizontal Scrollable Filters -->
+<section class="flex gap-stack-md overflow-x-auto hide-scrollbar pb-stack-md -mx-margin-mobile px-margin-mobile">
+<button class="flex items-center gap-stack-sm bg-primary text-on-primary px-4 py-2 rounded-full font-label-md transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">filter_list</span>
+        All Orders
+      </button>
+<button class="flex items-center gap-stack-sm bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-md transition-all hover:bg-surface-variant active:scale-95">
+        Pending
+      </button>
+<button class="flex items-center gap-stack-sm bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-md transition-all hover:bg-surface-variant active:scale-95">
+        Preparing
+      </button>
+<button class="flex items-center gap-stack-sm bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-md transition-all hover:bg-surface-variant active:scale-95">
+        Ready
+      </button>
+</section>
+<!-- Order Cards List -->
+<div class="space-y-stack-md">
+<!-- Order Card 1 (Pending) -->
+<article class="bg-surface-white border border-surface-container rounded-xl overflow-hidden transition-all duration-300" onclick="toggleExpand(this)">
+<div class="p-4 flex justify-between items-start">
+<div class="space-y-1">
+<div class="flex items-center gap-stack-sm">
+<span class="font-label-sm text-on-surface-variant">#ORD-8821</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-on-surface-variant">12:45 PM</span>
+</div>
+<h3 class="font-headline-md text-on-surface">Marcus Holloway</h3>
+<div class="flex items-center gap-2">
+<span class="bg-golden-glaze/10 text-secondary font-label-sm px-2 py-0.5 rounded uppercase">Pending</span>
+<span class="font-body-md text-primary font-bold">$42.50</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant expand-icon transition-transform">expand_more</span>
+</div>
+<!-- Expandable Content -->
+<div class="grid grid-rows-[0fr] transition-all duration-300 ease-in-out expansion-wrapper">
+<div class="overflow-hidden bg-surface-gray border-t border-surface-container px-4">
+<div class="py-4 space-y-stack-md">
+<div class="space-y-2">
+<div class="flex justify-between font-body-md">
+<span class="text-on-surface-variant">2x Spicy Chili Wings</span>
+<span class="text-on-surface font-bold">$24.00</span>
+</div>
+<div class="flex justify-between font-body-md">
+<span class="text-on-surface-variant">1x Loaded Nachos Extra Cheese</span>
+<span class="text-on-surface font-bold">$18.50</span>
+</div>
+</div>
+<div class="flex gap-stack-md pt-2">
+<button class="flex-1 bg-chili-red text-on-primary py-3 rounded-lg font-label-md active:scale-95 transition-transform" onclick="event.stopPropagation()">
+                  Accept Order
+                </button>
+<button class="px-3 border border-outline rounded-lg text-outline active:scale-95 transition-transform" onclick="event.stopPropagation()">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Order Card 2 (Preparing) -->
+<article class="bg-surface-white border border-surface-container rounded-xl overflow-hidden transition-all duration-300" onclick="toggleExpand(this)">
+<div class="p-4 flex justify-between items-start">
+<div class="space-y-1">
+<div class="flex items-center gap-stack-sm">
+<span class="font-label-sm text-on-surface-variant">#ORD-8819</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-on-surface-variant">12:32 PM</span>
+</div>
+<h3 class="font-headline-md text-on-surface">Elena Rodriguez</h3>
+<div class="flex items-center gap-2">
+<span class="bg-primary/10 text-primary font-label-sm px-2 py-0.5 rounded uppercase">Preparing</span>
+<span class="font-body-md text-primary font-bold">$18.25</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant expand-icon transition-transform">expand_more</span>
+</div>
+<div class="grid grid-rows-[0fr] transition-all duration-300 ease-in-out expansion-wrapper">
+<div class="overflow-hidden bg-surface-gray border-t border-surface-container px-4">
+<div class="py-4 space-y-stack-md">
+<div class="space-y-2">
+<div class="flex justify-between font-body-md">
+<span class="text-on-surface-variant">1x Ultimate Hotzy Burger</span>
+<span class="text-on-surface font-bold">$14.25</span>
+</div>
+<div class="flex justify-between font-body-md">
+<span class="text-on-surface-variant">1x Fresh Mint Lemonade</span>
+<span class="text-on-surface font-bold">$4.00</span>
+</div>
+</div>
+<div class="flex gap-stack-md pt-2">
+<button class="flex-1 bg-fresh-mint text-on-tertiary py-3 rounded-lg font-label-md active:scale-95 transition-transform" onclick="event.stopPropagation()">
+                  Mark as Ready
+                </button>
+<button class="px-3 border border-outline rounded-lg text-outline active:scale-95 transition-transform" onclick="event.stopPropagation()">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Order Card 3 (Ready) -->
+<article class="bg-surface-white border border-surface-container rounded-xl overflow-hidden transition-all duration-300" onclick="toggleExpand(this)">
+<div class="p-4 flex justify-between items-start">
+<div class="space-y-1">
+<div class="flex items-center gap-stack-sm">
+<span class="font-label-sm text-on-surface-variant">#ORD-8815</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-on-surface-variant">12:15 PM</span>
+</div>
+<h3 class="font-headline-md text-on-surface">James Wilson</h3>
+<div class="flex items-center gap-2">
+<span class="bg-fresh-mint/10 text-tertiary font-label-sm px-2 py-0.5 rounded uppercase">Ready</span>
+<span class="font-body-md text-primary font-bold">$67.00</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant expand-icon transition-transform">expand_more</span>
+</div>
+<div class="grid grid-rows-[0fr] transition-all duration-300 ease-in-out expansion-wrapper">
+<div class="overflow-hidden bg-surface-gray border-t border-surface-container px-4">
+<div class="py-4 space-y-stack-md">
+<div class="space-y-2">
+<div class="flex justify-between font-body-md">
+<span class="text-on-surface-variant">4x Custom Combo Box</span>
+<span class="text-on-surface font-bold">$60.00</span>
+</div>
+<div class="flex justify-between font-body-md">
+<span class="text-on-surface-variant">2x Large Golden Fries</span>
+<span class="text-on-surface font-bold">$7.00</span>
+</div>
+</div>
+<div class="flex gap-stack-md pt-2">
+<button class="flex-1 bg-on-background text-on-primary py-3 rounded-lg font-label-md active:scale-95 transition-transform" onclick="event.stopPropagation()">
+                  Deliver Order
+                </button>
+<button class="px-3 border border-outline rounded-lg text-outline active:scale-95 transition-transform" onclick="event.stopPropagation()">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface border-t border-surface-container-highest shadow-lg flex justify-around items-center h-16 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant active:scale-90 transition-transform px-4 py-2" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-sm text-label-sm">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant active:scale-90 transition-transform px-4 py-2" href="#">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="font-label-sm text-label-sm">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold hover:bg-surface-variant active:scale-90 transition-transform px-4 py-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-sm text-label-sm">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant active:scale-90 transition-transform px-4 py-2" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- FAB (Contextual for Fulfillment) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-chili-red text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined text-[28px]">add_task</span>
+</button>
+<script>
+    function toggleExpand(element) {
+      const wrapper = element.querySelector('.expansion-wrapper');
+      const icon = element.querySelector('.expand-icon');
+      
+      const isExpanded = wrapper.style.gridTemplateRows === '1fr';
+      
+      // Close all others
+      document.querySelectorAll('.expansion-wrapper').forEach(w => {
+        w.style.gridTemplateRows = '0fr';
+      });
+      document.querySelectorAll('.expand-icon').forEach(i => {
+        i.style.transform = 'rotate(0deg)';
+      });
+
+      if (!isExpanded) {
+        wrapper.style.gridTemplateRows = '1fr';
+        icon.style.transform = 'rotate(180deg)';
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        wrapper.style.gridTemplateRows = '0fr';
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // Add haptic feedback simulation
+    document.querySelectorAll('button, article').forEach(el => {
+      el.addEventListener('click', () => {
+        if (window.navigator.vibrate) {
+          window.navigator.vibrate(10);
+        }
+      });
+    });
+  </script>
+</body></html>

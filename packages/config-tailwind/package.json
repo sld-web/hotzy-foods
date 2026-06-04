@@ -1,0 +1,12 @@
+{
+  "name": "@hotzy/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/preset.ts"
+  },
+  "devDependencies": {
+    "@hotzy/tsconfig": "workspace:*",
+    "tailwindcss": "^3.4.0"
+  }
+}

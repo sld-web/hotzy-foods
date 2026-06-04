@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Your Hotzy Cart | Hotzy Foods</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary-fixed-dim": "#ffb3b2",
+                "chili-red": "#D7263D",
+                "surface-gray": "#F8F8F8",
+                "background": "#f9f9f9",
+                "surface-container-highest": "#e2e2e2",
+                "on-tertiary-fixed-variant": "#00522d",
+                "on-primary-fixed-variant": "#92001f",
+                "surface-white": "#FFFFFF",
+                "surface": "#f9f9f9",
+                "on-tertiary": "#ffffff",
+                "on-background": "#1b1b1b",
+                "inverse-surface": "#303030",
+                "fresh-mint": "#3CB371",
+                "primary": "#b20028",
+                "surface-tint": "#bd0a2e",
+                "on-primary": "#ffffff",
+                "tertiary-fixed-dim": "#69dd96",
+                "tertiary": "#006539",
+                "golden-glaze": "#FFCC00",
+                "surface-variant": "#e2e2e2",
+                "secondary": "#745b00",
+                "on-secondary-container": "#6e5700",
+                "on-error-container": "#93000a",
+                "tertiary-fixed": "#86fab0",
+                "on-secondary-fixed": "#241a00",
+                "on-secondary": "#ffffff",
+                "inverse-on-surface": "#f1f1f1",
+                "primary-container": "#d7263d",
+                "tertiary-container": "#008149",
+                "on-error": "#ffffff",
+                "on-surface-variant": "#5b403f",
+                "on-tertiary-container": "#d7ffdf",
+                "surface-dim": "#dadada",
+                "surface-bright": "#f9f9f9",
+                "inverse-primary": "#ffb3b2",
+                "secondary-fixed": "#ffe08b",
+                "secondary-container": "#fecb00",
+                "surface-container-lowest": "#ffffff",
+                "outline-variant": "#e4bdbc",
+                "primary-fixed": "#ffdad9",
+                "on-tertiary-fixed": "#00210f",
+                "secondary-fixed-dim": "#f1c100",
+                "surface-container": "#eeeeee",
+                "outline": "#906f6e",
+                "surface-container-high": "#e8e8e8",
+                "on-surface": "#1b1b1b",
+                "on-secondary-fixed-variant": "#584400",
+                "on-primary-fixed": "#410008",
+                "error-container": "#ffdad6",
+                "error": "#ba1a1a",
+                "on-primary-container": "#fff2f1",
+                "surface-container-low": "#f3f3f3"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "container-max": "1200px",
+                "stack-lg": "32px",
+                "margin-mobile": "16px",
+                "stack-sm": "4px",
+                "base": "8px",
+                "stack-md": "16px",
+                "gutter": "24px",
+                "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                "display-lg": ["Plus Jakarta Sans"],
+                "headline-lg": ["Plus Jakarta Sans"],
+                "headline-md": ["Plus Jakarta Sans"],
+                "body-lg": ["Work Sans"],
+                "body-md": ["Work Sans"],
+                "label-md": ["Work Sans"],
+                "label-sm": ["Work Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .bg-pattern {
+        background-image: url('https://lh3.googleusercontent.com/aida/AP1WRLuKo_V47eFNxikyJi3LfX9qc1yo1p2aqOsvBD3UFgCLF6X94R7OiblsuwvuYVELcveXILC6y_dbcD-6HtAhy6X6lVcnBR_QW4jrHvZT8enMwE1cbkvhZcIO3SEOEm8l477a9EwlBN0tNiBchZT_drTM92psX-qGTGM98COQb8DoKHZ8HoGKKcggLNtHMalh-FUS5R9CG1eghs4DQGdJty73pDE6r4mMYuAFGzUAwuG3Oj_1VlGgHDHrRWqX');
+        background-repeat: repeat;
+        background-size: 150px;
+        opacity: 0.04;
+      }
+      .cart-item-shadow {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface-white border-b border-surface-container-highest shadow-sm h-20 flex items-center">
+<div class="flex justify-between items-center px-margin-desktop max-w-container-max mx-auto w-full">
+<a class="font-display-lg text-display-lg font-extrabold text-chili-red" href="#">Hotzy Foods</a>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-chili-red transition-colors" href="#">Shop</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-chili-red transition-colors" href="#">Spicy Picks</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-chili-red transition-colors" href="#">Deals</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-chili-red transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="p-2 hover:bg-surface-gray rounded-full transition-all active:scale-90">
+<span class="material-symbols-outlined text-chili-red">shopping_cart</span>
+</button>
+<button class="p-2 hover:bg-surface-gray rounded-full transition-all active:scale-90">
+<span class="material-symbols-outlined text-chili-red">person</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-stack-lg relative overflow-hidden">
+<!-- Subtle Pattern Background -->
+<div class="absolute inset-0 bg-pattern pointer-events-none"></div>
+<div class="max-w-container-max mx-auto px-margin-desktop relative z-10">
+<header class="mb-stack-lg">
+<h1 class="font-display-lg text-display-lg text-on-background mb-stack-sm">Your Spicy Stash</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Ready to bring the heat home? Review your selection below.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Cart Items Column -->
+<div class="lg:col-span-8 flex flex-col gap-stack-md">
+<!-- Cart Item 1 -->
+<div class="bg-surface-white border border-surface-container-highest rounded-lg p-stack-md flex gap-stack-md cart-item-shadow transition-all hover:border-outline-variant">
+<div class="w-32 h-32 rounded-lg bg-surface-gray overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A premium bottle of Ghost Pepper Reserve hot sauce with a sleek, dark label featuring a stylized silver chili icon. The bottle sits on a clean, light gray surface with professional high-key lighting that emphasizes its elegant glass curves and the vibrant, deep red color of the sauce inside. The overall aesthetic is modern, high-contrast, and culinary-focused, fitting a premium artisanal food brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaV9cMmLf8Er7DYMa5sCvdwx-8ZJ0KU4h5rtd2nFSDH58Hkq-Zn98tmokRBflv84PYro36hGjcbLfFnQfSYxCnJR76mRIA0a3ZD_B-qgla4x-GF7VPx0mGFBXqRNf3go6fuSyGj-VjXQcas57-mqpEUXJA329SSmoGpAndahzsyOJAwaj4pynm4Cu7CPFHLtYzkHcvrKbmyoBZNzZYpfbbfrlWIR9Ph4aQ7dEyq5L-a-1-T4msKJo9KC9O83JK4_dmBqf_w8Pgx5ZI"/>
+</div>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background">Ghost Pepper Reserve</h3>
+<p class="font-label-sm text-label-sm text-chili-red mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">local_fire_department</span> EXTREME HEAT
+                                    </p>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1" onclick="this.closest('.bg-surface-white').remove()">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="mt-auto flex justify-between items-end">
+<div class="flex items-center border border-surface-container-highest rounded-full overflow-hidden">
+<button class="px-3 py-1 hover:bg-surface-container text-on-background transition-colors active:scale-90">-</button>
+<span class="px-4 py-1 font-label-md text-label-md border-x border-surface-container-highest">1</span>
+<button class="px-3 py-1 hover:bg-surface-container text-on-background transition-colors active:scale-90">+</button>
+</div>
+<span class="font-headline-md text-headline-md text-chili-red">$18.99</span>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="bg-surface-white border border-surface-container-highest rounded-lg p-stack-md flex gap-stack-md cart-item-shadow transition-all hover:border-outline-variant">
+<div class="w-32 h-32 rounded-lg bg-surface-gray overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A jar of Mango Habanero Glaze with a vibrant orange-yellow hue, captured in bright natural light. The label is modern and clean, featuring minimalist typography and a small habanero pepper graphic. The setting is a bright kitchen counter with a hint of fresh cilantro in the blurred background. The image evokes a fresh, tropical, and spicy culinary vibe aligned with modern artisanal food branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8150kRXTccDH7QB9U95KBYvAnnwr3cO-owJr_V7ITV8R91JSzTh6HOqMXC5fo207M22k3ujhSdlnCeGLmiXpeRcok2nPpj9T7b5fUSKUFfZK5vP0DWxrqu233LBZHfeFECVd2MfxINVSzMMszE21UmLkmUQcU0-P_cc7sUDsAAqiNx50kbx7Z6ANYtCxVGqNhF2_RMEw3ruorFR8ffauQnuivytihyiT7tAaL8d7MEUo2w5lVr8QmdX55RdCtLVDNnG-oPAlBBhUM"/>
+</div>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background">Mango Habanero Glaze</h3>
+<p class="font-label-sm text-label-sm text-fresh-mint mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">eco</span> SWEET &amp; SPICY
+                                    </p>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1" onclick="this.closest('.bg-surface-white').remove()">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="mt-auto flex justify-between items-end">
+<div class="flex items-center border border-surface-container-highest rounded-full overflow-hidden">
+<button class="px-3 py-1 hover:bg-surface-container text-on-background transition-colors active:scale-90">-</button>
+<span class="px-4 py-1 font-label-md text-label-md border-x border-surface-container-highest">2</span>
+<button class="px-3 py-1 hover:bg-surface-container text-on-background transition-colors active:scale-90">+</button>
+</div>
+<div class="text-right">
+<span class="block font-label-sm text-label-sm text-on-surface-variant line-through opacity-60">$29.98</span>
+<span class="font-headline-md text-headline-md text-chili-red">$24.99</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Cart Item 3 -->
+<div class="bg-surface-white border border-surface-container-highest rounded-lg p-stack-md flex gap-stack-md cart-item-shadow transition-all hover:border-outline-variant">
+<div class="w-32 h-32 rounded-lg bg-surface-gray overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A small packet of Hotzy Premium Chili Flakes, packaged in a sleek, semi-transparent kraft-style bag with a bold chili-red logo. The red flakes are clearly visible and look vibrant and textured. The shot is a close-up, angled product photo on a white marble surface, using sharp focus and high contrast to highlight the quality and heat of the spice. The mood is clean, modern, and high-end." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxfQngLulsjoIWX7MxwVjycqw4BdBGVkWJWApCx4fV4BiRy0muZ8z0K4rrJTL-7t0GU8kb2KdLpveQFcMlxw_dkYQp_GRosyqnUQuEjIavSDEJJLpABSR3_fsajJHLuHy-tYPjiTc-EtiPowD5uWX_MHn6CfjEYEJwzRJnwkr70uRErb0S1wTj7aP2E2ljNFfYUeKOM0D-hHzZg8mdC3V8JFYUbJSIRWMxjStd8h6MfxN2ew1kFbInbU9tAET5Q58KMmYIlu68iGdS"/>
+</div>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background">Artisanal Chili Flakes</h3>
+<p class="font-label-sm text-label-sm text-golden-glaze mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">star</span> TOP RATED
+                                    </p>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1" onclick="this.closest('.bg-surface-white').remove()">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="mt-auto flex justify-between items-end">
+<div class="flex items-center border border-surface-container-highest rounded-full overflow-hidden">
+<button class="px-3 py-1 hover:bg-surface-container text-on-background transition-colors active:scale-90">-</button>
+<span class="px-4 py-1 font-label-md text-label-md border-x border-surface-container-highest">1</span>
+<button class="px-3 py-1 hover:bg-surface-container text-on-background transition-colors active:scale-90">+</button>
+</div>
+<span class="font-headline-md text-headline-md text-chili-red">$12.50</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary Sidebar -->
+<aside class="lg:col-span-4">
+<div class="bg-surface-white border border-surface-container-highest rounded-lg p-stack-lg sticky top-28 shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-background mb-stack-md">Order Summary</h2>
+<!-- Promo Code -->
+<div class="mb-stack-lg">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">PROMO CODE</label>
+<div class="flex gap-2">
+<input class="flex-grow bg-surface-gray border border-surface-container-highest rounded-lg px-4 py-2 focus:ring-1 focus:ring-chili-red focus:border-chili-red outline-none font-body-md" placeholder="Enter code" type="text"/>
+<button class="bg-on-background text-surface-white font-label-md text-label-md px-4 py-2 rounded-lg hover:opacity-90 transition-opacity active:scale-95">Apply</button>
+</div>
+</div>
+<!-- Calculations -->
+<div class="flex flex-col gap-stack-sm border-b border-surface-container-highest pb-stack-md mb-stack-md">
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>$56.48</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Estimated Shipping</span>
+<span class="text-fresh-mint font-semibold">FREE</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Taxes</span>
+<span>$4.52</span>
+</div>
+</div>
+<!-- Total -->
+<div class="flex justify-between items-center mb-stack-lg">
+<span class="font-headline-md text-headline-md text-on-background">Total</span>
+<span class="font-display-lg text-headline-lg text-chili-red">$61.00</span>
+</div>
+<!-- Checkout Button -->
+<button class="w-full bg-chili-red text-surface-white font-label-md text-label-md py-4 rounded-xl flex justify-center items-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all shadow-md">
+                            Proceed to Checkout
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<div class="mt-stack-md text-center">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-chili-red transition-colors flex items-center justify-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">keyboard_backspace</span>
+                                Continue Shopping
+                            </a>
+</div>
+</div>
+<!-- Trust Badges -->
+<div class="mt-gutter grid grid-cols-2 gap-stack-md opacity-70">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-chili-red">verified</span>
+<span class="font-label-sm text-label-sm">Secure Payment</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-chili-red">local_shipping</span>
+<span class="font-label-sm text-label-sm">Carbon Neutral</span>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg mt-auto bg-surface-gray border-t border-surface-container-highest">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
+<div class="flex flex-col items-center md:items-start gap-1">
+<span class="font-headline-md text-headline-md font-bold text-chili-red">Hotzy Foods</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-80">© 2024 Hotzy Foods. Stay Spicy.</span>
+</div>
+<div class="flex flex-wrap justify-center gap-stack-md">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-chili-red transition-opacity underline decoration-2 underline-offset-4" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-chili-red transition-opacity underline decoration-2 underline-offset-4" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-chili-red transition-opacity underline decoration-2 underline-offset-4" href="#">Shipping Info</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-chili-red transition-opacity underline decoration-2 underline-offset-4" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple scale interactions for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => btn.classList.add('scale-95'));
+            btn.addEventListener('mouseup', () => btn.classList.remove('scale-95'));
+            btn.addEventListener('mouseleave', () => btn.classList.remove('scale-95'));
+        });
+    </script>
+</body></html>

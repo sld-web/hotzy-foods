@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chili-gradient {
+            background: linear-gradient(135deg, #b20028 0%, #d7263d 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#584400",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#86fab0",
+                        "inverse-primary": "#ffb3b2",
+                        "inverse-surface": "#303030",
+                        "on-secondary-fixed": "#241a00",
+                        "background": "#f9f9f9",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1b1b1b",
+                        "on-secondary-container": "#6e5700",
+                        "on-primary-fixed": "#410008",
+                        "surface-white": "#FFFFFF",
+                        "secondary": "#745b00",
+                        "surface": "#f9f9f9",
+                        "surface-dim": "#dadada",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "tertiary-fixed-dim": "#69dd96",
+                        "on-secondary": "#ffffff",
+                        "primary": "#b20028",
+                        "chili-red": "#D7263D",
+                        "secondary-fixed": "#ffe08b",
+                        "inverse-on-surface": "#f1f1f1",
+                        "secondary-container": "#fecb00",
+                        "primary-fixed": "#ffdad9",
+                        "surface-container": "#eeeeee",
+                        "primary-container": "#d7263d",
+                        "on-error": "#ffffff",
+                        "surface-gray": "#F8F8F8",
+                        "tertiary-container": "#008149",
+                        "surface-tint": "#bd0a2e",
+                        "on-primary-fixed-variant": "#92001f",
+                        "fresh-mint": "#3CB371",
+                        "surface-variant": "#e2e2e2",
+                        "outline-variant": "#e4bdbc",
+                        "on-tertiary-fixed-variant": "#00522d",
+                        "surface-container-high": "#e8e8e8",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#f1c100",
+                        "on-tertiary-fixed": "#00210f",
+                        "outline": "#906f6e",
+                        "golden-glaze": "#FFCC00",
+                        "on-primary-container": "#fff2f1",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container-highest": "#e2e2e2",
+                        "tertiary": "#006539",
+                        "on-surface-variant": "#5b403f",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#d7ffdf",
+                        "primary-fixed-dim": "#ffb3b2",
+                        "on-surface": "#1b1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "stack-sm": "4px",
+                        "margin-desktop": "40px",
+                        "container-max": "1200px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "label-sm": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 bottom-0 flex flex-col p-4 z-50 h-screen w-64 border-r border-outline-variant bg-surface-container-lowest">
+<div class="mb-10 flex flex-col px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Hotzy Admin</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Managing Spicy Excellence</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-primary-fixed rounded-lg font-bold" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-label-md text-label-md">Promotions</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-2 border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 left-64 h-16 flex justify-between items-center px-8 z-40 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-on-surface focus:ring-2 focus:ring-chili-red/20 transition-all font-body-md" placeholder="Search inventory..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">help_outline</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="font-label-md text-label-md leading-none">Admin User</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Super Admin</p>
+</div>
+<img alt="Admin User Avatar" class="h-10 w-10 rounded-full object-cover border-2 border-primary-fixed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2XdLzb8flypPOHsWvWjb5pKJ89Lb5eqn4mNhRzRSXVfUNXiFQwj93Eq8mURPn_igvcb1k1MqRiXNb2CX4WkznVNbk-kCeZrcv0CLK9yzir1TXFm0ljW-Z-STfqqRhYzV8AHIf78Dm5sSQzCgtbKC05CPxN7Jn7whWxTZ17G6JcZUPbg19bvCUdyd4kVpr-yA7ZzVBCuFI0yjPHBN6ITcVdNtDNe1wKEXcX5cU8SlHREiPAEjE4BTem5ZquazDMtWHi3dtS2a3R8UI"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 pb-32 px-8 min-h-screen">
+<div class="max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<nav class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="font-label-sm text-label-sm">Inventory</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="font-label-sm text-label-sm text-primary">Add New Product</span>
+</nav>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Create New Product</h2>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2.5 rounded-lg border border-outline text-on-surface font-label-md hover:bg-surface-container transition-colors">Discard changes</button>
+<button class="px-8 py-2.5 rounded-lg bg-chili-red text-white font-label-md hover:brightness-110 active:scale-[0.98] transition-all shadow-lg shadow-chili-red/20">Save Product</button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left Column: Form Details -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<!-- Section 1: Basic Information -->
+<section class="bg-surface-white border border-outline-variant rounded-xl p-8 shadow-sm">
+<div class="flex items-center gap-2 mb-6 text-primary">
+<span class="material-symbols-outlined">info</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Basic Information</h3>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="col-span-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Product Name</label>
+<input class="w-full border border-outline-variant rounded-lg p-3 font-body-md focus:border-chili-red focus:ring-1 focus:ring-chili-red outline-none transition-all" placeholder="e.g., Ghost Pepper Garlic Glaze" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">SKU</label>
+<input class="w-full border border-outline-variant rounded-lg p-3 font-body-md focus:border-chili-red focus:ring-1 focus:ring-chili-red outline-none transition-all" placeholder="HTZ-GHOST-001" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Category</label>
+<select class="w-full border border-outline-variant rounded-lg p-3 font-body-md focus:border-chili-red focus:ring-1 focus:ring-chili-red outline-none transition-all appearance-none bg-no-repeat bg-[right_1rem_center] bg-[length:1em_1em]">
+<option>Hot Sauce</option>
+<option>Salsa</option>
+<option>Rub &amp; Spices</option>
+<option>Gift Sets</option>
+</select>
+</div>
+<div class="col-span-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Product Description</label>
+<textarea class="w-full border border-outline-variant rounded-lg p-3 font-body-md focus:border-chili-red focus:ring-1 focus:ring-chili-red outline-none transition-all resize-none" placeholder="Describe the flavor profile, key ingredients, and pairing suggestions..." rows="4"></textarea>
+</div>
+</div>
+</section>
+<!-- Section 2: Pricing & Inventory -->
+<section class="bg-surface-white border border-outline-variant rounded-xl p-8 shadow-sm">
+<div class="flex items-center gap-2 mb-6 text-primary">
+<span class="material-symbols-outlined">payments</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Pricing &amp; Inventory</h3>
+</div>
+<div class="grid grid-cols-4 gap-6">
+<div class="col-span-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Price ($)</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold">$</span>
+<input class="w-full border border-outline-variant rounded-lg p-3 pl-8 font-body-md focus:border-chili-red focus:ring-1 focus:ring-chili-red outline-none transition-all" placeholder="0.00" type="number"/>
+</div>
+</div>
+<div class="col-span-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Cost per item ($)</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold">$</span>
+<input class="w-full border border-outline-variant rounded-lg p-3 pl-8 font-body-md focus:border-chili-red focus:ring-1 focus:ring-chili-red outline-none transition-all" placeholder="0.00" type="number"/>
+</div>
+</div>
+<div class="col-span-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Stock Level</label>
+<input class="w-full border border-outline-variant rounded-lg p-3 font-body-md focus:border-chili-red focus:ring-1 focus:ring-chili-red outline-none transition-all" placeholder="0" type="number"/>
+</div>
+<div class="col-span-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Low Stock Threshold</label>
+<input class="w-full border border-outline-variant rounded-lg p-3 font-body-md focus:border-chili-red focus:ring-1 focus:ring-chili-red outline-none transition-all" placeholder="10" type="number"/>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Media & Flavor -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Section 3: Refined Media Upload -->
+<section class="bg-surface-white border border-outline-variant rounded-xl p-8 shadow-sm">
+<div class="flex items-center gap-2 mb-6 text-primary">
+<span class="material-symbols-outlined">image</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Product Media</h3>
+</div>
+<div class="space-y-6">
+<!-- Primary Image Preview -->
+<div class="relative group aspect-square rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant">
+<img alt="Hot Sauce Bottle Primary" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtyqrzgN3cBO7Mpvmnfayz5OTuh5Jmnk50vrTLRU1WwxAWgkqgHc8U8zMMlgVDd1_XOz8ov3hH1byLGMw51tvIlDkqK7EdnND_zKIny_1NiCsOD1NUn5u93me7wXwBeUs4oPjCJf3Qr0BwE2ZrycLjeySvy_9bCITLJRNtNUGKs0XxP5bHrWTUr4YyzTLuozcRROrdjHV-fv1ucxU79KcDivzhqmYo5KdIpYIMoGHmaLK4QM-Pf7fQLFNfGEa-VUcvn_PkHtuovG4Z"/>
+<!-- Status Badge -->
+<div class="absolute top-3 left-3 px-2 py-1 bg-primary text-white text-[10px] font-bold rounded uppercase tracking-wider">
+                                Primary
+                            </div>
+<!-- Hover Overlay -->
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+<button class="w-10 h-10 rounded-full bg-white text-on-surface flex items-center justify-center hover:bg-surface-container-high transition-colors shadow-lg">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-white text-error flex items-center justify-center hover:bg-error-container transition-colors shadow-lg">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Drag & Drop Zone -->
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-6 bg-surface-container-lowest flex flex-col items-center justify-center text-center cursor-pointer hover:border-chili-red hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-outline text-[40px] group-hover:text-chili-red mb-3">cloud_upload</span>
+<p class="font-label-md text-label-md text-on-surface max-w-[200px]">
+                                Drag and drop product images here, or <span class="text-chili-red font-bold">click to browse</span>
+</p>
+</div>
+<!-- Thumbnail Gallery / Queue -->
+<div class="grid grid-cols-4 gap-3">
+<!-- Uploading State -->
+<div class="relative aspect-square rounded-lg bg-surface-container-high border border-outline-variant flex flex-col items-center justify-center p-2">
+<div class="w-full flex flex-col items-center gap-1">
+<span class="text-[10px] font-bold text-on-surface-variant">45%</span>
+<div class="w-full h-1.5 bg-surface-dim rounded-full overflow-hidden">
+<div class="h-full bg-chili-red w-[45%]"></div>
+</div>
+</div>
+</div>
+<!-- Uploaded Thumbnail 1 -->
+<div class="relative group aspect-square rounded-lg bg-white border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtyqrzgN3cBO7Mpvmnfayz5OTuh5Jmnk50vrTLRU1WwxAWgkqgHc8U8zMMlgVDd1_XOz8ov3hH1byLGMw51tvIlDkqK7EdnND_zKIny_1NiCsOD1NUn5u93me7wXwBeUs4oPjCJf3Qr0BwE2ZrycLjeySvy_9bCITLJRNtNUGKs0XxP5bHrWTUr4YyzTLuozcRROrdjHV-fv1ucxU79KcDivzhqmYo5KdIpYIMoGHmaLK4QM-Pf7fQLFNfGEa-VUcvn_PkHtuovG4Z"/>
+<div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<button class="w-6 h-6 bg-white text-error rounded-full flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Uploaded Thumbnail 2 -->
+<div class="relative group aspect-square rounded-lg bg-white border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtyqrzgN3cBO7Mpvmnfayz5OTuh5Jmnk50vrTLRU1WwxAWgkqgHc8U8zMMlgVDd1_XOz8ov3hH1byLGMw51tvIlDkqK7EdnND_zKIny_1NiCsOD1NUn5u93me7wXwBeUs4oPjCJf3Qr0BwE2ZrycLjeySvy_9bCITLJRNtNUGKs0XxP5bHrWTUr4YyzTLuozcRROrdjHV-fv1ucxU79KcDivzhqmYo5KdIpYIMoGHmaLK4QM-Pf7fQLFNfGEa-VUcvn_PkHtuovG4Z"/>
+<div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<button class="w-6 h-6 bg-white text-error rounded-full flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Add Button -->
+<button class="aspect-square border-2 border-dashed border-outline-variant rounded-lg flex items-center justify-center text-on-surface-variant hover:border-chili-red hover:text-chili-red transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<!-- Requirements Footer -->
+<div class="pt-4 border-t border-outline-variant">
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant">
+                                Supports JPG, PNG, WebP (Max 10MB). <br/>
+<span class="font-bold">Recommended: 1080x1080px.</span>
+</p>
+</div>
+</div>
+</section>
+<!-- Section 4: Heat & Flavor -->
+<section class="bg-surface-white border border-outline-variant rounded-xl p-8 shadow-sm">
+<div class="flex items-center gap-2 mb-6 text-primary">
+<span class="material-symbols-outlined">local_fire_department</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Flavor Profile</h3>
+</div>
+<div class="mb-8">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-4">Heat Scale (1-5)</label>
+<div class="flex justify-between items-center bg-surface-container-low p-4 rounded-xl">
+<div class="flex gap-2">
+<button class="material-symbols-outlined text-chili-red" style="font-variation-settings: 'FILL' 1;">local_fire_department</button>
+<button class="material-symbols-outlined text-chili-red" style="font-variation-settings: 'FILL' 1;">local_fire_department</button>
+<button class="material-symbols-outlined text-chili-red" style="font-variation-settings: 'FILL' 1;">local_fire_department</button>
+<button class="material-symbols-outlined text-outline-variant">local_fire_department</button>
+<button class="material-symbols-outlined text-outline-variant">local_fire_department</button>
+</div>
+<span class="font-bold text-chili-red">LEVEL 3</span>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-4">Flavor Tags</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1 rounded-full bg-chili-red/10 text-chili-red border border-chili-red/20 font-label-sm text-label-sm">Smoky</button>
+<button class="px-3 py-1 rounded-full bg-fresh-mint/10 text-fresh-mint border border-fresh-mint/20 font-label-sm text-label-sm">Sweet</button>
+<button class="px-3 py-1 rounded-full bg-golden-glaze/10 text-on-secondary-fixed-variant border border-golden-glaze/20 font-label-sm text-label-sm">Tangy</button>
+<button class="px-3 py-1 rounded-full border border-outline-variant text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">add</span>
+                                Add New
+                            </button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Bar -->
+<footer class="fixed bottom-0 right-0 left-64 bg-surface-white/90 backdrop-blur-md border-t border-outline-variant px-8 py-4 z-40 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-2 text-fresh-mint font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-fresh-mint animate-pulse"></span>
+            Autosaved at 14:42
+        </span>
+</div>
+<div class="flex gap-4">
+<button class="px-8 py-3 rounded-lg border border-outline text-on-surface font-label-md hover:bg-surface-container transition-all">Cancel</button>
+<button class="px-12 py-3 rounded-lg bg-chili-red text-white font-headline-md text-label-md hover:brightness-110 active:scale-[0.98] transition-all shadow-xl shadow-chili-red/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">save</span>
+            Save Product
+        </button>
+</div>
+</footer>
+<script>
+    // Micro-interactions
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+        el.addEventListener('focus', () => {
+            el.parentElement.classList.add('scale-[1.01]');
+            el.parentElement.style.transition = 'transform 0.2s ease-out';
+        });
+        el.addEventListener('blur', () => {
+            el.parentElement.classList.remove('scale-[1.01]');
+        });
+    });
+
+    // Simple Heat Scale Toggle
+    const fireIcons = document.querySelectorAll('.flex.gap-2 .material-symbols-outlined');
+    fireIcons.forEach((icon, index) => {
+        icon.addEventListener('click', () => {
+            fireIcons.forEach((i, idx) => {
+                if(idx <= index) {
+                    i.style.fontVariationSettings = "'FILL' 1";
+                    i.classList.remove('text-outline-variant');
+                    i.classList.add('text-chili-red');
+                } else {
+                    i.style.fontVariationSettings = "'FILL' 0";
+                    i.classList.add('text-outline-variant');
+                    i.classList.remove('text-chili-red');
+                }
+            });
+            document.querySelector('.text-chili-red.font-bold').innerText = `LEVEL ${index + 1}`;
+        });
+    });
+</script>
+</body></html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hotzy Foods Admin - Inventory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#bd0a2e",
+                        "secondary-fixed": "#ffe08b",
+                        "on-primary-container": "#fff2f1",
+                        "on-secondary-container": "#6e5700",
+                        "inverse-primary": "#ffb3b2",
+                        "secondary": "#745b00",
+                        "background": "#f9f9f9",
+                        "on-background": "#1b1b1b",
+                        "tertiary-fixed-dim": "#69dd96",
+                        "surface": "#f9f9f9",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#ffdad9",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#5b403f",
+                        "surface-container-high": "#e8e8e8",
+                        "on-surface": "#1b1b1b",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary-fixed-variant": "#00522d",
+                        "on-tertiary-fixed": "#00210f",
+                        "on-error-container": "#93000a",
+                        "surface-white": "#FFFFFF",
+                        "inverse-surface": "#303030",
+                        "surface-dim": "#dadada",
+                        "primary": "#b20028",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#d7ffdf",
+                        "on-primary-fixed": "#410008",
+                        "on-primary": "#ffffff",
+                        "surface-gray": "#F8F8F8",
+                        "primary-container": "#d7263d",
+                        "surface-container-low": "#f3f3f3",
+                        "secondary-container": "#fecb00",
+                        "tertiary-fixed": "#86fab0",
+                        "secondary-fixed-dim": "#f1c100",
+                        "tertiary-container": "#008149",
+                        "surface-container": "#eeeeee",
+                        "on-secondary-fixed": "#241a00",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#584400",
+                        "golden-glaze": "#FFCC00",
+                        "outline-variant": "#e4bdbc",
+                        "on-tertiary": "#ffffff",
+                        "fresh-mint": "#3CB371",
+                        "chili-red": "#D7263D",
+                        "outline": "#906f6e",
+                        "tertiary": "#006539",
+                        "on-primary-fixed-variant": "#92001f",
+                        "primary-fixed-dim": "#ffb3b2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "container-max": "1200px",
+                        "margin-desktop": "40px",
+                        "stack-sm": "4px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "label-sm": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Work Sans', sans-serif; background-color: #f9f9f9; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-64 h-16 flex justify-between items-center px-6 z-40 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-4 w-full max-w-md">
+<div class="relative w-full">
+<span aria-hidden="true" class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-label-sm font-label-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-surface-container-highest rounded-full focus:outline-none focus:border-chili-red focus:ring-1 focus:ring-chili-red transition-colors text-label-md font-label-md text-on-surface" placeholder="Search inventory..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button aria-label="Notifications" class="text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors relative">
+<span class="material-symbols-outlined text-headline-md font-headline-md">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-chili-red rounded-full"></span>
+</button>
+<button aria-label="Help" class="text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-headline-md font-headline-md">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Admin User Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a smiling man with short brown hair, wearing a casual grey shirt. The background is slightly blurred." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATfaJAx2oNJCb1-wdBbzMnfmIzkivM7uqs3h1e4jaENY4gcKEG-nrAx1OV9p7p07N3quVlXLfwSP74h0wnnv0p66sqhTDk4hqGxYa9zIBDqhQCpo1OA7V2GXbuZwA3bHjMvxNAiuz5zU7ZTeHozDG9PNs_30X9RYLdp8hNBRaoPkdDSzHJTuBQrcXAa_5ec7m8EksUHtKo_3D_0j4ZgP4bHm10juvQTioyshlJ5ygrtdfA_XyO_jZIMrwL2VlAja09sYN9Uzile-sZ"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 bottom-0 flex flex-col p-4 z-50 h-screen w-64 border-r border-outline-variant dark:border-outline bg-surface-container-lowest dark:bg-inverse-surface">
+<div class="flex items-center gap-3 mb-8 px-2">
+<span class="material-symbols-outlined text-chili-red text-display-lg-mobile font-display-lg-mobile fill">local_fire_department</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim leading-none">Hotzy Admin</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Managing Spicy Excellence</span>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-chili-red text-white py-3 px-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-transform duration-200 hover:scale-[0.98] mb-8 shadow-sm" style="box-shadow: 0 4px 14px 0 rgba(215, 38, 61, 0.39);">
+<span class="material-symbols-outlined font-label-md text-label-md">add</span>
+            Create New Order
+        </button>
+<div class="flex-1 flex flex-col gap-2 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary dark:text-primary-fixed-dim bg-primary-fixed dark:bg-primary-container rounded-lg font-bold scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md fill">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md group-hover:text-primary transition-colors">shopping_cart</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md group-hover:text-primary transition-colors">group</span>
+<span class="font-label-md text-label-md">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md group-hover:text-primary transition-colors">campaign</span>
+<span class="font-label-md text-label-md">Promotions</span>
+</a>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md group-hover:text-primary transition-colors">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md group-hover:text-error transition-colors">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="ml-64 mt-16 p-margin-desktop min-h-[calc(100vh-4rem)]">
+<!-- Page Header -->
+<div class="flex justify-between items-center mb-stack-lg">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Inventory Management</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage your hot sauce catalog, track stock levels, and update pricing.</p>
+</div>
+<button class="flex items-center gap-2 bg-chili-red text-white py-2 px-6 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-transform duration-200 hover:scale-[0.98] shadow-sm">
+<span class="material-symbols-outlined text-label-md font-label-md">add</span>
+                Add New Product
+            </button>
+</div>
+<!-- Inventory Data Table -->
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-gray border-b border-surface-container-highest">
+<th class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Product</th>
+<th class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">SKU</th>
+<th class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Category</th>
+<th class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Price</th>
+<th class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Stock Level</th>
+<th class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Heat Scale</th>
+<th class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest font-body-md text-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="py-4 px-6 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden shrink-0">
+<img alt="Ghost Pepper Reserve" class="w-full h-full object-cover" data-alt="A small glass bottle of bright red hot sauce sitting on a dark wooden surface. The lighting highlights the glossy texture of the sauce and the simple, modern label." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSjyb4-Ka-ZBnWzZ4q3ob_ugvjp5JkzC5X8OXxVjeNKlubNDsCGouE_sIXbn7-TQCR1k7dtH7dojlAh9dEp5awTyjgn4GeblEL47LuhR6FcvngNBOLGs_1zmQkoxIKyCA1wwhFxU2ibGUj9I_K9xtF8vmvRWjHBVDmHOVnkO75bO8r-vOdu8N6Gt1pw9kmszc-OOIFI2JqI46mMR1qqTRZn96ew2P2zTaAmD-K38IgWa6Q5Ntbaei2_Jtl1AXofs2-SeE43FneGUH7"/>
+</div>
+<span class="font-label-md text-label-md">Ghost Pepper Reserve</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">HZ-GPR-01</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Extreme Heat</span>
+</td>
+<td class="py-4 px-6 font-label-md text-label-md">$14.99</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-fresh-mint"></span>
+<span>In Stock (142)</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex text-chili-red">
+<span class="material-symbols-outlined fill text-sm">local_fire_department</span>
+<span class="material-symbols-outlined fill text-sm">local_fire_department</span>
+<span class="material-symbols-outlined fill text-sm">local_fire_department</span>
+<span class="material-symbols-outlined fill text-sm">local_fire_department</span>
+<span class="material-symbols-outlined fill text-sm">local_fire_department</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button aria-label="Edit" class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button aria-label="Delete" class="text-on-surface-variant hover:text-error p-2 rounded-full hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="py-4 px-6 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden shrink-0">
+<img alt="Mango Habanero Bliss" class="w-full h-full object-cover" data-alt="A sleek bottle of orange-yellow hot sauce. The label features a minimalist mango graphic. The bottle is placed on a clean, light grey background to emphasize the bright color of the sauce." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlUbQKJgLBLPCSZ3viKSK2mvd4x2d6VdoJPawIFipkG7SH0_WsgXkHJ8J-C7ux0f1HOCEWSRyKDHM3bMsv4clFPgFy-ULebNbqG6jdvIC8tVZcF-GXgzudD3VBDv0o0HHjDsTRgfYSOYzRL0ZI2mWuQF4-RZJ8gCpV3cWoaw1FK8G6aOsMs2wLcot2O-hG8gtR_HyjSCDW2CGgRxElNXHKQN3NU4yEbzRk6HLjLs_5xvillpNecZnXPd_IwGMTYOH6jZUu0cMaavEm"/>
+</div>
+<span class="font-label-md text-label-md">Mango Habanero Bliss</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">HZ-MHB-02</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Sweet &amp; Spicy</span>
+</td>
+<td class="py-4 px-6 font-label-md text-label-md">$12.50</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span>
+<span>Low Stock (12)</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex text-chili-red">
+<span class="material-symbols-outlined fill text-sm">local_fire_department</span>
+<span class="material-symbols-outlined fill text-sm">local_fire_department</span>
+<span class="material-symbols-outlined fill text-sm">local_fire_department</span>
+<span class="material-symbols-outlined text-surface-container-highest text-sm">local_fire_department</span>
+<span class="material-symbols-outlined text-surface-container-highest text-sm">local_fire_department</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button aria-label="Edit" class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button aria-label="Delete" class="text-on-surface-variant hover:text-error p-2 rounded-full hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="py-4 px-6 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden shrink-0">
+<img alt="Smoky Chipotle BBQ" class="w-full h-full object-cover" data-alt="A dark red, almost brown hot sauce in a classic glass bottle. It sits on a rustic wooden table with a few dried red chilies scattered nearby. The lighting is warm and slightly moody." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGqOmWZQ1wczzG-B2GFrl86dyzkFuv5jH8jSGUt1R9QnJJT79qZHMCCH7yTIzHT_dMYRHKgXY34drD9czg3inbMxyizScA0qbg5vWKQ81-Je8RStudWTa6e1BJod1BadR7OMMOymtuzqLxj3-JM66uTSvWpcKGP1JtoycG3CuzCYI4ifsZ7N_majFUqne01B0wJeZQA_uViM_PvgJaUk_29FFGyAk2rWAFJ7cK6VpD8nMPWQGfO6iin5C_sGouS0FucyAP7zo1nwhM"/>
+</div>
+<span class="font-label-md text-label-md">Smoky Chipotle BBQ</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">HZ-SCB-03</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">BBQ Sauces</span>
+</td>
+<td class="py-4 px-6 font-label-md text-label-md">$9.99</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-error font-medium">Out of Stock</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex text-chili-red">
+<span class="material-symbols-outlined fill text-sm">local_fire_department</span>
+<span class="material-symbols-outlined fill text-sm">local_fire_department</span>
+<span class="material-symbols-outlined text-surface-container-highest text-sm">local_fire_department</span>
+<span class="material-symbols-outlined text-surface-container-highest text-sm">local_fire_department</span>
+<span class="material-symbols-outlined text-surface-container-highest text-sm">local_fire_department</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button aria-label="Edit" class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<button aria-label="Delete" class="text-on-surface-variant hover:text-error p-2 rounded-full hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination (Simple placeholder) -->
+<div class="px-6 py-4 border-t border-surface-container-highest bg-surface-gray flex items-center justify-between">
+<span class="text-sm text-on-surface-variant">Showing 1 to 3 of 45 entries</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-surface-container-highest rounded text-sm bg-white text-on-surface-variant disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 border border-surface-container-highest rounded text-sm bg-white text-on-surface hover:bg-surface-container-low transition-colors">Next</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

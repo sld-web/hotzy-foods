@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hotzy Foods Admin: Order Fulfillment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#bd0a2e",
+                      "secondary-fixed": "#ffe08b",
+                      "on-primary-container": "#fff2f1",
+                      "on-secondary-container": "#6e5700",
+                      "inverse-primary": "#ffb3b2",
+                      "secondary": "#745b00",
+                      "background": "#f9f9f9",
+                      "on-background": "#1b1b1b",
+                      "tertiary-fixed-dim": "#69dd96",
+                      "surface": "#f9f9f9",
+                      "error": "#ba1a1a",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#ffdad9",
+                      "on-secondary": "#ffffff",
+                      "on-surface-variant": "#5b403f",
+                      "surface-container-high": "#e8e8e8",
+                      "on-surface": "#1b1b1b",
+                      "inverse-on-surface": "#f1f1f1",
+                      "surface-variant": "#e2e2e2",
+                      "on-tertiary-fixed-variant": "#00522d",
+                      "on-tertiary-fixed": "#00210f",
+                      "on-error-container": "#93000a",
+                      "surface-white": "#FFFFFF",
+                      "inverse-surface": "#303030",
+                      "surface-dim": "#dadada",
+                      "primary": "#b20028",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-container": "#d7ffdf",
+                      "on-primary-fixed": "#410008",
+                      "on-primary": "#ffffff",
+                      "surface-gray": "#F8F8F8",
+                      "primary-container": "#d7263d",
+                      "surface-container-low": "#f3f3f3",
+                      "secondary-container": "#fecb00",
+                      "tertiary-fixed": "#86fab0",
+                      "secondary-fixed-dim": "#f1c100",
+                      "tertiary-container": "#008149",
+                      "surface-container": "#eeeeee",
+                      "on-secondary-fixed": "#241a00",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#e2e2e2",
+                      "surface-bright": "#f9f9f9",
+                      "on-secondary-fixed-variant": "#584400",
+                      "golden-glaze": "#FFCC00",
+                      "outline-variant": "#e4bdbc",
+                      "on-tertiary": "#ffffff",
+                      "fresh-mint": "#3CB371",
+                      "chili-red": "#D7263D",
+                      "outline": "#906f6e",
+                      "tertiary": "#006539",
+                      "on-primary-fixed-variant": "#92001f",
+                      "primary-fixed-dim": "#ffb3b2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-lg": "32px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "stack-md": "16px",
+                      "container-max": "1200px",
+                      "margin-desktop": "40px",
+                      "stack-sm": "4px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Work Sans"
+                      ],
+                      "label-md": [
+                              "Work Sans"
+                      ],
+                      "label-sm": [
+                              "Work Sans"
+                      ],
+                      "body-lg": [
+                              "Work Sans"
+                      ],
+                      "display-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "34px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "42px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-64 h-16 flex justify-between items-center px-6 z-40 bg-surface border-b border-outline-variant hidden md:flex">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-extrabold text-chili-red">Hotzy Foods Admin</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<img alt="Admin User Avatar" class="w-10 h-10 rounded-full border-2 border-surface-container-high" data-alt="A close up, well lit portrait of an adult male looking directly into the camera. He is wearing a simple dark blue shirt. The background is slightly blurred out to create a shallow depth of field. The lighting is bright and modern, creating a professional and clean aesthetic typical of high end corporate headshots." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJCWEDO67iwSQfduryU3gMgqLa4U4kO6JgfL4eyyliSJh-5qnCVU9U2fFiQQelXYgmToDK557kD_ifYvhKr6OMJQ1AkWZCYDZ2W7RUzZIVNq5bSEfUTGeEYlzbLFInWWJ1Q5QLE9fHFF9aOnhft-AOPvZfVUQiPayCkJKPpSH_3cRKKiDC6YgJN0XDlYyBRNsNFrEl3mMVVonrZ3Mudec2IG_E7Y-1n2qhWnNvGCKvGU3WYMwioYRhd_GfHgdYslSlZljd8eNMWZu0"/>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 bottom-0 flex flex-col p-4 z-50 h-screen w-64 border-r border-outline-variant bg-surface-container-lowest hidden md:flex">
+<div class="flex items-center gap-4 mb-stack-lg px-2">
+<img alt="Hotzy Foods Admin Profile" class="w-12 h-12 rounded-full" data-alt="A portrait of a cheerful person, well lit with modern lighting. They appear confident and professional. The background is simple and clean. The overall feel is bright, approachable and corporate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvH-yYIwqxQp8dg4a3_aNxhAmuxF_E8zmG8No9JKtg-wAHQU8r3JC3G339uHwcdIFNcHmN-ol0aTIWpoWGFUOg6jWecNxHO6fXd2s_hcuAZgSf8I6tV-jeBPr3TIGzvV5SBphV171To_3DfApBbcw7bniwJPc9q1_Az22EN2v7sbZTh5rQKwgFn8GZkXXnjDgs6m-ZCmluKemXeSxZiuNbbfQHOcCGcdoJPXLZlPNDZiR5-cQ1RAgaul9veVU2MHtreHCvo8WJBW9H"/>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Hotzy Admin</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Managing Spicy Excellence</p>
+</div>
+</div>
+<ul class="flex-1 flex flex-col gap-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-primary-fixed rounded-lg font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md text-label-md">Customers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+<span class="font-label-md text-label-md">Promotions</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto">
+<button class="w-full bg-chili-red text-on-primary py-3 rounded-lg font-label-md text-label-md hover:bg-primary transition-colors active:scale-[0.98] mb-4">
+                Create New Order
+            </button>
+<ul class="flex flex-col gap-2 border-t border-outline-variant pt-4">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="md:ml-64 pt-16 p-6">
+<div class="flex justify-between items-center mb-stack-lg">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Order Fulfillment</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage and track customer orders.</p>
+</div>
+<!-- Filters -->
+<div class="flex bg-surface-container-low rounded-lg p-1 border border-outline-variant">
+<button class="px-4 py-2 rounded-md font-label-md text-label-md bg-surface-container-lowest text-primary shadow-sm border border-outline-variant">All Orders</button>
+<button class="px-4 py-2 rounded-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors">Pending</button>
+<button class="px-4 py-2 rounded-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors">Processing</button>
+<button class="px-4 py-2 rounded-md font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors">Shipped</button>
+</div>
+</div>
+<!-- Orders Grid -->
+<div class="grid grid-cols-1 gap-6">
+<!-- Order Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-shadow">
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant">Order #HTZ-8924</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1">Sarah Jenkins</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Oct 24, 2023 at 14:32</p>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-golden-glaze/20 text-on-secondary-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="sync">sync</span> Processing
+                            </span>
+</div>
+<div class="border-t border-outline-variant pt-4 mt-4 hidden md:block">
+<h4 class="font-label-md text-label-md text-on-surface mb-2">Order Summary</h4>
+<ul class="space-y-2">
+<li class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>2x Spicy Habanero Salsa (16oz)</span>
+<span>$18.00</span>
+</li>
+<li class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>1x Ghost Pepper Hot Sauce</span>
+<span>$12.50</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="flex justify-between items-end mt-6 pt-4 border-t border-outline-variant md:border-t-0 md:pt-0">
+<div class="font-headline-md text-headline-md text-primary">$30.50</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors">Details</button>
+<button class="px-4 py-2 bg-chili-red text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="print">print</span> Label
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-shadow">
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant">Order #HTZ-8923</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1">Michael Chang</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Oct 24, 2023 at 10:15</p>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="pending">pending</span> Pending
+                            </span>
+</div>
+</div>
+<div class="flex justify-between items-end mt-6 pt-4 border-t border-outline-variant">
+<div class="font-headline-md text-headline-md text-primary">$124.00</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors">Details</button>
+<button class="px-4 py-2 bg-chili-red text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="print">print</span> Label
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden flex flex-col md:flex-row opacity-75">
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant">Order #HTZ-8922</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1">Elena Rodriguez</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Oct 23, 2023 at 18:45</p>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="local_shipping">local_shipping</span> Shipped
+                            </span>
+</div>
+</div>
+<div class="flex justify-between items-end mt-6 pt-4 border-t border-outline-variant">
+<div class="font-headline-md text-headline-md text-on-surface-variant">$45.00</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors">Details</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

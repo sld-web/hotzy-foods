@@ -1,0 +1,258 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum HeatLevel {
+  MILD
+  MEDIUM
+  HOT
+  XTREME
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  COMPLETED
+  CANCELLED
+}
+
+enum PromoType {
+  PERCENTAGE
+  FREE_SHIPPING
+  FIXED_AMOUNT
+}
+
+enum PromoStatus {
+  ACTIVE
+  SCHEDULED
+  EXPIRED
+}
+
+enum CampaignStatus {
+  LIVE
+  DRAFT
+}
+
+enum UserRole {
+  ADMIN
+  SUPER_ADMIN
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(ADMIN)
+  avatar       String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Customer {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String?
+  name          String?
+  phone         String?
+  isGuest       Boolean   @default(true)
+  totalOrders   Int       @default(0)
+  totalSpent    Decimal   @default(0)
+  segment       String?
+  loyaltyPoints Int       @default(0)
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  addresses     Address[]
+  orders        Order[]
+}
+
+model Address {
+  id         String   @id @default(cuid())
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  label      String?
+  name       String
+  phone      String
+  line1      String
+  line2      String?
+  city       String
+  province   String
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  icon        String?
+  description String?
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  products    Product[]
+}
+
+model Product {
+  id                String      @id @default(cuid())
+  name              String
+  slug              String      @unique
+  sku               String      @unique
+  description       String
+  price             Decimal
+  compareAtPrice    Decimal?
+  costPrice         Decimal?
+  stockLevel        Int         @default(0)
+  lowStockThreshold Int         @default(10)
+  heatLevel         HeatLevel?
+  shuMin            Int?
+  shuMax            Int?
+  weight            Decimal?
+  isActive          Boolean     @default(true)
+  isFeatured        Boolean     @default(false)
+  isBestseller      Boolean     @default(false)
+  isNew             Boolean     @default(false)
+  dietaryTags       String[]
+  metaTitle         String?
+  metaDesc          String?
+  categoryId        String
+  category          Category    @relation(fields: [categoryId], references: [id])
+  images            ProductImage[]
+  orderItems        OrderItem[]
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  @@index([categoryId])
+  @@index([slug])
+  @@index([sku])
+  @@index([isActive, isFeatured, isBestseller])
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  url       String
+  alt       String?
+  sortOrder Int     @default(0)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model Order {
+  id               String      @id @default(cuid())
+  orderNumber      String      @unique
+  customerId       String?
+  customer         Customer?   @relation(fields: [customerId], references: [id])
+  status           OrderStatus @default(PENDING)
+  subtotal         Decimal
+  shippingCost     Decimal     @default(0)
+  tax              Decimal     @default(0)
+  total            Decimal
+  promoCodeId      String?
+  promoCode        PromoCode?  @relation(fields: [promoCodeId], references: [id])
+  discountAmount   Decimal     @default(0)
+  shippingName     String
+  shippingPhone    String?
+  shippingAddress  String
+  shippingCity     String
+  shippingProvince String?
+  shippingCountry  String      @default("Sri Lanka")
+  notes            String?
+  paidAt           DateTime?
+  shippedAt        DateTime?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  items            OrderItem[]
+
+  @@index([customerId])
+  @@index([orderNumber])
+  @@index([status])
+  @@index([promoCodeId])
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  unitPrice Decimal
+  subtotal  Decimal
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model PromoCode {
+  id             String      @id @default(cuid())
+  code           String      @unique
+  type           PromoType
+  value          Decimal
+  minOrderAmount Decimal?    @default(0)
+  maxUses        Int?
+  currentUses    Int         @default(0)
+  maxPerUser     Int?        @default(1)
+  status         PromoStatus @default(ACTIVE)
+  startsAt       DateTime?
+  expiresAt      DateTime?
+  description    String?
+  createdAt      DateTime    @default(now())
+  orders         Order[]
+}
+
+model Campaign {
+  id          String          @id @default(cuid())
+  title       String
+  description String?
+  status      CampaignStatus  @default(DRAFT)
+  imageUrl    String?
+  placement   String
+  linkUrl     String?
+  sortOrder   Int             @default(0)
+  views       Int             @default(0)
+  startsAt    DateTime?
+  endsAt      DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([status])
+  @@index([placement])
+}
+
+model TeamMember {
+  id        String  @id @default(cuid())
+  name      String
+  role      String
+  photoUrl  String?
+  bio       String?
+  sortOrder Int     @default(0)
+  isActive  Boolean @default(true)
+}
+
+model SiteSettings {
+  id                   String  @id @default("singleton")
+  brandName            String  @default("Hotzy Foods")
+  tagline              String  @default("Bold Flavor. Zero Limits.")
+  logoUrl              String?
+  faviconUrl           String?
+  currency             String  @default("LKR")
+  currencySymbol       String  @default("Rs.")
+  taxRate              Decimal @default(0)
+  shippingBase         Decimal @default(0)
+  freeShippingThreshold Decimal?
+  socialLinks          Json?
+  contactEmail         String?
+  contactPhone         String?
+  contactWhatsApp      String?
+  address              String?
+  updatedAt            DateTime @updatedAt
+}

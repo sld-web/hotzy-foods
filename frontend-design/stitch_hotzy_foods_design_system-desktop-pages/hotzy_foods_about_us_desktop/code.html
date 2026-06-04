@@ -1,0 +1,291 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>About Us - Hotzy Foods</title>
+<!-- Google Fonts: Plus Jakarta Sans & Work Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-white": "#FFFFFF",
+                      "on-primary-container": "#fff2f1",
+                      "inverse-primary": "#ffb3b2",
+                      "primary-fixed": "#ffdad9",
+                      "surface-tint": "#bd0a2e",
+                      "fresh-mint": "#3CB371",
+                      "on-surface-variant": "#5b403f",
+                      "on-tertiary-container": "#d7ffdf",
+                      "primary-fixed-dim": "#ffb3b2",
+                      "on-tertiary-fixed": "#00210f",
+                      "on-primary-fixed-variant": "#92001f",
+                      "surface-dim": "#dadada",
+                      "background": "#f9f9f9",
+                      "on-secondary-fixed-variant": "#584400",
+                      "surface-container": "#eeeeee",
+                      "surface-bright": "#f9f9f9",
+                      "tertiary-fixed-dim": "#69dd96",
+                      "on-error": "#ffffff",
+                      "on-surface": "#1b1b1b",
+                      "tertiary-fixed": "#86fab0",
+                      "on-tertiary": "#ffffff",
+                      "outline-variant": "#e4bdbc",
+                      "on-tertiary-fixed-variant": "#00522d",
+                      "inverse-surface": "#303030",
+                      "golden-glaze": "#FFCC00",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#e8e8e8",
+                      "error": "#ba1a1a",
+                      "chili-red": "#D7263D",
+                      "secondary-fixed": "#ffe08b",
+                      "surface-container-low": "#f3f3f3",
+                      "outline": "#906f6e",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#f1c100",
+                      "secondary-container": "#fecb00",
+                      "surface-variant": "#e2e2e2",
+                      "on-secondary-fixed": "#241a00",
+                      "inverse-on-surface": "#f1f1f1",
+                      "primary": "#b20028",
+                      "tertiary-container": "#008149",
+                      "primary-container": "#d7263d",
+                      "on-secondary": "#ffffff",
+                      "secondary": "#745b00",
+                      "on-background": "#1b1b1b",
+                      "on-secondary-container": "#6e5700",
+                      "on-primary": "#ffffff",
+                      "tertiary": "#006539",
+                      "surface": "#f9f9f9",
+                      "surface-gray": "#F8F8F8",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-primary-fixed": "#410008",
+                      "surface-container-lowest": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "margin-mobile": "16px",
+                      "container-max": "1200px",
+                      "stack-sm": "4px",
+                      "stack-md": "16px",
+                      "stack-lg": "32px",
+                      "margin-desktop": "40px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "body-md": ["Work Sans"],
+                      "display-lg-mobile": ["Plus Jakarta Sans"],
+                      "label-sm": ["Work Sans"],
+                      "label-md": ["Work Sans"],
+                      "headline-lg-mobile": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "body-lg": ["Work Sans"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg-mobile": ["36px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased selection:bg-chili-red selection:text-surface-white flex flex-col min-h-screen">
+<!-- Shared Component: TopAppBar -->
+<header class="bg-surface-white dark:bg-surface-container-lowest sticky top-0 z-50 border-b border-surface-container dark:border-outline-variant w-full">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<button class="text-chili-red dark:text-primary-fixed-dim hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors active:scale-95 duration-100 ease-in-out p-2 flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">menu</span>
+</button>
+<div class="text-headline-md font-headline-md font-bold text-chili-red dark:text-primary-fixed-dim tracking-tight">
+                Hotzy Foods
+            </div>
+<button class="text-chili-red dark:text-primary-fixed-dim hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors active:scale-95 duration-100 ease-in-out p-2 flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">shopping_cart</span>
+</button>
+</div>
+</header>
+<main class="flex-grow">
+<!-- 1. Hero Section -->
+<section class="relative w-full h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+<!-- Background Image with data-alt prompt -->
+<div class="absolute inset-0 z-0 bg-cover bg-center" data-alt="A highly detailed, ultra-sharp macro photograph of a dense pile of fresh, vibrant red chili peppers and exotic spices scattered across a dark, textured slate surface. The lighting is dramatic and high-contrast, evoking a sense of intense culinary heat and modern gastronomic energy. The overall aesthetic perfectly matches a bold, high-end food brand with a color palette dominated by vivid chili red and deep shadows. The composition is dynamic and appetizing." style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuB3BpnIawbXvvAvjMSquZnIkwr7lxaO3yEtefSF68AO3WImSTTii3p9O7zjibcWujUcIS2SiSOsa9jsOrcKa01EL_m93LyZGV5c1JBbqkrW6n1CCPby9FLJnVXbEcuSur5SOfPyyCPJVR3o7oVBwCtulrNNEDAxeNFrh-CM0MZqnKLnDA-tZT4AgvG72KmRZLsxK3OINfJumBwNEruu7TLZRQGyNgfJDmoL4cYpHdj5f6_ygXDrMqxeiojejao4_9DrmlOK314sSYAN&quot;);">
+</div>
+<!-- Dark Overlay for text legibility -->
+<div class="absolute inset-0 z-10 bg-on-surface opacity-60"></div>
+<div class="relative z-20 text-center px-margin-mobile max-w-3xl mx-auto">
+<h1 class="text-display-lg-mobile font-display-lg-mobile md:text-display-lg md:font-display-lg text-surface-white mb-stack-md">
+                    Our Spicy Story
+                </h1>
+<p class="text-body-lg font-body-lg text-surface-container leading-relaxed">
+                    Unapologetic flavor. Relentless heat. We are redefining the modern pantry.
+                </p>
+</div>
+</section>
+<!-- 2. Brand Mission -->
+<section class="py-stack-lg md:py-[80px] px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida/AP1WRLuKo_V47eFNxikyJi3LfX9qc1yo1p2aqOsvBD3UFgCLF6X94R7OiblsuwvuYVELcveXILC6y_dbcD-6HtAhy6X6lVcnBR_QW4jrHvZT8enMwE1cbkvhZcIO3SEOEm8l477a9EwlBN0tNiBchZT_drTM92psX-qGTGM98COQb8DoKHZ8HoGKKcggLNtHMalh-FUS5R9CG1eghs4DQGdJty73pDE6r4mMYuAFGzUAwuG3Oj_1VlGgHDHrRWqX&quot;); background-repeat: repeat; background-size: 100px 100px;">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div class="order-2 md:order-1 flex flex-col justify-center">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile md:text-headline-lg md:font-headline-lg text-chili-red mb-stack-md">
+                        Vibrant Culinary Modernism
+                    </h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-stack-md leading-relaxed">
+                        At Hotzy Foods, we believe that mild is a mistake. Our mission is to bring bold, unapologetic heat to every kitchen, elevating everyday meals into extraordinary sensory experiences. We reject the bland and embrace the fire.
+                    </p>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                        Founded on the principles of 'Vibrant Culinary Modernism', we source only the most intense, high-quality peppers globally. We combine traditional spice-crafting techniques with a sleek, contemporary approach to flavor profiling. It's not just about burning your tongue; it's about igniting your palate with complex, layered heat.
+                    </p>
+</div>
+<div class="order-1 md:order-2 rounded-xl overflow-hidden shadow-sm border border-surface-container h-[400px]">
+<img alt="Brand Mission" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" data-alt="A sleek, modern editorial photograph showing a chef's hands carefully selecting from a vibrant array of global chili peppers laid out on a pristine white marble countertop. The scene is brightly lit with a high-key, modern corporate aesthetic that emphasizes cleanliness, precision, and culinary expertise. Splashes of vivid red from the peppers provide a stark, bold contrast against the minimalist white and gray background, perfectly embodying the brand's 'Vibrant Culinary Modernism' philosophy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU1JkvQDbLf1tlYXA7ttfASf2iI9zUYIJgD5r_JamtRhP0gOvuXY7oehYEM62PcTBKdwMulIn5mid5pq4Ut4LYi7-f3Vfl7wDuflkU4aZlVzTCFQ7l0W8aqQ54Xo9isJnPJ21UWPkPjpscJkppEtNfjwwIs9ah4GqNe0cr9W3NIXbWJyy3iQGlUZfcWfsl1Bc9_YTBSFJBxuIUUycyfkdDkIQU2DFSlPXgawgVw0XzLMQjNKOS3dk1D63QY7YuO_NocR8jgmy9aebP">
+</div>
+</div>
+</section>
+<!-- 3. The Heat Scale -->
+<section class="bg-surface-gray py-stack-lg md:py-[80px] px-margin-mobile md:px-margin-desktop" style="background-image: url(&quot;data:image/png;base64,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&quot;); background-repeat: repeat; background-size: 100px 100px; background-color: rgb(248, 248, 248);">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-stack-lg">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile md:text-headline-lg md:font-headline-lg text-on-surface">
+                        The Hotzy Heat Scale
+                    </h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-stack-sm max-w-2xl mx-auto">
+                        Navigate our flavor spectrum. From a gentle warm tingle to an all-out sensory inferno.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-base md:gap-gutter"><!-- Mild -->
+<div class="bg-surface-white rounded-xl p-stack-lg border border-surface-container flex flex-col items-center text-center hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+    <div class="absolute top-0 left-0 w-full h-1.5 bg-outline-variant"></div>
+    <div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-stack-md group-hover:scale-110 transition-transform">
+        <span class="material-symbols-outlined text-outline" style="font-size: 32px;">local_fire_department</span>
+    </div>
+    <h3 class="text-headline-md font-headline-md text-on-surface mb-stack-sm">Mild</h3>
+    <p class="text-label-md font-label-md text-on-surface-variant bg-surface-container-low border border-surface-container px-4 py-1.5 rounded-full mb-stack-md tracking-wide">1k - 5k SHU</p>
+    <p class="text-body-md font-body-md text-on-surface-variant">A gentle introduction. Flavor forward with a polite warmth.</p>
+</div>
+
+<!-- Medium -->
+<div class="bg-secondary-fixed-dim/10 rounded-xl p-stack-lg border border-secondary-fixed flex flex-col items-center text-center hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+    <div class="absolute top-0 left-0 w-full h-1.5 bg-golden-glaze"></div>
+    <div class="w-16 h-16 rounded-full bg-secondary-fixed flex items-center justify-center mb-stack-md group-hover:scale-110 transition-transform">
+        <span class="material-symbols-outlined text-secondary" style="font-size: 32px;">local_fire_department</span>
+    </div>
+    <h3 class="text-headline-md font-headline-md text-on-surface mb-stack-sm">Medium</h3>
+    <p class="text-label-md font-label-md text-on-secondary-container bg-secondary-fixed px-4 py-1.5 rounded-full mb-stack-md font-bold tracking-wide shadow-sm">10k - 30k SHU</p>
+    <p class="text-body-md font-body-md text-on-surface-variant">A confident kick. Perfect for everyday bold culinary adventures.</p>
+</div>
+
+<!-- Hot -->
+<div class="bg-primary-fixed/20 rounded-xl p-stack-lg border border-primary-fixed flex flex-col items-center text-center hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+    <div class="absolute top-0 left-0 w-full h-1.5 bg-chili-red"></div>
+    <div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-stack-md group-hover:scale-110 transition-transform">
+        <span class="material-symbols-outlined text-chili-red" style="font-size: 32px;">local_fire_department</span>
+    </div>
+    <h3 class="text-headline-md font-headline-md text-on-surface mb-stack-sm">Hot</h3>
+    <p class="text-label-md font-label-md text-on-primary-fixed-variant bg-primary-fixed px-4 py-1.5 rounded-full mb-stack-md font-bold tracking-wide shadow-sm">50k - 100k SHU</p>
+    <p class="text-body-md font-body-md text-on-surface-variant">Serious heat for enthusiasts. Sweaty brows guaranteed.</p>
+</div>
+
+<!-- Xtreme Heat -->
+<div class="bg-on-surface rounded-xl p-stack-lg border border-surface-container flex flex-col items-center text-center hover:shadow-2xl transition-all duration-300 relative overflow-hidden group">
+    <div class="absolute top-0 left-0 w-full h-1.5 bg-surface-tint shadow-[0_0_10px_rgba(189,10,46,0.8)]"></div>
+    <div class="w-16 h-16 rounded-full bg-surface-tint flex items-center justify-center mb-stack-md animate-pulse group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(189,10,46,0.5)]">
+        <span class="material-symbols-outlined text-surface-white" style="font-size: 32px;">warning</span>
+    </div>
+    <h3 class="text-headline-md font-headline-md text-surface-white mb-stack-sm">Xtreme Heat</h3>
+    <p class="text-label-md font-label-md text-surface-white bg-surface-tint px-4 py-1.5 rounded-full mb-stack-md font-bold tracking-wide">500k+ SHU</p>
+    <p class="text-body-md font-body-md text-surface-container-highest">Proceed with caution. Unapologetic, relentless sensory overload.</p>
+</div></div>
+</div>
+</section>
+<!-- 4. Our Commitment -->
+<section class="py-stack-lg md:py-[60px] px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto border-b border-surface-container">
+<div class="text-center mb-stack-lg">
+<h2 class="text-headline-md font-headline-md text-on-surface">Our Commitment</h2>
+</div>
+<div class="flex flex-wrap justify-center gap-gutter">
+<div class="flex items-center gap-stack-sm bg-surface-container-low px-6 py-3 rounded-full">
+<span class="material-symbols-outlined text-fresh-mint" style="font-variation-settings: &quot;FILL&quot; 1;">eco</span>
+<span class="text-label-md font-label-md text-on-surface">100% Vegan</span>
+</div>
+<div class="flex items-center gap-stack-sm bg-surface-container-low px-6 py-3 rounded-full">
+<span class="material-symbols-outlined text-golden-glaze" style="font-variation-settings: &quot;FILL&quot; 1;">agriculture</span>
+<span class="text-label-md font-label-md text-on-surface">Gluten Free</span>
+</div>
+<div class="flex items-center gap-stack-sm bg-surface-container-low px-6 py-3 rounded-full">
+<span class="material-symbols-outlined text-chili-red" style="font-variation-settings: &quot;FILL&quot; 1;">health_and_safety</span>
+<span class="text-label-md font-label-md text-on-surface">No Artificial Preservatives</span>
+</div>
+</div>
+</section>
+<!-- 5. The Team -->
+<section class="py-stack-lg md:py-[80px] px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida/AP1WRLuKo_V47eFNxikyJi3LfX9qc1yo1p2aqOsvBD3UFgCLF6X94R7OiblsuwvuYVELcveXILC6y_dbcD-6HtAhy6X6lVcnBR_QW4jrHvZT8enMwE1cbkvhZcIO3SEOEm8l477a9EwlBN0tNiBchZT_drTM92psX-qGTGM98COQb8DoKHZ8HoGKKcggLNtHMalh-FUS5R9CG1eghs4DQGdJty73pDE6r4mMYuAFGzUAwuG3Oj_1VlGgHDHrRWqX&quot;); background-repeat: repeat; background-size: 100px 100px;">
+<div class="text-center mb-stack-lg">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile md:text-headline-lg md:font-headline-lg text-on-surface">
+                    The Culinary Rebels
+                </h2>
+</div>
+<div class="flex justify-center gap-gutter flex-wrap">
+<!-- Founder 1 -->
+<div class="flex flex-col items-center max-w-[200px] text-center">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-white shadow-sm mb-stack-sm">
+<img alt="Jane Doe" class="w-full h-full object-cover" data-alt="A professional, modern corporate portrait of a confident female founder in a clean, brightly lit culinary test kitchen. She is wearing a dark, sleek chef's apron over a crisp white shirt. The lighting is soft yet high-contrast, emphasizing her energetic expression. The background is slightly blurred, showing stainless steel surfaces and subtle red accents that subtly reinforce the brand's bold, spicy identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiPY2h96ChIkLkt14xMpcikm947ESyx8iZ2wZcQC67WTV8rWgmS2yGzMG2tMszhx8h00f4d_oD5BhhyOjHY4qmYAfPgqN3jzsq0uM-Djk6VA6c4wQufojX0SVGKNpbYUG5xXx1MaVYwo6v2mC1NnEndvfCDh1nTJXsv0HYSkKED_Mqyud8F_nVEyzrDmdnO1rmPUM-EYZFIWeiaakE1KbHd3mYjRUDJnIe_gZrA5SPTsivGgZah3tOftb1ilvJ1W9oKr7qmJIXmAVk">
+</div>
+<h4 class="text-label-md font-label-md text-on-surface text-lg">Elena Rossi</h4>
+<p class="text-label-sm font-label-sm text-chili-red uppercase tracking-wider mt-1">Head of Flavor</p>
+</div>
+<!-- Founder 2 -->
+<div class="flex flex-col items-center max-w-[200px] text-center">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-white shadow-sm mb-stack-sm">
+<img alt="John Smith" class="w-full h-full object-cover" data-alt="A striking, high-quality corporate headshot of a male co-founder standing in a modern, minimalist warehouse environment. He exudes a calm but intense demeanor, dressed in a sharp, casual dark grey blazer. The lighting scheme utilizes cool, clean whites with a distinct, warm directional light that highlights his facial features, reflecting the 'bold and energetic' persona of a modern, disruptive food brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDevhAPpEiWNd_b_yJgANRoD3DCsUv2TfKpd0qXdW6sUs31dSjiXg72_UuzD-mP92GEh2V1JOUVfl0dVzpef7i7baC0iUKgV5BoJAzaaeW2T1F2J19yWsn71J09QH5KmlIiBl8wYwLAfzFqfDNlBtCpfRlKd7_sdjnhOUGUjVNg9V-Mgd3ODp0VZor0ts_9G6KpuiHAOIyWtPKlXe_Dw_QuTB5QsYZMZrtvBERWiY3SYUSSU7rcMXSgXB6OFE_FzVzqZdcMp9vvU3H0">
+</div>
+<h4 class="text-label-md font-label-md text-on-surface text-lg">Marcus Chen</h4>
+<p class="text-label-sm font-label-sm text-chili-red uppercase tracking-wider mt-1">Chief Heat Officer</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Shared Component: Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-high w-full mt-stack-lg border-t border-surface-container-highest dark:border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-lg w-full max-w-container-max mx-auto gap-stack-md">
+<div class="text-center md:text-left">
+<div class="text-headline-md font-headline-md text-chili-red mb-stack-sm">
+                    Hotzy Foods
+                </div>
+<div class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant">
+                    © 2024 Hotzy Foods Inc. Boldly Spicy.
+                </div>
+</div>
+<nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors active:opacity-80" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors active:opacity-80" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors active:opacity-80" href="#">Nutrition Info</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors active:opacity-80" href="#">Accessibility</a>
+</nav>
+</div>
+</footer>
+
+
+</body></html>

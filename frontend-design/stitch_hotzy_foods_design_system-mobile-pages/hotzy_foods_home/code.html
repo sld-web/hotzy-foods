@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hotzy Foods - Boldly Spicy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#dadada",
+                      "on-tertiary-fixed-variant": "#00522d",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#ffb3b2",
+                      "surface-variant": "#e2e2e2",
+                      "on-secondary-container": "#6e5700",
+                      "surface-container-low": "#f3f3f3",
+                      "on-secondary": "#ffffff",
+                      "outline-variant": "#e4bdbc",
+                      "surface-white": "#FFFFFF",
+                      "golden-glaze": "#FFCC00",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-primary": "#ffb3b2",
+                      "tertiary-fixed": "#86fab0",
+                      "secondary-fixed": "#ffe08b",
+                      "on-primary-fixed": "#410008",
+                      "inverse-surface": "#303030",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-surface": "#1b1b1b",
+                      "on-primary": "#ffffff",
+                      "surface-gray": "#F8F8F8",
+                      "on-primary-fixed-variant": "#92001f",
+                      "secondary": "#745b00",
+                      "secondary-container": "#fecb00",
+                      "on-primary-container": "#fff2f1",
+                      "outline": "#906f6e",
+                      "surface-container": "#eeeeee",
+                      "secondary-fixed-dim": "#f1c100",
+                      "on-background": "#1b1b1b",
+                      "inverse-on-surface": "#f1f1f1",
+                      "on-error-container": "#93000a",
+                      "on-error": "#ffffff",
+                      "chili-red": "#D7263D",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#ffdad9",
+                      "surface": "#f9f9f9",
+                      "on-tertiary-container": "#d7ffdf",
+                      "tertiary-fixed-dim": "#69dd96",
+                      "surface-container-high": "#e8e8e8",
+                      "fresh-mint": "#3CB371",
+                      "background": "#f9f9f9",
+                      "surface-tint": "#bd0a2e",
+                      "surface-bright": "#f9f9f9",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed": "#241a00",
+                      "tertiary": "#006539",
+                      "on-tertiary-fixed": "#00210f",
+                      "primary": "#b20028",
+                      "primary-container": "#d7263d",
+                      "on-surface-variant": "#5b403f",
+                      "tertiary-container": "#008149",
+                      "on-secondary-fixed-variant": "#584400"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "stack-lg": "32px",
+                      "stack-sm": "4px",
+                      "gutter": "24px",
+                      "stack-md": "16px",
+                      "container-max": "1200px",
+                      "margin-desktop": "40px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "body-md": ["Work Sans"],
+                      "label-sm": ["Work Sans"],
+                      "body-lg": ["Work Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "label-md": ["Work Sans"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "display-lg-mobile": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "display-lg-mobile": ["36px", {"lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-white text-on-surface font-body-md antialiased overflow-x-hidden relative">
+<!-- Drawer Overlay -->
+<div aria-hidden="true" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity opacity-0" id="drawer-overlay"></div>
+<!-- Navigation Drawer Component -->
+<aside class="bg-surface-white dark:bg-surface-container-lowest fixed inset-y-0 left-0 w-80 shadow-md dark:shadow-none flex flex-col h-full py-stack-md z-50 transform -translate-x-full transition-transform duration-300 ease-in-out" id="nav-drawer">
+<div class="px-4 mb-stack-md flex justify-between items-center">
+<span class="text-headline-lg font-headline-lg text-chili-red">Hotzy Menu</span>
+<button class="material-symbols-outlined text-on-surface-variant p-2" id="close-drawer-btn">close</button>
+</div>
+<nav class="flex-grow flex flex-col gap-1">
+<a class="bg-primary-container text-on-primary-container rounded-lg mx-2 my-1 text-label-md font-label-md px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">local_fire_department</span>
+                Hot Deals
+            </a>
+<a class="text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container dark:hover:bg-surface-variant text-label-md font-label-md flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+                Our Products
+            </a>
+<a class="text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container dark:hover:bg-surface-variant text-label-md font-label-md flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">location_on</span>
+                Store Finder
+            </a>
+<a class="text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container dark:hover:bg-surface-variant text-label-md font-label-md flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                Order History
+            </a>
+<a class="text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container dark:hover:bg-surface-variant text-label-md font-label-md flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+                Contact Us
+            </a>
+</nav>
+</aside>
+<!-- TopAppBar Component -->
+<header class="bg-surface-white dark:bg-surface-container-lowest docked full-width sticky top-0 z-30 border-b border-surface-container dark:border-outline-variant flex justify-between items-center px-margin-mobile py-4 w-full max-w-container-max mx-auto transition-colors">
+<button aria-label="Open menu" class="text-chili-red dark:text-primary-fixed-dim hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors material-symbols-outlined active:scale-95 duration-100 ease-in-out p-1" id="open-drawer-btn">
+            menu
+        </button>
+<span class="text-headline-md font-headline-md font-bold text-chili-red dark:text-primary-fixed-dim tracking-tight">Hotzy Foods</span>
+<button aria-label="Shopping cart" class="text-chili-red dark:text-primary-fixed-dim hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors material-symbols-outlined active:scale-95 duration-100 ease-in-out p-1">
+            shopping_cart
+        </button>
+</header>
+<main class="w-full max-w-container-max mx-auto">
+<!-- Hero Section -->
+<section class="px-margin-mobile py-stack-md flex flex-col items-center text-center">
+<div class="w-full h-[530px] rounded-xl overflow-hidden mb-stack-md relative shadow-sm border border-surface-container">
+<img alt="Gourmet spicy burger" class="w-full h-full object-cover" data-alt="A highly appetizing, close-up shot of a gourmet spicy artisan burger overflowing with vibrant red chili sauce, melted cheese, and crispy jalapeños. The food is placed on a sleek, light-colored modern ceramic plate. The scene is brightly lit with high-key lighting, creating a clean, modern aesthetic that emphasizes the bold, intense colors of the meal. The background is a crisp white surface with subtle soft shadows, embodying an energetic and premium fast-casual brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXcW8MfwCUfFhfESYtXu1TyDFNUVYN6qnGN53Cs7vHle-2pULJR4ThGcNi72dF_hEbRLldMWr1exr9_GgkTCH7GWsW9q6KxQqMxODUZ1p6fdhVkWH0OpBKmlvGSMVBbtQEZ-wdSe_cz4wLs8eC149EDQbjJKUQXlsvWSTMreFm9iqY9xWKI5vBt_NgMeRC9DINsz6UBjmkh4TgF-N8tiXfn_ixs2lkqOQ8yfF8I4jFoVj1xfQ-0YMlczI71s0hZHH7S2zm9PpZL1yP"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex flex-col justify-end items-center p-stack-lg">
+<h1 class="text-display-lg-mobile font-display-lg-mobile text-on-primary mb-stack-sm drop-shadow-md">Bold Flavor.<br/><span class="text-golden-glaze">Zero Limits.</span></h1>
+<p class="text-body-md font-body-md text-on-primary/90 mb-stack-lg max-w-xs">Ignite your taste buds with our signature fiery menu crafted for the brave.</p>
+<button class="bg-chili-red text-on-primary text-label-md font-label-md px-8 py-4 rounded-full shadow-md hover:bg-primary transition-colors active:scale-95 duration-100 ease-in-out w-full max-w-[240px]">
+                        Order Now
+                    </button>
+</div>
+</div>
+</section>
+<!-- Hot Deals Horizontal Slider -->
+<section class="py-stack-md pl-margin-mobile">
+<div class="flex justify-between items-center pr-margin-mobile mb-stack-md">
+<h2 class="text-headline-md font-headline-md text-on-surface">Hot Deals</h2>
+<a class="text-label-md font-label-md text-chili-red flex items-center" href="#">See all <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span></a>
+</div>
+<div class="flex overflow-x-auto gap-base pb-stack-sm snap-x pr-margin-mobile no-scrollbar">
+<!-- Deal Card 1 -->
+<article class="snap-start shrink-0 w-64 bg-surface-white border border-surface-container rounded-lg overflow-hidden flex flex-col relative shadow-sm">
+<div class="absolute top-2 left-2 bg-fresh-mint/10 text-fresh-mint text-label-sm font-label-sm px-2 py-1 rounded-full z-10 backdrop-blur-sm border border-fresh-mint/20">Vegan</div>
+<div class="absolute top-2 right-2 bg-chili-red text-on-primary text-label-sm font-label-sm px-2 py-1 rounded-full z-10">-20%</div>
+<img alt="Spicy Noodles" class="h-40 w-full object-cover" data-alt="A vibrant, overhead shot of a steaming bowl of spicy vegan noodles garnished with fresh green herbs and bright red chili flakes. The bowl sits on a pristine white tabletop, softly illuminated to highlight the vivid contrasting colors of the red broth and green garnishes. The aesthetic is clean, energetic, and modern, reflecting a premium food brand style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzQra2w0ehqP_0FHSxNsG8CCkPYOfJU4qzzY72bOmnsdCehtpMNx4GYBWjKemdwO-jkjVwQW3HkHCNRBAXgnqlVVAqvYLFtqBH80S-X9L6MhkaPB7UgVOp3LiJq_YHeAwPAXefT5wFlFQZ5PmvHsdgEjDqIqO3iQzmghvcGmLOsseII_IMtCkhia8xtrqEvIh_cgE5X0x8_G8weNiFB0VlKB6MvZ5jQxF0-shT6tG9qWhRga-fygQdk6J0PjV3XWbm8vtjjCXg98En"/>
+<div class="p-stack-md flex-grow flex flex-col">
+<h3 class="text-body-lg font-body-lg text-on-surface font-bold leading-tight mb-1">Volcano Noodle Bowl</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant line-clamp-2 mb-stack-md">A fiery blend of spices and fresh veggies.</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="text-headline-md font-headline-md text-chili-red">$10.99</span>
+<button aria-label="Add to cart" class="bg-surface-container-low text-on-surface hover:bg-surface-variant rounded-full p-2 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Deal Card 2 -->
+<article class="snap-start shrink-0 w-64 bg-surface-white border border-surface-container rounded-lg overflow-hidden flex flex-col relative shadow-sm">
+<div class="absolute top-2 right-2 bg-chili-red text-on-primary text-label-sm font-label-sm px-2 py-1 rounded-full z-10">Bestseller</div>
+<img alt="Spicy Wings" class="h-40 w-full object-cover" data-alt="A close-up photograph of crispy, golden-fried chicken wings generously coated in a thick, glossy, bright red chili glaze. The wings are arranged cleanly on a simple white plate. The lighting is crisp and modern, casting minimal shadows to keep the focus entirely on the mouth-watering texture and intense red hue of the food. The overall vibe is bold, appetizing, and high-quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoikkCEf2-cVavVVuBHDdQ4iW19I1GXaDjuc7na9YtVNri180TMEIfnZgvSd9qWKK2nT9RWVHM6w7FIKZgvYC8WIvMcpeQUw83y6XOId_LowwLtfZiiJX8QJKdEgJG4-RDhBOUZARww4onoOnAAfZqDsq8K4WQ6vclyGVmUsRz0IUdgnpKa9XMD-cmYcC3hAnadzx0s7ZXk_eAR29jn38Updb8iBGcvbKJkNmo5lKX2xdn1pE9y4WIP_wBRD_TV2gHTklhAf-21J_6"/>
+<div class="p-stack-md flex-grow flex flex-col">
+<h3 class="text-body-lg font-body-lg text-on-surface font-bold leading-tight mb-1">Inferno Wings</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant line-clamp-2 mb-stack-md">6pc crispy wings smothered in our signature glaze.</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="text-headline-md font-headline-md text-chili-red">$12.49</span>
+<button aria-label="Add to cart" class="bg-surface-container-low text-on-surface hover:bg-surface-variant rounded-full p-2 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Featured Categories (Bento Style) -->
+<section class="px-margin-mobile py-stack-md">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-stack-md">Explore Categories</h2>
+<div class="grid grid-cols-2 gap-base">
+<!-- Large Card -->
+<a class="col-span-2 h-48 rounded-xl overflow-hidden relative group block shadow-sm" href="#">
+<img alt="Signature Meals" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautifully styled flat lay of various high-end fast-casual meals including a spicy burger, a bowl of vivid red noodles, and golden fries. The composition is clean and geometric, set against a pristine light gray surface. The lighting is bright, even, and modern, perfectly capturing the energetic, bold brand colors of red and gold." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs3bTMWALhBzndkw26n9OIGtXRjEWBHp5d3X_rJu0kUmpPYNMmH-czWAFJaNp5pXLb1-Nl5OwN0OwuBQIeugFVDrOjs5O8vDbhjcW1ZRL5fuAsnRo3pwOmBgWGb5R0L5QIonGRu8opAbVPaqgGdHHotDu3002z7SCPKCkVi-CT16_-d35dJ4Yi7qCBPfA13syGmXLL3lxMKoLvdQk2aaJsyiancjjnFilJZUqxVvtMJ8EAPGFzqZwtQ-TrNjM_SbtNTws--r0PFWmw"/>
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+<h3 class="text-headline-lg-mobile font-headline-lg-mobile text-on-primary drop-shadow-md">Signature Meals</h3>
+</div>
+</a>
+<!-- Small Card 1 -->
+<a class="h-36 rounded-xl overflow-hidden relative group block shadow-sm border border-surface-container" href="#">
+<img alt="Hot Sauces" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A sharp, minimalist shot of three glass bottles of vibrant red hot sauce lined up on a white background. The bright studio lighting highlights the rich color of the sauces. The aesthetic is clean, premium, and corporate-modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM-VXAlfGqrRIjlscKLXlZR7pOtTtdl252XE9Tyn5Be-Tsbn8qvAEih0nkAYWkBuYx_NoDaJcP3Jb1-ZKqmNWbgj1PiaKjNt1UN5si4sXN4WJGw2ll_2DbAS_H7b4AeAdVPXMjMl2sS69cBN9NOtIOhPxuAGD9Bw50pPCsWLebnlvQwsoTqMNdPzE9k-dX1lU5lFh-F6eJSICewamp1LxiAXXqJAqw9LS5tyHjmm-X-bGj42sO_3u1ViqJ-e20U-jhg-AFUMlniuku"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-3">
+<h3 class="text-body-lg font-body-lg font-bold text-on-primary">Hot Sauces</h3>
+</div>
+</a>
+<!-- Small Card 2 -->
+<a class="h-36 rounded-xl overflow-hidden relative group block shadow-sm border border-surface-container bg-golden-glaze/10" href="#">
+<img alt="Spicy Snacks" class="w-full h-full object-cover mix-blend-multiply opacity-80 group-hover:scale-105 transition-transform duration-500" data-alt="A stylized image of crispy golden snacks dusted with bright red chili powder, arranged casually on a light, warm-toned surface. The lighting is soft but crisp, creating an energetic and appetizing mood suitable for a modern snack brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFjGR7L0mEga6dnqSWf6M46eRMNhopA3DQemjvx2qj30EITYS-z5gHj5oHYqp8eDEdGwl_BtK7ttWFcPvXF_-UxTiKci38b0gTiy3B8Gam9CdRkzGLMyKEsxQSqNK9yRYj9mGWhKn4agcI_wPHS5J0KeKA09zM2VtCOQ8dH25AlAUVgvhQzJuEYo8Y_yK3UASahicj06KCnPrGL-gjt9KSO5Mp3vOhX-GwdiiNcnwsihUGAq2JBJLCARTz8f42bs7be4_Wtri1h8lh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3">
+<h3 class="text-body-lg font-body-lg font-bold text-on-primary">Snacks</h3>
+</div>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container-low dark:bg-surface-container-high w-full mt-stack-lg border-t border-surface-container-highest dark:border-outline-variant flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-lg max-w-container-max mx-auto text-center md:text-left gap-stack-md">
+<div class="flex flex-col items-center md:items-start">
+<span class="text-headline-md font-headline-md text-chili-red mb-2">Hotzy Foods</span>
+<p class="text-label-sm font-label-sm text-on-surface-variant">© 2024 Hotzy Foods Inc. Boldly Spicy.</p>
+</div>
+<nav class="flex flex-wrap justify-center gap-4">
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Nutrition Info</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Accessibility</a>
+</nav>
+</footer>
+<!-- Interactive Scripts -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const drawer = document.getElementById('nav-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const openBtn = document.getElementById('open-drawer-btn');
+            const closeBtn = document.getElementById('close-drawer-btn');
+
+            function openDrawer() {
+                drawer.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                // Small delay to allow display block to apply before animating opacity
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    overlay.classList.add('opacity-100');
+                }, 10);
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+
+            function closeDrawer() {
+                drawer.classList.add('-translate-x-full');
+                overlay.classList.remove('opacity-100');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300); // Match transition duration
+                document.body.style.overflow = '';
+            }
+
+            openBtn.addEventListener('click', openDrawer);
+            closeBtn.addEventListener('click', closeDrawer);
+            overlay.addEventListener('click', closeDrawer);
+        });
+    </script>
+</body></html>

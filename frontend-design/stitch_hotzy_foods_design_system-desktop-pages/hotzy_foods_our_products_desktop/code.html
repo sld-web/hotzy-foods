@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Products - Hotzy Foods</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#006539",
+                      "on-secondary-fixed-variant": "#584400",
+                      "surface-tint": "#bd0a2e",
+                      "tertiary-fixed": "#86fab0",
+                      "surface-container-lowest": "#ffffff",
+                      "on-background": "#1b1b1b",
+                      "fresh-mint": "#3CB371",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#241a00",
+                      "on-tertiary-container": "#d7ffdf",
+                      "surface-white": "#FFFFFF",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#ffb3b2",
+                      "secondary": "#745b00",
+                      "on-tertiary-fixed": "#00210f",
+                      "surface-container-low": "#f3f3f3",
+                      "surface-container-high": "#e8e8e8",
+                      "secondary-container": "#fecb00",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#f1f1f1",
+                      "on-primary-container": "#fff2f1",
+                      "outline": "#906f6e",
+                      "secondary-fixed": "#ffe08b",
+                      "tertiary-fixed-dim": "#69dd96",
+                      "surface-bright": "#f9f9f9",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e2e2e2",
+                      "surface": "#f9f9f9",
+                      "surface-container": "#eeeeee",
+                      "on-primary-fixed-variant": "#92001f",
+                      "surface-container-highest": "#e2e2e2",
+                      "primary-container": "#d7263d",
+                      "on-surface": "#1b1b1b",
+                      "secondary-fixed-dim": "#f1c100",
+                      "on-tertiary-fixed-variant": "#00522d",
+                      "on-secondary-container": "#6e5700",
+                      "on-primary-fixed": "#410008",
+                      "golden-glaze": "#FFCC00",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#ffdad9",
+                      "on-error": "#ffffff",
+                      "on-surface-variant": "#5b403f",
+                      "inverse-surface": "#303030",
+                      "primary": "#b20028",
+                      "background": "#f9f9f9",
+                      "tertiary-container": "#008149",
+                      "chili-red": "#D7263D",
+                      "surface-gray": "#F8F8F8",
+                      "outline-variant": "#e4bdbc",
+                      "surface-dim": "#dadada",
+                      "primary-fixed-dim": "#ffb3b2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "stack-sm": "4px",
+                      "stack-md": "16px",
+                      "stack-lg": "32px",
+                      "margin-mobile": "16px",
+                      "container-max": "1200px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Work Sans"
+                      ],
+                      "label-md": [
+                              "Work Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Work Sans"
+                      ],
+                      "body-lg": [
+                              "Work Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "34px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "42px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #f9f9f9;
+            color: #1b1b1b;
+        }
+        .spice-meter span {
+            color: #e2e2e2;
+        }
+        .spice-meter.level-1 span:nth-child(1) { color: #FFCC00; }
+        .spice-meter.level-2 span:nth-child(1), .spice-meter.level-2 span:nth-child(2) { color: #D7263D; }
+        .spice-meter.level-3 span:nth-child(1), .spice-meter.level-3 span:nth-child(2), .spice-meter.level-3 span:nth-child(3) { color: #b20028; }
+        .spice-meter.level-4 span { color: #92001f; }
+        
+        /* Sidebar transition */
+        #nav-drawer {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        #nav-drawer.open {
+            transform: translateX(0);
+        }
+      </style>
+</head>
+<body class="font-body-md text-body-md bg-surface flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface-white dark:bg-surface-container-lowest sticky full-width top-0 z-50 border-b border-surface-container dark:border-outline-variant">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<button aria-label="Open Menu" class="text-on-surface hover:text-chili-red transition-colors flex items-center justify-center p-2 rounded-full hover:bg-surface-container" id="menu-btn">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="text-headline-md font-headline-md font-bold text-chili-red dark:text-primary-fixed-dim tracking-tight">
+                Hotzy Foods
+            </div>
+<button aria-label="Shopping Cart" class="text-on-surface hover:text-chili-red transition-colors flex items-center justify-center p-2 rounded-full hover:bg-surface-container relative">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-1 right-1 bg-chili-red text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">3</span>
+</button>
+</div>
+</header>
+<!-- NavigationDrawer (Hidden by default, slides in) -->
+<div class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity" id="nav-overlay"></div>
+<nav class="fixed inset-y-0 left-0 w-80 bg-surface-white dark:bg-surface-container-lowest shadow-md dark:shadow-none z-50 flex flex-col h-full py-stack-md" id="nav-drawer">
+<div class="px-4 py-3 flex justify-between items-center border-b border-surface-container mb-2">
+<h2 class="text-headline-md font-headline-md text-chili-red">Hotzy Menu</h2>
+<button class="text-on-surface-variant hover:text-chili-red p-2 rounded-full hover:bg-surface-container transition-colors" id="close-menu-btn">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<ul class="flex-1 overflow-y-auto">
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container dark:hover:bg-surface-variant transition-colors" href="#"><span class="material-symbols-outlined" data-icon="local_fire_department">local_fire_department</span> <span class="text-label-md font-label-md">Hot Deals</span></a></li>
+<li><a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg mx-2 my-1 px-4 py-3 translate-x-1 transition-transform" href="#"><span class="material-symbols-outlined" data-icon="restaurant_menu" data-weight="fill" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span> <span class="text-label-md font-label-md font-bold">Our Products</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container dark:hover:bg-surface-variant transition-colors" href="#"><span class="material-symbols-outlined" data-icon="location_on">location_on</span> <span class="text-label-md font-label-md">Store Finder</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container dark:hover:bg-surface-variant transition-colors" href="#"><span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span> <span class="text-label-md font-label-md">Order History</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-outline-variant px-4 py-3 hover:bg-surface-container dark:hover:bg-surface-variant transition-colors" href="#"><span class="material-symbols-outlined" data-icon="support_agent">support_agent</span> <span class="text-label-md font-label-md">Contact Us</span></a></li>
+</ul>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg flex flex-col gap-stack-lg">
+<!-- Header & Search -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-stack-md border-b border-surface-container pb-stack-md">
+<div>
+<h1 class="text-display-lg font-display-lg text-on-surface mb-2">Our Products</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Explore our curated selection of bold flavors.</p>
+</div>
+<div class="w-full md:w-auto flex flex-col sm:flex-row gap-stack-sm">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-surface-container rounded-lg focus:outline-none focus:border-chili-red focus:ring-1 focus:ring-chili-red text-label-md font-label-md bg-surface-white transition-colors" placeholder="Search sauces, glazes..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full border border-chili-red bg-chili-red/10 text-chili-red text-label-sm font-label-sm hover:bg-chili-red hover:text-white transition-colors font-bold">All Products</button>
+<button class="px-4 py-2 rounded-full border border-surface-container bg-surface-white text-on-surface text-label-sm font-label-sm hover:border-chili-red transition-colors">Spicy</button>
+<button class="px-4 py-2 rounded-full border border-surface-container bg-surface-white text-on-surface text-label-sm font-label-sm hover:border-chili-red transition-colors">Mild</button>
+<button class="px-4 py-2 rounded-full border border-surface-container bg-surface-white text-on-surface text-label-sm font-label-sm hover:border-chili-red transition-colors">Sweet &amp; Spicy</button>
+<button class="px-4 py-2 rounded-full border border-surface-container bg-surface-white text-on-surface text-label-sm font-label-sm hover:border-chili-red transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">new_releases</span> New Arrivals</button>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-gutter">
+<!-- Product Card 1 -->
+<div class="bg-surface-white rounded-lg border border-surface-container overflow-hidden flex flex-col hover:shadow-md transition-shadow group">
+<div class="relative aspect-square overflow-hidden bg-surface-container-low">
+<img alt="Bottle of red hot sauce on a wooden table" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A close-up studio shot of a sleek glass bottle filled with vibrant, fiery red hot sauce, resting on a rustic wooden table. The lighting is bright and high-contrast, emphasizing the glossy texture of the sauce and the modern, bold label design. The background is slightly blurred, creating a clean, appetizing, light-mode culinary aesthetic that aligns with a premium food brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo3pk9kQuyBmzTQOqLBQ2hCC65TPOkTDA__Cxim2J6ZlYcgO-cU7ocmjVFGwYtGB1u3_f_zCZU03kkVBSu70eAtr8hUFMboN3YD1HMJMvJkIX7u7FdKmXVti3swY_zZr7kqwHWUxRAnYOMVwX2KKneKFxunFYgmu3voOKcTPu8D-UkDO_hmIRl57XG6smdODjME4WsuR698UvamczathBkHZyTx-qynyM8oqbkt3TYvmkLL62SdunCT-UsjMQfneD6UibmWcfeZ1Cq"/>
+<div class="absolute top-2 left-2 bg-chili-red/90 text-white px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Bestseller</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-label-md font-label-md text-on-surface line-clamp-2">Ghost Pepper Inferno</h3>
+<div class="spice-meter level-4 flex gap-[2px]" title="Spice Level: Extreme">
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+</div>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-4 flex-1">Our hottest sauce yet. Not for the faint of heart.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="text-headline-md font-headline-md text-on-surface">$12.99</span>
+<button aria-label="Add to cart" class="bg-chili-red text-white p-2 rounded hover:scale-95 transition-transform active:bg-primary">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-white rounded-lg border border-surface-container overflow-hidden flex flex-col hover:shadow-md transition-shadow group">
+<div class="relative aspect-square overflow-hidden bg-surface-container-low">
+<img alt="Jar of yellow glaze with mango chunks" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A brightly lit product photography shot featuring a clear jar filled with a golden-yellow mango glaze, dotted with small red chili flakes. The jar sits on a crisp white marble surface under soft, natural daylight. The overall aesthetic is fresh, modern, and appetizing, emphasizing the vibrant 'Golden Glaze' color palette of a high-end gourmet food catalog." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeghKqd_GCc80VAEn0MPU1GGFR-pRRZ-JLuC-3UEvY5AK_051roYVLUxw2g4ZoXvCUe-k0m_r01_QpVBGMnu96-g_ImglRiAbNH9QdEjCaoEbcmfdTBVqnmP46lKAzlz_9XjLmhp9X2KA3tEfQry8LinlU3DT7qH0UJfRRrCeLEeknJf3lqkmRq36nF2zLrj6kLirQER-XPWB6zEN5gZ8YIJXcP-KwBbQJQJdnmiLpvJfjrR9saqvsk3IzPbfNXEPtEZ8tcOl8gO5x"/>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-label-md font-label-md text-on-surface line-clamp-2">Mango Habanero Glaze</h3>
+<div class="spice-meter level-2 flex gap-[2px]" title="Spice Level: Medium">
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]">whatshot</span>
+<span class="material-symbols-outlined text-[14px]">whatshot</span>
+</div>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-4 flex-1">Sweet upfront with a creeping habanero kick.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="text-headline-md font-headline-md text-on-surface">$9.50</span>
+<button aria-label="Add to cart" class="bg-chili-red text-white p-2 rounded hover:scale-95 transition-transform active:bg-primary">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-surface-white rounded-lg border border-surface-container overflow-hidden flex flex-col hover:shadow-md transition-shadow group">
+<div class="relative aspect-square overflow-hidden bg-surface-container-low">
+<img alt="Green salsa verde in a bowl" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A top-down view of a small white ceramic bowl filled with vibrant green salsa verde, garnished with fresh cilantro leaves. The bowl is placed on a clean, light-colored slate background. The lighting is crisp and modern, highlighting the fresh, natural textures of the sauce, fitting perfectly into a bright, clean corporate food brand style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0NKtLcFru2oRakaAJqdIM5aQOx2yseacPUoKtHhWDHAzHm6Gil7gYLz3e89iWmRPaUi-2bAbCVI-2AkXJbAHWffVvohA4zV0tDWE1H7i5u9X8L6VJQdzfkaokiL-p_F_gOpHfQNnq96drg1tIsWCWMp56cuYDO7mMIAYo_nIN_-L9_2yvOZTL6AV5fTKNYtD99thQrjkAMmsUbNW576e4ipeDaYw27e7xgdS5J7JU2KgNpC-PG7Wc_l4rQ3wNPTm4GTb_fxyam7JL"/>
+<div class="absolute top-2 left-2 bg-fresh-mint/90 text-on-tertiary-fixed px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Vegan</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-label-md font-label-md text-on-surface line-clamp-2">Smoked Jalapeno Verde</h3>
+<div class="spice-meter level-1 flex gap-[2px]" title="Spice Level: Mild">
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]">whatshot</span>
+<span class="material-symbols-outlined text-[14px]">whatshot</span>
+<span class="material-symbols-outlined text-[14px]">whatshot</span>
+</div>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-4 flex-1">Tangy, smoky, and perfectly balanced.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="text-headline-md font-headline-md text-on-surface">$8.00</span>
+<button aria-label="Add to cart" class="bg-chili-red text-white p-2 rounded hover:scale-95 transition-transform active:bg-primary">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-surface-white rounded-lg border border-surface-container overflow-hidden flex flex-col hover:shadow-md transition-shadow group">
+<div class="relative aspect-square overflow-hidden bg-surface-container-low">
+<img alt="Dark red BBQ sauce pouring" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="An action shot capturing a thick, glossy dark red BBQ sauce being poured from a minimalist glass bottle. The background is a clean, off-white studio setting that creates a high-contrast, modern aesthetic. The lighting highlights the rich, appetizing texture of the sauce, aligning with a premium, bold culinary brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKhuDCWhaXUlUX24KiPaLL5y0pcv1dA3brV4ea1fL1tXknyKVA-xKVkXOuam6RMg_z3S4tGDOXPZmQlP9c5mlb84bC9o9LQBDsFAvkn05eQGRgjIWI1KyRG-9bygaHtW_mNj4BEchdPByULqlQE92wvtMQ4OCs9eOnNV9RXPiyMb9taVCXAP48hCBgScgxwtlPvqy_ZFFDxS7u5uZrm9IgXKFV7dUc_JC9u3NTQU-uXgEJbsYGo_YcuxbtkHzKRLtdEmiUq8wbTofr"/>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-label-md font-label-md text-on-surface line-clamp-2">Carolina Reaper BBQ</h3>
+<div class="spice-meter level-3 flex gap-[2px]" title="Spice Level: Hot">
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]">whatshot</span>
+</div>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-4 flex-1">Classic smoky BBQ flavor with a serious bite.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="text-headline-md font-headline-md text-on-surface">$11.50</span>
+<button aria-label="Add to cart" class="bg-chili-red text-white p-2 rounded hover:scale-95 transition-transform active:bg-primary">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 (New Arrival) -->
+<div class="bg-surface-white rounded-lg border border-surface-container overflow-hidden flex flex-col hover:shadow-md transition-shadow group">
+<div class="relative aspect-square overflow-hidden bg-surface-container-low">
+<img alt="Garlic and chili oil" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A detailed macro photograph of a clear jar containing chili crisp oil filled with toasted garlic bits and red pepper flakes. The jar sits on a pristine white counter under bright, modern studio lighting. The image emphasizes the rich golden-red hue of the oil and the crunchy textures, conveying a high-end, appetizing food brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMb6bWotMUdm4XiKRuB-lFB0mIyuZjuRhNKCIooUkiZyl2sJFENuJpWqseK1ggrUJk-ae9HWPTCFV4YcLrWJMCMRkdxp5ktEJQPXpKOPNgxZlCyAoPFsR_C8xqdKVw7WPd0VW2xIEUD4Q4E8aaF3NaLGPRtmeF08DZQmgkBgiuSXj_-SqEC1Y2FPQlrWLCdpdXrWcScPSG5n8vDdaAi43Rw7xuJaiFwjzhcnhZLhY8DGi192tLVr_U3ZJhTFBIDMfayOoEMQXQb1hr"/>
+<div class="absolute top-2 right-2 bg-golden-glaze/90 text-on-secondary-fixed-variant px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">New</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-label-md font-label-md text-on-surface line-clamp-2">Crispy Garlic Chili Oil</h3>
+<div class="spice-meter level-2 flex gap-[2px]" title="Spice Level: Medium">
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">whatshot</span>
+<span class="material-symbols-outlined text-[14px]">whatshot</span>
+<span class="material-symbols-outlined text-[14px]">whatshot</span>
+</div>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-4 flex-1">Add umami and crunch to literally anything.</p>
+<div class="flex items-center justify-between mt-auto">
+<span class="text-headline-md font-headline-md text-on-surface">$14.00</span>
+<button aria-label="Add to cart" class="bg-chili-red text-white p-2 rounded hover:scale-95 transition-transform active:bg-primary">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-high w-full mt-stack-lg border-t border-surface-container-highest dark:border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-lg w-full max-w-container-max mx-auto gap-stack-md">
+<div class="text-headline-md font-headline-md text-chili-red">
+                Hotzy Foods
+            </div>
+<div class="flex flex-wrap justify-center gap-4">
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Nutrition Info</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Accessibility</a>
+</div>
+<div class="text-body-md font-body-md text-on-surface-variant dark:text-outline-variant text-center md:text-right">
+                © 2024 Hotzy Foods Inc. Boldly Spicy.
+            </div>
+</div>
+</footer>
+<script>
+        // Drawer toggle logic
+        const menuBtn = document.getElementById('menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const navDrawer = document.getElementById('nav-drawer');
+        const navOverlay = document.getElementById('nav-overlay');
+
+        function toggleMenu() {
+            const isOpen = navDrawer.classList.contains('open');
+            if (isOpen) {
+                navDrawer.classList.remove('open');
+                navOverlay.classList.add('hidden');
+            } else {
+                navDrawer.classList.add('open');
+                navOverlay.classList.remove('hidden');
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+    </script>
+</body></html>

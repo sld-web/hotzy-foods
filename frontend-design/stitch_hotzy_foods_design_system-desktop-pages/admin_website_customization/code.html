@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hotzy Foods Admin - Website Customization</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "inverse-surface": "#303030",
+                "secondary": "#745b00",
+                "primary": "#b20028",
+                "on-background": "#1b1b1b",
+                "surface-variant": "#e2e2e2",
+                "on-primary": "#ffffff",
+                "on-tertiary-fixed-variant": "#00522d",
+                "primary-fixed": "#ffdad9",
+                "fresh-mint": "#3CB371",
+                "surface-container-low": "#f3f3f3",
+                "on-error-container": "#93000a",
+                "tertiary-fixed-dim": "#69dd96",
+                "on-tertiary-fixed": "#00210f",
+                "on-primary-fixed-variant": "#92001f",
+                "tertiary": "#006539",
+                "background": "#f9f9f9",
+                "on-secondary-fixed-variant": "#584400",
+                "chili-red": "#D7263D",
+                "outline-variant": "#e4bdbc",
+                "surface-container": "#eeeeee",
+                "on-tertiary": "#ffffff",
+                "surface": "#f9f9f9",
+                "secondary-fixed-dim": "#f1c100",
+                "outline": "#906f6e",
+                "tertiary-fixed": "#86fab0",
+                "surface-container-high": "#e8e8e8",
+                "primary-container": "#d7263d",
+                "secondary-fixed": "#ffe08b",
+                "inverse-primary": "#ffb3b2",
+                "surface-container-lowest": "#ffffff",
+                "surface-gray": "#F8F8F8",
+                "surface-bright": "#f9f9f9",
+                "primary-fixed-dim": "#ffb3b2",
+                "golden-glaze": "#FFCC00",
+                "on-surface-variant": "#5b403f",
+                "on-error": "#ffffff",
+                "on-primary-fixed": "#410008",
+                "inverse-on-surface": "#f1f1f1",
+                "on-secondary": "#ffffff",
+                "on-surface": "#1b1b1b",
+                "surface-dim": "#dadada",
+                "on-tertiary-container": "#d7ffdf",
+                "secondary-container": "#fecb00",
+                "tertiary-container": "#008149",
+                "surface-container-highest": "#e2e2e2",
+                "error-container": "#ffdad6",
+                "on-secondary-fixed": "#241a00",
+                "surface-white": "#FFFFFF",
+                "error": "#ba1a1a",
+                "on-secondary-container": "#6e5700",
+                "surface-tint": "#bd0a2e",
+                "on-primary-container": "#fff2f1"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "stack-sm": "4px",
+                "margin-mobile": "16px",
+                "base": "8px",
+                "stack-lg": "32px",
+                "gutter": "24px",
+                "container-max": "1200px",
+                "stack-md": "16px",
+                "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                "display-lg": ["Plus Jakarta Sans"],
+                "headline-lg": ["Plus Jakarta Sans"],
+                "body-md": ["Work Sans"],
+                "label-sm": ["Work Sans"],
+                "headline-md": ["Plus Jakarta Sans"],
+                "body-lg": ["Work Sans"],
+                "label-md": ["Work Sans"]
+            },
+            "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .chili-bg-pattern {
+            background-image: url('https://lh3.googleusercontent.com/aida/AP1WRLuKo_V47eFNxikyJi3LfX9qc1yo1p2aqOsvBD3UFgCLF6X94R7OiblsuwvuYVELcveXILC6y_dbcD-6HtAhy6X6lVcnBR_QW4jrHvZT8enMwE1cbkvhZcIO3SEOEm8l477a9EwlBN0tNiBchZT_drTM92psX-qGTGM98COQb8DoKHZ8HoGKKcggLNtHMalh-FUS5R9CG1eghs4DQGdJty73pDE6r4mMYuAFGzUAwuG3Oj_1VlGgHDHrRWqX');
+            background-repeat: repeat;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Side Navigation Shell (from JSON COMPONENTS_28 logic) -->
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col p-base z-40 bg-surface-container-lowest dark:bg-inverse-surface border-r border-surface-variant dark:border-outline-variant shadow-sm">
+<div class="flex flex-col gap-base mb-stack-lg px-base pt-base">
+<div class="flex items-center gap-stack-md mb-base">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" data-icon="restaurant_menu">restaurant_menu</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary leading-tight">Admin Panel</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Customization Suite</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<!-- Active Tab Mapping: Website Customization maps to Homepage Banners or Dashboard intent -->
+<a class="flex items-center gap-stack-md p-base text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-stack-md p-base text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="palette">palette</span>
+<span class="font-label-md text-label-md">Brand Assets</span>
+</a>
+<a class="flex items-center gap-stack-md p-base bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary font-bold rounded-lg translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="view_carousel">view_carousel</span>
+<span class="font-label-md text-label-md">Homepage Banners</span>
+</a>
+<a class="flex items-center gap-stack-md p-base text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="texture">texture</span>
+<span class="font-label-md text-label-md">Backgrounds</span>
+</a>
+<a class="flex items-center gap-stack-md p-base text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Store Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-stack-lg border-t border-surface-variant">
+<button class="w-full bg-chili-red text-white py-stack-md rounded-lg font-label-md text-label-md hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20">
+                Publish Changes
+            </button>
+</div>
+</aside>
+<!-- Top Navigation Anchor -->
+<header class="flex justify-between items-center w-full md:pl-[296px] pr-margin-desktop h-16 sticky top-0 z-30 bg-surface dark:bg-surface-dim border-b border-surface-variant dark:border-outline-variant">
+<div class="flex items-center gap-stack-md">
+<h1 class="text-headline-md font-headline-md font-extrabold text-primary">Website Customization</h1>
+<span class="px-2 py-0.5 bg-fresh-mint/10 text-fresh-mint text-[10px] uppercase tracking-widest font-bold rounded">Live Editor</span>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="flex items-center gap-stack-md bg-surface-container px-base py-1 rounded-full">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md w-40" placeholder="Search settings..." type="text"/>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors" data-icon="settings">settings</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-surface-variant flex items-center justify-center overflow-hidden">
+<img alt="Admin profile" class="w-full h-full object-cover" data-alt="A professional headshot of a website administrator in a modern office environment. The lighting is soft and natural, emphasizing a clean and capable brand personality. The overall aesthetic is high-end corporate with a focus on trust and technical expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqsrBJRkDbtpy2WoQYsPXan-QbiB7OqIbmRpXFC6nYnrAlxM_m3pG5vE72GxR8NNu3w7-hVlk0nCl52cAapGu7otjpah2p_OG6IhfZHfpYoPuVbh7V9wFnDywTP5Xp0IOg4LS_rfvkRbauYpuOS_jBvdDuxr1D2pnL3jb2DeOB3HO9t45pU4kRAXLM8w7AjMljIgV8gYvWMAo64UJ9qmNxvsZ1Jqg6ZzkRvAuK2EOOuIey4T62qQLuHGfyZyLBOLSDsTnZq-15M9Po"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="md:pl-[296px] pr-margin-desktop pt-gutter pb-stack-lg max-w-[1600px]">
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Section 1: Logo Management (Bento Style) -->
+<section class="col-span-12 lg:col-span-8 bg-surface-container-lowest border border-surface-variant rounded-xl p-stack-lg shadow-sm">
+<div class="flex justify-between items-start mb-stack-lg">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Logo Management</h3>
+<p class="font-body-md text-on-surface-variant">Update your brand identity assets across the storefront.</p>
+</div>
+<button class="flex items-center gap-stack-sm text-primary font-label-md hover:underline">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span> Restore Defaults
+                    </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Main Logo -->
+<div class="space-y-stack-md">
+<div class="aspect-video bg-surface-container border border-dashed border-outline-variant rounded-lg flex flex-col items-center justify-center group cursor-pointer hover:bg-surface-container-high transition-colors">
+<img alt="Current Logo" class="h-12 w-auto grayscale group-hover:grayscale-0 transition-all" data-alt="A stylized minimalist food logo featuring a bold chili pepper icon integrated with modern typography. The design is clean and high-contrast, utilizing vibrant red against a crisp white background to evoke a sense of professional culinary branding and spicy appetite." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP9K0cbFYtebZ2LM44RCsuxkoD7kEEvaRQAh87BAIqggQuYKRalj8fNzUeiRnkS5glqrtVEFJJql3j7T7m5DL1OpVaIE7aaH_oTfMmFcvY3t9Mfbu3piexwx2AkJP15nZ9WaToQXQwLmUhueI7RKFpWJfeife2mQOUL6dV7c0sKWQPGqDTeOPYDlR7fJnejuQepjDZQCgauFOCxIbXOU7GCYiMfC1eDpGrsQyvRD-TyPABEC59vwWOGYJWvVuJpXyAltMoqi3ZrW5a"/>
+<span class="mt-base font-label-sm text-on-surface-variant">Click to Replace</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Main Logo</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">400x120px • SVG / PNG</p>
+</div>
+</div>
+<!-- Footer Logo -->
+<div class="space-y-stack-md">
+<div class="aspect-video bg-inverse-surface border border-dashed border-surface-variant rounded-lg flex flex-col items-center justify-center group cursor-pointer hover:bg-on-surface-variant transition-colors">
+<div class="w-16 h-8 bg-surface-variant/20 rounded"></div>
+<span class="mt-base font-label-sm text-surface-variant">Upload Inverse</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Footer Logo</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">400x120px • White Monochrome</p>
+</div>
+</div>
+<!-- Favicon -->
+<div class="space-y-stack-md">
+<div class="aspect-square w-24 mx-auto bg-surface-container border border-dashed border-outline-variant rounded-lg flex flex-col items-center justify-center group cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="rocket">rocket</span>
+</div>
+<div class="text-center">
+<p class="font-label-md text-on-surface">Favicon</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">32x32px • .ICO / .PNG</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Design Tokens Overview (Read-only Side Widget) -->
+<section class="col-span-12 lg:col-span-4 bg-primary p-stack-lg rounded-xl text-on-primary shadow-lg shadow-primary/20 relative overflow-hidden">
+<!-- Decorative background elements -->
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="relative z-10 h-full flex flex-col">
+<div class="mb-stack-lg">
+<h3 class="font-headline-md text-headline-md">Brand Guardrails</h3>
+<p class="font-body-md opacity-80">Vibrant Culinary Modernism</p>
+</div>
+<div class="space-y-stack-md flex-1">
+<div class="flex justify-between items-center bg-white/10 p-base rounded-lg backdrop-blur-sm">
+<span class="font-label-sm uppercase tracking-widest opacity-70">Primary Color</span>
+<div class="flex items-center gap-stack-md">
+<span class="font-bold">#D7263D</span>
+<div class="w-6 h-6 bg-chili-red rounded border border-white/20"></div>
+</div>
+</div>
+<div class="flex justify-between items-center bg-white/10 p-base rounded-lg backdrop-blur-sm">
+<span class="font-label-sm uppercase tracking-widest opacity-70">Heading Font</span>
+<span class="font-headline-md text-base">Jakarta Sans</span>
+</div>
+<div class="flex justify-between items-center bg-white/10 p-base rounded-lg backdrop-blur-sm">
+<span class="font-label-sm uppercase tracking-widest opacity-70">Corner Radius</span>
+<span class="font-bold">8px (lg)</span>
+</div>
+</div>
+<div class="mt-stack-lg p-base border border-white/20 rounded-lg">
+<p class="text-xs italic opacity-80">"Design for appetite. Use high-contrast imagery and keep layouts breathable."</p>
+</div>
+</div>
+</section>
+<!-- Section 2: Homepage Banners (Interactive List) -->
+<section class="col-span-12 bg-surface-container-lowest border border-surface-variant rounded-xl p-stack-lg shadow-sm">
+<div class="flex justify-between items-center mb-stack-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">Hero Banners</h3>
+<button class="bg-surface-container-high text-on-surface px-stack-md py-stack-sm rounded-lg font-label-md flex items-center gap-stack-md hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Add New Banner
+                    </button>
+</div>
+<div class="space-y-stack-md">
+<!-- Banner Row 1 -->
+<div class="flex items-center gap-gutter p-base border border-surface-container rounded-xl hover:border-primary/30 transition-all group">
+<div class="w-40 aspect-video rounded-lg overflow-hidden flex-shrink-0 relative">
+<img alt="Summer BBQ Banner" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A vibrant, high-contrast close-up of sizzling grilled meat and fresh vegetables on a barbecue. The lighting is warm and golden, emphasizing textures and intense flavors. The overall mood is energetic and celebratory, designed to stimulate a summer appetite." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJbWUKazEnQaZ5mwlh9ZrifOAikh94VN2QZkOB37CA3C4LioXl7keLcCEGTRPFTu15bDFuBoCScauDTy_E13cVIktPs0m9f7fSwQFRYB9aZMh-yRq8tzjcWYVoVK25Fjog6D3tK_4kHa_hXYs5vOqprK1FjEdumMix7HcASSOXq-31eqMG_YGg2rz02yHyMIWEzz54GfYoQxE0Z8nN0Tvju0C5O_d2lUoU1MmaUBGFxmKr49GOCST4PdOFTwAiOTvThoPhPDFelFXJ"/>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-base mb-1">
+<span class="bg-fresh-mint/20 text-fresh-mint text-[10px] font-bold px-1.5 py-0.5 rounded">ACTIVE</span>
+<h4 class="font-headline-md text-[18px]">Summer Heat Sizzlers</h4>
+</div>
+<p class="text-on-surface-variant font-body-md line-clamp-1">CTA: "Shop Summer Deals" → /collections/summer-bbq</p>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors group/btn">
+<span class="material-symbols-outlined text-on-surface-variant group-hover/btn:text-primary" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container rounded-lg transition-colors group/btn">
+<span class="material-symbols-outlined text-on-surface-variant group-hover/btn:text-error" data-icon="delete">delete</span>
+</button>
+<div class="cursor-grab p-2">
+<span class="material-symbols-outlined text-surface-variant" data-icon="drag_indicator">drag_indicator</span>
+</div>
+</div>
+</div>
+<!-- Banner Row 2 -->
+<div class="flex items-center gap-gutter p-base border border-surface-container rounded-xl hover:border-primary/30 transition-all group opacity-75">
+<div class="w-40 aspect-video rounded-lg overflow-hidden flex-shrink-0 relative">
+<img alt="Lunch Menu" class="w-full h-full object-cover" data-alt="A clean, top-down photograph of a gourmet salad with fresh ingredients and artisanal dressing. The aesthetic is bright and modern, using high-key lighting and a pristine white background. The composition is balanced and elegant, emphasizing the 'Fresh' and 'Healthy' aspects of the food brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlCJ_rsCS81DTHR6dZbCVx8Q8iTPxrPV2QKa9SQUiSuBxLnzPLYKxGsXvHhU6GNitHJbSKzIPMFRfDoCVY44aKEecvqaDqrGvN5-1bRHP3S04jhETmatA-otpVLCGGECZ_K_KHImkTbzwPucCOozVDUk6O2-aNleM_Ybgmybmp3jQTyyAACEM9i49UmQHGNTmDshS2gFiAv_5KSj21WxAZ3_mBDjg9QjtuJJJK-FzO6pSYHSwWH39zfLZaFleoAzuRvhE5Ode8rStK"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-base mb-1">
+<span class="bg-surface-variant text-on-surface-variant text-[10px] font-bold px-1.5 py-0.5 rounded uppercase">Scheduled</span>
+<h4 class="font-headline-md text-[18px]">Fresh Morning Glow</h4>
+</div>
+<p class="text-on-surface-variant font-body-md line-clamp-1">CTA: "Breakfast Bundles" → /breakfast-menu</p>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors group/btn">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="calendar_today">calendar_today</span>
+</button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors group/btn">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="edit">edit</span>
+</button>
+<div class="cursor-grab p-2">
+<span class="material-symbols-outlined text-surface-variant" data-icon="drag_indicator">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Background & Patterns (Specialized Area) -->
+<section class="col-span-12 lg:col-span-12 bg-surface-container-lowest border border-surface-variant rounded-xl p-stack-lg shadow-sm">
+<div class="flex flex-col md:flex-row gap-gutter">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-base">Signature Pattern Control</h3>
+<p class="font-body-md text-on-surface-variant mb-stack-lg max-w-md">Customize the intensity and appearance of the Hotzy chili pepper pattern applied to the storefront background layers.</p>
+<div class="space-y-stack-lg">
+<div>
+<div class="flex justify-between mb-base">
+<label class="font-label-md">Pattern Opacity</label>
+<span class="text-primary font-bold">15%</span>
+</div>
+<input class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-chili-red" type="range"/>
+</div>
+<div>
+<div class="flex justify-between mb-base">
+<label class="font-label-md">Pattern Scale</label>
+<span class="text-primary font-bold">Medium (200px)</span>
+</div>
+<div class="flex gap-stack-md">
+<button class="flex-1 py-base border border-surface-variant rounded-lg font-label-sm hover:bg-surface-container transition-colors">Small</button>
+<button class="flex-1 py-base border-2 border-primary bg-primary/5 rounded-lg font-label-sm text-primary font-bold">Medium</button>
+<button class="flex-1 py-base border border-surface-variant rounded-lg font-label-sm hover:bg-surface-container transition-colors">Large</button>
+</div>
+</div>
+<div>
+<label class="font-label-md block mb-base">Base Background Color</label>
+<div class="flex gap-base">
+<div class="w-10 h-10 rounded-full border-2 border-primary bg-surface-bright cursor-pointer ring-offset-2 ring-primary"></div>
+<div class="w-10 h-10 rounded-full border-2 border-transparent bg-surface-container cursor-pointer hover:scale-110 transition-transform"></div>
+<div class="w-10 h-10 rounded-full border-2 border-transparent bg-surface-dim cursor-pointer hover:scale-110 transition-transform"></div>
+<div class="w-10 h-10 rounded-full border-2 border-transparent bg-inverse-surface cursor-pointer hover:scale-110 transition-transform"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full md:w-[400px] bg-surface rounded-xl border border-surface-variant overflow-hidden relative group">
+<div class="absolute inset-0 chili-bg-pattern opacity-15"></div>
+<div class="relative p-gutter h-full flex flex-col justify-center items-center text-center">
+<div class="bg-white/80 backdrop-blur-md p-stack-lg rounded-xl shadow-xl border border-white/50">
+<span class="text-[10px] uppercase tracking-widest font-extrabold text-primary mb-2 block">Live Preview</span>
+<h4 class="font-headline-md text-headline-md mb-base">Homepage Canvas</h4>
+<p class="text-on-surface-variant text-sm mb-stack-md">The background pattern adds depth and texture without distracting from your delicious offerings.</p>
+<div class="w-32 h-2 bg-primary/20 rounded-full mx-auto"></div>
+</div>
+</div>
+<div class="absolute bottom-4 right-4 bg-on-surface text-white text-[10px] px-2 py-1 rounded font-bold">PREVIEW MODE</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer Area (JSON COMPONENTS_28 logic) -->
+<footer class="md:pl-[296px] bg-surface-container dark:bg-surface-dim border-t border-surface-variant mt-stack-lg">
+<div class="w-full py-stack-md px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-headline-md text-headline-md text-primary mb-1">Hotzy Foods</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Hotzy Foods Admin. All rights reserved.</p>
+</div>
+<div class="flex gap-gutter">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+<!-- Floating Save Hint (Contextual FAB logic override) -->
+<div class="fixed bottom-gutter right-gutter hidden transform translate-y-20 transition-all duration-300 z-50" id="saveHint">
+<div class="bg-on-surface text-surface py-stack-md px-stack-lg rounded-full shadow-2xl flex items-center gap-stack-md border border-white/10">
+<span class="material-symbols-outlined text-fresh-mint" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md">Unsaved changes detected</span>
+<button class="bg-chili-red text-white px-base py-1 rounded-full text-xs font-bold hover:scale-105 transition-transform" onclick="publishChanges()">Publish Now</button>
+</div>
+</div>
+<script>
+        // Micro-interactions for admin panel
+        const inputs = document.querySelectorAll('input[type="range"], input[type="text"], button');
+        const saveHint = document.getElementById('saveHint');
+
+        inputs.forEach(input => {
+            input.addEventListener('change', () => {
+                saveHint.classList.remove('hidden');
+                setTimeout(() => {
+                    saveHint.classList.remove('translate-y-20');
+                }, 100);
+            });
+        });
+
+        function publishChanges() {
+            const btn = event.target;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm" data-icon="progress_activity">progress_activity</span> Publishing...';
+            setTimeout(() => {
+                btn.innerHTML = 'Success!';
+                btn.classList.replace('bg-chili-red', 'bg-fresh-mint');
+                setTimeout(() => {
+                    saveHint.classList.add('translate-y-20');
+                    setTimeout(() => saveHint.classList.add('hidden'), 300);
+                }, 2000);
+            }, 1500);
+        }
+    </script>
+</body></html>

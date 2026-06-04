@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hotzy Foods - Bold Flavor. Zero Limits.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#006539",
+                      "on-secondary-fixed-variant": "#584400",
+                      "surface-tint": "#bd0a2e",
+                      "tertiary-fixed": "#86fab0",
+                      "surface-container-lowest": "#ffffff",
+                      "on-background": "#1b1b1b",
+                      "fresh-mint": "#3CB371",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#241a00",
+                      "on-tertiary-container": "#d7ffdf",
+                      "surface-white": "#FFFFFF",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#ffb3b2",
+                      "secondary": "#745b00",
+                      "on-tertiary-fixed": "#00210f",
+                      "surface-container-low": "#f3f3f3",
+                      "surface-container-high": "#e8e8e8",
+                      "secondary-container": "#fecb00",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#f1f1f1",
+                      "on-primary-container": "#fff2f1",
+                      "outline": "#906f6e",
+                      "secondary-fixed": "#ffe08b",
+                      "tertiary-fixed-dim": "#69dd96",
+                      "surface-bright": "#f9f9f9",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e2e2e2",
+                      "surface": "#f9f9f9",
+                      "surface-container": "#eeeeee",
+                      "on-primary-fixed-variant": "#92001f",
+                      "surface-container-highest": "#e2e2e2",
+                      "primary-container": "#d7263d",
+                      "on-surface": "#1b1b1b",
+                      "secondary-fixed-dim": "#f1c100",
+                      "on-tertiary-fixed-variant": "#00522d",
+                      "on-secondary-container": "#6e5700",
+                      "on-primary-fixed": "#410008",
+                      "golden-glaze": "#FFCC00",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#ffdad9",
+                      "on-error": "#ffffff",
+                      "on-surface-variant": "#5b403f",
+                      "inverse-surface": "#303030",
+                      "primary": "#b20028",
+                      "background": "#f9f9f9",
+                      "tertiary-container": "#008149",
+                      "chili-red": "#D7263D",
+                      "surface-gray": "#F8F8F8",
+                      "outline-variant": "#e4bdbc",
+                      "surface-dim": "#dadada",
+                      "primary-fixed-dim": "#ffb3b2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "stack-sm": "4px",
+                      "stack-md": "16px",
+                      "stack-lg": "32px",
+                      "margin-mobile": "16px",
+                      "container-max": "1200px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Work Sans"
+                      ],
+                      "label-md": [
+                              "Work Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Work Sans"
+                      ],
+                      "body-lg": [
+                              "Work Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "34px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "42px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-md antialiased bg-surface">
+<!-- TopAppBar -->
+<header class="bg-surface-white dark:bg-surface-container-lowest docked full-width top-0 z-50 border-b border-surface-container dark:border-outline-variant flat no shadows sticky">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<button aria-label="Menu" class="text-on-surface-variant dark:text-outline-variant hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors scale-95 duration-100 ease-in-out md:hidden">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<a class="text-headline-md font-headline-md font-bold text-chili-red dark:text-primary-fixed-dim tracking-tight" href="#">Hotzy Foods</a>
+</div>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-chili-red dark:text-primary-fixed-dim font-bold text-label-md font-label-md hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-outline-variant text-label-md font-label-md hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors" href="#">Hot Deals</a>
+<a class="text-on-surface-variant dark:text-outline-variant text-label-md font-label-md hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors" href="#">Menu</a>
+<a class="text-on-surface-variant dark:text-outline-variant text-label-md font-label-md hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors" href="#">Store Finder</a>
+</nav>
+<button aria-label="Cart" class="text-on-surface-variant dark:text-outline-variant hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors scale-95 duration-100 ease-in-out">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</header>
+<main class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg flex flex-col gap-stack-lg md:gap-[48px]">
+<!-- Hero Section -->
+<section class="relative w-full rounded-xl overflow-hidden bg-surface-white border border-surface-container shadow-sm min-h-[500px] flex items-center bg-cover bg-center" data-alt="A high-quality, mouth-watering close-up photography of a towering, gourmet burger. The burger features a thick, juicy beef patty, melting cheese, vibrant fresh lettuce, and ripe red tomatoes, all sandwiched between a perfectly toasted artisan bun. The lighting is dramatic and appetizing, emphasizing the textures and colors of the ingredients. The scene is set in a modern, slightly moody culinary environment, aligning perfectly with a bold, high-contrast visual style designed to evoke an immediate appetite and sense of culinary excitement." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAl3QW5yDai2VLhsa0qUI45wd3aqTMJmv6RmTtHYXLqpWWJtsCXDYx0cDF5_JajM2VfbmYsTIThcjZ-FBzQlXvdvxMIvIEvK6wEgf-qJsp-9AyDwIIJ4Fk_DiePdAoNgJ7AXrl-xRfzJ9c6bLn6JMlM1QMkOyl2WpkC4ncdxucJcRom4AlgshVihh0HrW6ssA7rwF4O3az-BESNccPfOVgjkP5cVVqd6lZekapcZw-2QjcEl8pubB_29_FPtN5mj-Ko8VjbMGhVMw78');">
+<!-- Overlay for text readability -->
+<div class="absolute inset-0 bg-gradient-to-r from-on-background/80 via-on-background/50 to-transparent"></div>
+<div class="relative z-10 p-stack-lg md:p-[64px] max-w-2xl text-surface-white">
+<span class="inline-block px-3 py-1 mb-4 rounded-full bg-chili-red text-surface-white text-label-sm font-label-sm uppercase tracking-wider">New Arrival</span>
+<h1 class="text-display-lg font-display-lg mb-stack-md leading-tight">Bold Flavor.<br/>Zero Limits.</h1>
+<p class="text-body-lg font-body-lg mb-stack-lg text-surface-container-lowest/90">Experience the ultimate heat with our new Inferno Burger. Crafted for those who crave intensity and unmatched taste.</p>
+<div class="flex gap-4">
+<button class="bg-chili-red hover:bg-primary text-surface-white px-8 py-4 rounded-lg text-label-md font-label-md transition-transform active:scale-95 shadow-md">
+                        Order Now
+                    </button>
+<button class="bg-surface-white/10 hover:bg-surface-white/20 border border-surface-white/30 text-surface-white px-8 py-4 rounded-lg text-label-md font-label-md transition-colors backdrop-blur-sm">
+                        View Menu
+                    </button>
+</div>
+</div>
+</section>
+<!-- Hot Deals Section (Bento Grid) -->
+<section class="w-full">
+<div class="flex justify-between items-end mb-stack-md">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-background mb-stack-sm">Hot Deals</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Unbeatable prices for maximum flavor.</p>
+</div>
+<a class="text-chili-red text-label-md font-label-md hover:underline flex items-center gap-1 hidden md:flex" href="#">
+                    See All <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter h-auto md:h-[400px]">
+<!-- Main Deal (Takes up 2 columns on desktop) -->
+<div class="md:col-span-2 relative rounded-xl overflow-hidden group border border-surface-container shadow-sm bg-surface-white">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A dynamic, top-down photograph of a vibrant, loaded combo meal spread on a dark, textured surface. The meal includes a massive, spicy fried chicken sandwich with golden-brown crust, a generous portion of crispy, crinkle-cut fries, and a bright red dipping sauce. The lighting is high-contrast, highlighting the textures of the crispy chicken and fries, creating a mouth-watering, energetic culinary scene that fits the modern, bold brand identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAoNy9Hz12-w5SW-ICRKPKyRZ1WwZ8lEZ_Hki6KTkgYFnuxcCN5pwJF52LdaQNhbzK17aYALG2JORXitXiDUfN7_KVMdH4QMAkzL4FI3YQJSfxM4yL3a4YTaKR3fRh_etGIRNu5ck19OATGEZ3-wBmj4upvpb8YGaxiY20xdxuzBcR4IUNDkWRrdPy6CTeFJdRnUHV47ZOckcrCCgFnE8d5KtaMeU2ZP4DAghmyP3vpl5iqXBN19Q9nFL-LH2AbxJ1n3jLz6MCzdIoY');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-stack-md flex justify-between items-end">
+<div class="text-surface-white">
+<span class="inline-block px-2 py-1 mb-2 rounded bg-golden-glaze text-on-secondary-fixed text-label-sm font-label-sm">Combo Deal</span>
+<h3 class="text-headline-md font-headline-md mb-1">The Spicy Duo</h3>
+<p class="text-body-md font-body-md text-surface-container-low/80">Double the heat, double the fun.</p>
+</div>
+<div class="bg-surface-white text-on-background px-4 py-2 rounded-lg font-headline-md text-headline-md shadow-sm">
+                            $14.99
+                        </div>
+</div>
+</div>
+<!-- Secondary Deal -->
+<div class="relative rounded-xl overflow-hidden group border border-surface-container shadow-sm bg-surface-white">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A close-up, appetizing shot of a pile of crispy, seasoned french fries served in a modern, red-accented container. The fries are golden and perfectly textured, dusted with a visible layer of spicy red seasoning. The background is slightly blurred to keep focus on the fries, with lighting that emphasizes the crispy edges. The overall aesthetic is clean, fast, and highly appealing, aligning with the brand's energetic personality." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDC5eEZEE9aO067Zh5gXNNurtY7bQqM6IexBwhlt4Eu8tOK9PDClUSJyMUfIVJGXZH7A6bQiNX6-zj6m_uviZI9KBrBEIxSmbTjsk1OQI6L5lgriFkyMUKaJAvdEs42MwwxaF_NmKQtm933ZERX9Er52cIpi33PchW_fjVciABymuR49NcpkDBSz9xW0AVRJzsnWJ6wJTF0i2JtKHifE8PKhMqrlOxsKQf4LDls2kEyWOqSXNSa_P5Web8QRYAPniXfErcAQBLaJctf');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/90 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-stack-md">
+<span class="inline-block px-2 py-1 mb-2 rounded bg-fresh-mint text-on-tertiary-fixed text-label-sm font-label-sm">Add-on</span>
+<h3 class="text-headline-md font-headline-md text-surface-white mb-1">Volcano Fries</h3>
+<div class="flex justify-between items-center mt-2">
+<span class="text-body-md font-body-md text-surface-container-low/80">Spicy &amp; Crispy</span>
+<span class="text-golden-glaze font-headline-md text-headline-md">$4.99</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories Section -->
+<section class="w-full">
+<h2 class="text-headline-lg font-headline-lg text-on-background mb-stack-md">Explore Categories</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<!-- Category 1 -->
+<div class="bg-surface-white border border-surface-container rounded-xl p-stack-md flex flex-col items-center text-center cursor-pointer hover:border-chili-red hover:shadow-sm transition-all group">
+<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center mb-stack-sm group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-3xl text-chili-red" data-icon="lunch_dining">lunch_dining</span>
+</div>
+<h3 class="text-label-md font-label-md text-on-background">Burgers</h3>
+</div>
+<!-- Category 2 -->
+<div class="bg-surface-white border border-surface-container rounded-xl p-stack-md flex flex-col items-center text-center cursor-pointer hover:border-chili-red hover:shadow-sm transition-all group">
+<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center mb-stack-sm group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-3xl text-chili-red" data-icon="local_pizza">local_pizza</span>
+</div>
+<h3 class="text-label-md font-label-md text-on-background">Pizza</h3>
+</div>
+<!-- Category 3 -->
+<div class="bg-surface-white border border-surface-container rounded-xl p-stack-md flex flex-col items-center text-center cursor-pointer hover:border-chili-red hover:shadow-sm transition-all group">
+<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center mb-stack-sm group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-3xl text-chili-red" data-icon="kebab_dining">kebab_dining</span>
+</div>
+<h3 class="text-label-md font-label-md text-on-background">Chicken</h3>
+</div>
+<!-- Category 4 -->
+<div class="bg-surface-white border border-surface-container rounded-xl p-stack-md flex flex-col items-center text-center cursor-pointer hover:border-chili-red hover:shadow-sm transition-all group">
+<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center mb-stack-sm group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-3xl text-chili-red" data-icon="local_drink">local_drink</span>
+</div>
+<h3 class="text-label-md font-label-md text-on-background">Drinks</h3>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-high w-full mt-stack-lg border-t border-surface-container-highest dark:border-outline-variant flat no shadows">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-lg w-full max-w-container-max mx-auto gap-4">
+<div class="text-headline-md font-headline-md text-chili-red">
+                Hotzy Foods
+            </div>
+<div class="flex flex-wrap justify-center gap-4 md:gap-8">
+<a class="text-on-surface-variant dark:text-outline-variant text-label-sm font-label-sm hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-outline-variant text-label-sm font-label-sm hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-outline-variant text-label-sm font-label-sm hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Nutrition Info</a>
+<a class="text-on-surface-variant dark:text-outline-variant text-label-sm font-label-sm hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Accessibility</a>
+</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">
+                © 2024 Hotzy Foods Inc. Boldly Spicy.
+            </div>
+</div>
+</footer>
+</body></html>

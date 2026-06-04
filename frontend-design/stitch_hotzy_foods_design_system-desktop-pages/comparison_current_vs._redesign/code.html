@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hotzy Foods - Design Comparison</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1b1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#241a00",
+                        "secondary": "#745b00",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-background": "#1b1b1b",
+                        "surface-container-high": "#e8e8e8",
+                        "primary": "#b20028",
+                        "on-primary-fixed-variant": "#92001f",
+                        "primary-fixed": "#ffdad9",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#303030",
+                        "tertiary-fixed-dim": "#69dd96",
+                        "on-secondary-container": "#6e5700",
+                        "golden-glaze": "#FFCC00",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#008149",
+                        "fresh-mint": "#3CB371",
+                        "on-primary-fixed": "#410008",
+                        "tertiary-fixed": "#86fab0",
+                        "surface-dim": "#dadada",
+                        "surface-variant": "#e2e2e2",
+                        "surface-bright": "#f9f9f9",
+                        "surface-tint": "#bd0a2e",
+                        "surface": "#f9f9f9",
+                        "on-tertiary-fixed-variant": "#00522d",
+                        "surface-white": "#FFFFFF",
+                        "chili-red": "#D7263D",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#d7ffdf",
+                        "secondary-container": "#fecb00",
+                        "primary-fixed-dim": "#ffb3b2",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#f1c100",
+                        "on-surface-variant": "#5b403f",
+                        "tertiary": "#006539",
+                        "surface-gray": "#F8F8F8",
+                        "outline-variant": "#e4bdbc",
+                        "on-secondary-fixed-variant": "#584400",
+                        "surface-container-low": "#f3f3f3",
+                        "background": "#f9f9f9",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#fff2f1",
+                        "inverse-primary": "#ffb3b2",
+                        "surface-container": "#eeeeee",
+                        "primary-container": "#d7263d",
+                        "outline": "#906f6e",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffe08b",
+                        "on-tertiary-fixed": "#00210f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "stack-sm": "4px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1200px",
+                        "base": "8px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "label-sm": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["36px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface-gray text-on-surface font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface-white dark:bg-surface-container-lowest border-b border-surface-container dark:border-outline-variant docked full-width top-0 z-50 flat no shadows">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<button aria-label="Menu" class="md:hidden text-chili-red dark:text-primary-fixed-dim hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="text-headline-md font-headline-md font-bold text-chili-red dark:text-primary-fixed-dim tracking-tight">
+                Hotzy Foods
+            </div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors text-label-md font-label-md" href="#">Hot Deals</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors text-label-md font-label-md" href="#">Our Products</a>
+<a class="text-chili-red dark:text-primary-fixed-dim font-bold text-label-md font-label-md underline underline-offset-4 decoration-2" href="#">Compare</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors text-label-md font-label-md" href="#">Contact Us</a>
+</nav>
+<button aria-label="Cart" class="text-chili-red dark:text-primary-fixed-dim hover:text-chili-red dark:hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg flex flex-col gap-stack-lg">
+<div class="text-center mb-8">
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg text-chili-red mb-stack-sm">Design Evolution</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mx-auto">See how we've reimagined the Hotzy Foods experience to be bolder, spicier, and more appetizing than ever before.</p>
+</div>
+<!-- Comparison Container -->
+<div class="flex flex-col xl:flex-row gap-gutter relative items-start">
+<!-- Current Live Version -->
+<div class="flex-1 w-full flex flex-col gap-stack-md bg-surface-white rounded-xl shadow-sm border border-surface-container overflow-hidden">
+<div class="bg-surface-container-low px-6 py-4 border-b border-surface-container">
+<h2 class="text-headline-md font-headline-md text-on-surface">Current Live Version</h2>
+</div>
+<div class="p-6">
+<div class="rounded-lg overflow-hidden border border-surface-container shadow-sm">
+<img alt="Original Hotzy Foods Homepage Screenshot" class="w-full h-auto object-cover object-top" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg" style="max-height: 800px;"/>
+</div>
+</div>
+</div>
+<!-- VS Badge -->
+<div class="hidden xl:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-16 h-16 rounded-full bg-chili-red text-surface-white text-headline-md font-headline-md shadow-lg border-4 border-surface-gray shadow-chili-red/20">
+                VS
+            </div>
+<div class="xl:hidden self-center w-12 h-12 rounded-full bg-chili-red text-surface-white text-body-lg font-headline-md font-bold shadow-lg flex items-center justify-center my-4">
+                VS
+            </div>
+<!-- Our Redesign -->
+<div class="flex-1 w-full flex flex-col gap-stack-md bg-surface-white rounded-xl shadow-sm border border-surface-container overflow-hidden relative overflow-hidden">
+<!-- Decorative subtle background element -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-fixed-dim rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none"></div>
+<div class="bg-chili-red/5 px-6 py-4 border-b border-chili-red/10 flex items-center justify-between">
+<h2 class="text-headline-md font-headline-md text-chili-red">Our Redesign</h2>
+<span class="px-3 py-1 bg-chili-red text-surface-white text-label-sm font-label-sm rounded-full">New Look</span>
+</div>
+<div class="p-6 relative z-10">
+<div class="rounded-lg overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-surface-container transition-transform hover:-translate-y-1 duration-300">
+<img alt="New Hotzy Foods Desktop Redesign" class="w-full h-auto object-cover object-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFVeZVlldx9LaBSuQYE5sapL-ymWDGoH7PCnaPT2--O9m6pc3Qob4QSadj8lQ5GoqGbMBd0lqpHda6YtBetu1f9zyGzePKcwUcFWNSF4R4zx1wKVcGPtpi2tAIR-iMiQacNKyBjDhO19bo1iM4LzNURuh1d83UQpEbmaMsx9gX2qmy0FK9DWvp-6x7hxJQDTk5J_kmiR16Hd4-uX-ieHX-_juy8yJozKIo9jU0x6IDIb1wOopcUuyBAoGA_lvY-m87EHNsV8cjRDsl" style="max-height: 800px;"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Improvements Section -->
+<div class="mt-stack-lg bg-surface-white rounded-xl shadow-sm border border-surface-container p-8 md:p-12 relative overflow-hidden">
+<!-- Subtle accent -->
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-golden-glaze"></div>
+<h3 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-surface mb-6">Key Improvements</h3>
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+<li class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0 text-chili-red">
+<span class="material-symbols-outlined" data-icon="palette" style="font-variation-settings: 'FILL' 1;">palette</span>
+</div>
+<div>
+<h4 class="text-body-lg font-bold text-on-surface mb-1">Modernized visual identity</h4>
+<p class="text-body-md text-on-surface-variant">Elevated the brand aesthetic with the 'Vibrant Culinary Modernism' design system, utilizing bold colors and clean typography.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center flex-shrink-0 text-secondary">
+<span class="material-symbols-outlined" data-icon="devices" style="font-variation-settings: 'FILL' 1;">devices</span>
+</div>
+<div>
+<h4 class="text-body-lg font-bold text-on-surface mb-1">Enhanced responsiveness</h4>
+<p class="text-body-md text-on-surface-variant">A true mobile-first approach that seamlessly scales up to provide a premium, optimized experience on desktop displays.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center flex-shrink-0 text-tertiary">
+<span class="material-symbols-outlined" data-icon="account_tree" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+</div>
+<div>
+<h4 class="text-body-lg font-bold text-on-surface mb-1">Improved information architecture</h4>
+<p class="text-body-md text-on-surface-variant">Streamlined navigation and content hierarchy to help users find products and information faster and more intuitively.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0 text-chili-red">
+<span class="material-symbols-outlined" data-icon="auto_stories" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+</div>
+<div>
+<h4 class="text-body-lg font-bold text-on-surface mb-1">Consistent brand storytelling</h4>
+<p class="text-body-md text-on-surface-variant">Unified the narrative across all sections, ensuring every touchpoint communicates Hotzy's dedication to bold flavor and quality.</p>
+</div>
+</li>
+</ul>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-high border-t border-surface-container-highest dark:border-outline-variant w-full mt-stack-lg flat no shadows">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-lg w-full max-w-container-max mx-auto gap-4">
+<div class="text-headline-md font-headline-md text-chili-red text-center md:text-left">
+                Hotzy Foods
+            </div>
+<div class="flex flex-wrap justify-center gap-4 text-label-sm font-label-sm">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Nutrition Info</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Accessibility</a>
+</div>
+<div class="text-body-md font-body-md text-on-surface-variant text-center md:text-right">
+                © 2024 Hotzy Foods Inc. Boldly Spicy.
+            </div>
+</div>
+</footer>
+</body></html>
