@@ -2,34 +2,36 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { trpc } from '@/lib/trpc';
+import { useAuthStore } from '@/lib/auth-store';
 
 export default function LoginPage() {
   const router = useRouter();
+  const token = useAuthStore((s) => s.token);
+  const setAuth = useAuthStore((s) => s.setAuth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  // Simple redirect if already logged in
-  useEffect(() => {
-    const token = localStorage.getItem('hotzy-admin-token');
-    if (token) router.push('/admin');
-  }, [router]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-
-    try {
-      // For now, redirect to admin (token-based auth will be implemented fully)
-      localStorage.setItem('hotzy-admin-token', 'mock-token');
+  const loginMutation = trpc.admin.auth.login.useMutation({
+    onSuccess: (data) => {
+      localStorage.setItem('hotzy-admin-token', data.token);
+      setAuth(data.token, data.user);
       router.push('/admin');
-    } catch {
-      setError('Login failed');
-    } finally {
-      setLoading(false);
-    }
+    },
+    onError: (err) => {
+      setError(err.message);
+    },
+  });
+
+  useEffect(() => {
+    if (token) router.push('/admin');
+  }, [token, router]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    loginMutation.mutate({ email, password });
   };
 
   return (
@@ -43,6 +45,12 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-surface-container p-6 space-y-4">
           {error && (
             <div className="p-3 rounded-lg bg-error/10 text-error text-label-sm">{error}</div>
+          )}
+
+          {loginMutation.isSuccess && (
+            <div className="p-3 rounded-lg bg-fresh-mint/10 text-tertiary text-label-sm">
+              Login successful! Redirecting...
+            </div>
           )}
 
           <div>
@@ -71,10 +79,10 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loginMutation.isPending}
             className="w-full py-2.5 rounded-lg bg-primary text-white text-label-md font-semibold hover:bg-[#92001f] transition-colors disabled:opacity-50"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loginMutation.isPending ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
       </div>

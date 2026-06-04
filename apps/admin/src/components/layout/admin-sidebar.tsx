@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useAuthStore } from '@/lib/auth-store';
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: 'dashboard' },
@@ -15,10 +16,13 @@ const navItems = [
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const logout = useAuthStore((s) => s.logout);
+  const user = useAuthStore((s) => s.user);
 
   const handleLogout = () => {
-    localStorage.removeItem('hotzy-admin-token');
-    window.location.href = '/login';
+    logout();
+    router.push('/login');
   };
 
   return (

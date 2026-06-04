@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@hotzy/api": "workspace:*",
     "@hotzy/database": "workspace:*",
     "@hotzy/ui": "workspace:*",
@@ -21,11 +22,11 @@
     "next": "^14.2.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
-    "superjson": "^2.2.0",
     "react-hook-form": "^7.52.0",
-    "@hookform/resolvers": "^3.9.0",
+    "recharts": "^2.12.0",
+    "superjson": "^2.2.0",
     "zod": "^3.23.0",
-    "recharts": "^2.12.0"
+    "zustand": "^4.5.7"
   },
   "devDependencies": {
     "@hotzy/tailwind-config": "workspace:*",
