@@ -14,10 +14,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "^5.18.0"
+    "@prisma/client": "^5.18.0",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
     "@hotzy/tsconfig": "workspace:*",
+    "@types/bcryptjs": "^2.4.6",
     "prisma": "^5.18.0",
     "tsx": "^4.16.0",
     "typescript": "^5.5.0"

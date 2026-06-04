@@ -1,11 +1,14 @@
-import { router, adminProcedure } from '../trpc';
+import { router, publicProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
 import { loginSchema } from '@hotzy/validators';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import { TRPCError } from '@trpc/server';
 
+const JWT_SECRET = process.env.JWT_SECRET || 'dev-jwt-secret';
+
 export const authRouter = router({
-  login: adminProcedure.input(loginSchema).mutation(async ({ input }) => {
+  login: publicProcedure.input(loginSchema).mutation(async ({ input }) => {
     const user = await prisma.user.findUnique({ where: { email: input.email } });
     if (!user) {
       throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid email or password' });
@@ -16,6 +19,20 @@ export const authRouter = router({
       throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid email or password' });
     }
 
-    return { id: user.id, email: user.email, name: user.name, role: user.role };
+    const token = jwt.sign(
+      { id: user.id, email: user.email, type: 'admin' },
+      JWT_SECRET,
+      { expiresIn: '24h' },
+    );
+
+    return {
+      token,
+      user: { id: user.id, email: user.email, name: user.name, role: user.role },
+    };
+  }),
+
+  me: publicProcedure.query(async ({ ctx }) => {
+    if (!ctx.admin) return null;
+    return ctx.admin;
   }),
 });

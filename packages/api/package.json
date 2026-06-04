@@ -16,6 +16,9 @@
     "jsonwebtoken": "^9.0.0",
     "superjson": "^2.2.0"
   },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
   "devDependencies": {
     "@hotzy/tsconfig": "workspace:*",
     "@types/bcryptjs": "^2.4.6",

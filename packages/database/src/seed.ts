@@ -6,6 +6,17 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Seeding database...');
 
+  // ─── Clear existing data (idempotent) ───
+  await prisma.orderItem.deleteMany();
+  await prisma.order.deleteMany();
+  await prisma.productImage.deleteMany();
+  await prisma.product.deleteMany();
+  await prisma.category.deleteMany();
+  await prisma.teamMember.deleteMany();
+  await prisma.address.deleteMany();
+  await prisma.customer.deleteMany();
+  console.log('  ✓ Cleared existing data');
+
   // ─── Admin User ───
   const adminPassword = await bcrypt.hash('admin123', 12);
   const admin = await prisma.user.upsert({

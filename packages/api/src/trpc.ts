@@ -19,18 +19,26 @@ export interface CustomerUser {
 }
 
 export async function createTRPCContext(req: Request) {
-  // Extract customer token from Authorization header
   const authHeader = req.headers.get('authorization');
-  const customerToken = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
+  const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
 
   let admin: AdminUser | null = null;
   let customer: CustomerUser | null = null;
 
-  // Validate customer JWT
-  if (customerToken) {
+  if (token) {
     try {
-      const payload = jwt.verify(customerToken, JWT_SECRET) as { id: string; email: string; type: 'customer' };
-      if (payload.type === 'customer') {
+      const payload = jwt.verify(token, JWT_SECRET) as {
+        id: string;
+        email: string;
+        type: 'admin' | 'customer';
+      };
+
+      if (payload.type === 'admin') {
+        const user = await prisma.user.findUnique({ where: { id: payload.id } });
+        if (user) {
+          admin = { id: user.id, email: user.email, name: user.name, role: user.role };
+        }
+      } else if (payload.type === 'customer') {
         const user = await prisma.customer.findUnique({ where: { id: payload.id } });
         if (user) {
           customer = { id: user.id, email: user.email, name: user.name };
