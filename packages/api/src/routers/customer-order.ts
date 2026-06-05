@@ -30,8 +30,10 @@ export const customerOrderRouter = router({
         },
       });
       if (!order) throw new Error('Order not found');
-      const customer = await prisma.customer.findUnique({ where: { id: order.customerId! } });
-      if (customer?.email !== input.email) throw new Error('Order not found for this email');
+      if (!order.customerId) throw new Error('Order not found for this email');
+      const customer = await prisma.customer.findUnique({ where: { id: order.customerId } });
+      if (!customer || customer.email !== input.email)
+        throw new Error('Order not found for this email');
       return order;
     }),
 });
