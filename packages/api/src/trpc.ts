@@ -3,7 +3,10 @@ import superjson from 'superjson';
 import { prisma } from '@hotzy/database';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-jwt-secret';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
 
 export interface AdminUser {
   id: string;
@@ -27,7 +30,7 @@ export async function createTRPCContext(req: Request) {
 
   if (token) {
     try {
-      const payload = jwt.verify(token, JWT_SECRET) as {
+      const payload = jwt.verify(token, JWT_SECRET as string) as {
         id: string;
         email: string;
         type: 'admin' | 'customer';

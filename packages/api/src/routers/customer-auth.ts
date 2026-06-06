@@ -11,7 +11,10 @@ import jwt from 'jsonwebtoken';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-jwt-secret';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
 
 export const customerAuthRouter = router({
   register: publicProcedure.input(customerRegisterSchema).mutation(async ({ input }) => {
@@ -81,14 +84,16 @@ export const customerAuthRouter = router({
     }),
 
   addAddress: customerProcedure.input(createAddressSchema).mutation(async ({ ctx, input }) => {
-    if (input.isDefault) {
-      await prisma.address.updateMany({
-        where: { customerId: ctx.customer.id },
-        data: { isDefault: false },
+    return prisma.$transaction(async (tx) => {
+      if (input.isDefault) {
+        await tx.address.updateMany({
+          where: { customerId: ctx.customer.id },
+          data: { isDefault: false },
+        });
+      }
+      return tx.address.create({
+        data: { ...input, customerId: ctx.customer.id },
       });
-    }
-    return prisma.address.create({
-      data: { ...input, customerId: ctx.customer.id },
     });
   }),
 
@@ -98,13 +103,15 @@ export const customerAuthRouter = router({
       const { id, ...data } = input;
       const addr = await prisma.address.findFirst({ where: { id, customerId: ctx.customer.id } });
       if (!addr) throw new TRPCError({ code: 'NOT_FOUND', message: 'Address not found' });
-      if (data.isDefault) {
-        await prisma.address.updateMany({
-          where: { customerId: ctx.customer.id },
-          data: { isDefault: false },
-        });
-      }
-      return prisma.address.update({ where: { id }, data });
+      return prisma.$transaction(async (tx) => {
+        if (data.isDefault) {
+          await tx.address.updateMany({
+            where: { customerId: ctx.customer.id },
+            data: { isDefault: false },
+          });
+        }
+        return tx.address.update({ where: { id }, data });
+      });
     }),
 
   deleteAddress: customerProcedure

@@ -34,7 +34,6 @@ export default function ProductDetailPage() {
   const slug = params.slug as string;
   const [quantity, setQuantity] = useState(1);
   const addItem = useCart((s) => s.addItem);
-  const updateQuantity = useCart((s) => s.updateQuantity);
 
   const { data: product, isLoading } = trpc.product.bySlug.useQuery({ slug });
 
@@ -156,15 +155,17 @@ export default function ProductDetailPage() {
             <Button
               size="lg"
               onClick={() => {
-                addItem({
-                  productId: product.id,
-                  name: product.name,
-                  slug: product.slug,
-                  price: Number(product.price),
-                  image: product.images?.[0]?.url || '',
-                  heatLevel: product.heatLevel,
-                });
-                if (quantity > 1) updateQuantity(product.id, quantity);
+                addItem(
+                  {
+                    productId: product.id,
+                    name: product.name,
+                    slug: product.slug,
+                    price: Number(product.price),
+                    image: product.images?.[0]?.url || '',
+                    heatLevel: product.heatLevel,
+                  },
+                  quantity,
+                );
                 setQuantity(1);
               }}
             >
