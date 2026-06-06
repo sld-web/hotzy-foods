@@ -44,7 +44,7 @@ export const productFilterSchema = z.object({
   search: z.string().optional(),
   sort: z.enum(['name_asc', 'name_desc', 'price_asc', 'price_desc', 'newest', 'oldest']).optional(),
   page: z.number().int().min(1).default(1),
-  limit: z.number().int().min(1).max(100).default(12),
+  limit: z.number().int().min(1).max(24).default(12),
 });
 
 export type CreateProductInput = z.input<typeof createProductSchema>;

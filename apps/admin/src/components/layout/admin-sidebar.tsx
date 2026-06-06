@@ -36,13 +36,16 @@ export function AdminSidebar() {
 
       <nav className="flex-1 p-3 space-y-1">
         {navItems.map((item) => {
-          const active = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href));
+          const active =
+            pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href));
           return (
             <Link
               key={item.href}
               href={item.href}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-label-md transition-colors ${
-                active ? 'bg-primary/10 text-primary font-semibold' : 'text-on-surface-variant hover:bg-surface-container'
+                active
+                  ? 'bg-primary/10 text-primary font-semibold'
+                  : 'text-on-surface-variant hover:bg-surface-container'
               }`}
             >
               <span className="material-symbols-outlined text-lg">{item.icon}</span>
@@ -52,7 +55,13 @@ export function AdminSidebar() {
         })}
       </nav>
 
-      <div className="p-3 border-t border-surface-container">
+      <div className="p-3 border-t border-surface-container space-y-1">
+        {user && (
+          <div className="px-3 py-2 text-label-sm text-on-surface-variant truncate">
+            {user.name}
+            <span className="block text-[11px] opacity-60">{user.email}</span>
+          </div>
+        )}
         <button
           onClick={handleLogout}
           className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-label-md text-on-surface-variant hover:bg-surface-container w-full transition-colors"

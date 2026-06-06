@@ -4,6 +4,8 @@ import { prisma } from '@hotzy/database';
 import { createOrderSchema } from '@hotzy/validators';
 
 const MAX_QUANTITY = 99;
+const FREE_SHIPPING_THRESHOLD = 5000;
+const STANDARD_SHIPPING_COST = 350;
 
 function generateOrderNumber(): string {
   const ts = Date.now().toString(36).toUpperCase();
@@ -60,7 +62,7 @@ export const orderRouter = router({
       subtotal += dbPrice * item.quantity;
     }
 
-    const shippingCost = subtotal >= 5000 ? 0 : 350;
+    const shippingCost = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : STANDARD_SHIPPING_COST;
     let discountAmount = 0;
     let freeShipping = false;
     let promoCodeId: string | undefined;

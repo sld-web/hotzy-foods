@@ -23,7 +23,6 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       setAuth: (token, user) => set({ token, user }),
       logout: () => {
-        localStorage.removeItem('hotzy-admin-token');
         set({ token: null, user: null });
       },
       isAuthenticated: () => !!get().token,

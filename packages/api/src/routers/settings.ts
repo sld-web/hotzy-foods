@@ -2,16 +2,49 @@ import { router, publicProcedure, adminProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
 import { z } from 'zod';
 
+const settingsSchema = z.object({
+  brandName: z.string().min(1).optional(),
+  tagline: z.string().optional(),
+  logoUrl: z.string().optional(),
+  faviconUrl: z.string().optional(),
+  currency: z.string().optional(),
+  currencySymbol: z.string().optional(),
+  taxRate: z.number().min(0).optional(),
+  shippingBase: z.number().min(0).optional(),
+  freeShippingThreshold: z.number().min(0).optional(),
+  socialLinks: z.any().optional(),
+  contactEmail: z.string().email().optional().nullable(),
+  contactPhone: z.string().optional().nullable(),
+  contactWhatsApp: z.string().optional().nullable(),
+  address: z.string().optional().nullable(),
+});
+
+const publicSettingsSchema = z.object({
+  brandName: z.string(),
+  tagline: z.string(),
+  logoUrl: z.string().nullable(),
+  faviconUrl: z.string().nullable(),
+  currency: z.string(),
+  currencySymbol: z.string(),
+  freeShippingThreshold: z.number().nullable(),
+  contactEmail: z.string().nullable(),
+  contactPhone: z.string().nullable(),
+  contactWhatsApp: z.string().nullable(),
+  address: z.string().nullable(),
+});
+
 export const settingsRouter = router({
   get: adminProcedure.query(async () => {
     return prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
   }),
 
   getPublic: publicProcedure.query(async () => {
-    return prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
+    const settings = await prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
+    if (!settings) return null;
+    return publicSettingsSchema.parse(settings);
   }),
 
-  update: adminProcedure.input(z.any()).mutation(async ({ input }) => {
+  update: adminProcedure.input(settingsSchema).mutation(async ({ input }) => {
     return prisma.siteSettings.update({
       where: { id: 'singleton' },
       data: input,

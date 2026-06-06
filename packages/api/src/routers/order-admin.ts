@@ -1,7 +1,16 @@
+import { TRPCError } from '@trpc/server';
 import { router, adminProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
 import { orderFilterSchema, updateOrderStatusSchema } from '@hotzy/validators';
 import { z } from 'zod';
+
+const VALID_TRANSITIONS: Record<string, string[]> = {
+  PENDING: ['PROCESSING', 'CANCELLED'],
+  PROCESSING: ['SHIPPED', 'CANCELLED'],
+  SHIPPED: ['COMPLETED'],
+  COMPLETED: [],
+  CANCELLED: [],
+};
 
 export const orderAdminRouter = router({
   list: adminProcedure.input(orderFilterSchema).query(async ({ input }) => {
@@ -45,7 +54,21 @@ export const orderAdminRouter = router({
   }),
 
   updateStatus: adminProcedure.input(updateOrderStatusSchema).mutation(async ({ input }) => {
-    const updateData: any = { status: input.status };
+    const current = await prisma.order.findUnique({
+      where: { id: input.id },
+      select: { status: true },
+    });
+    if (!current) {
+      throw new TRPCError({ code: 'NOT_FOUND', message: 'Order not found' });
+    }
+    const allowed = VALID_TRANSITIONS[current.status];
+    if (!allowed || !allowed.includes(input.status)) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: `Cannot transition from ${current.status} to ${input.status}`,
+      });
+    }
+    const updateData: Record<string, unknown> = { status: input.status };
     if (input.status === 'SHIPPED') updateData.shippedAt = new Date();
     if (input.status === 'COMPLETED') updateData.paidAt = new Date();
     return prisma.order.update({

@@ -5,7 +5,10 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { TRPCError } from '@trpc/server';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-jwt-secret';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
 
 export const authRouter = router({
   login: publicProcedure.input(loginSchema).mutation(async ({ input }) => {
@@ -19,11 +22,9 @@ export const authRouter = router({
       throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign(
-      { id: user.id, email: user.email, type: 'admin' },
-      JWT_SECRET,
-      { expiresIn: '24h' },
-    );
+    const token = jwt.sign({ id: user.id, email: user.email, type: 'admin' }, JWT_SECRET, {
+      expiresIn: '24h',
+    });
 
     return {
       token,

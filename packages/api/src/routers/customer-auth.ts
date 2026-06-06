@@ -83,6 +83,27 @@ export const customerAuthRouter = router({
       });
     }),
 
+  changePassword: customerProcedure
+    .input(z.object({ currentPassword: z.string().min(1), newPassword: z.string().min(6) }))
+    .mutation(async ({ ctx, input }) => {
+      const customer = await prisma.customer.findUnique({ where: { id: ctx.customer.id } });
+      if (!customer || !customer.passwordHash) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'Cannot change password for guest accounts',
+        });
+      }
+      const valid = await bcrypt.compare(input.currentPassword, customer.passwordHash);
+      if (!valid) {
+        throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Current password is incorrect' });
+      }
+      const passwordHash = await bcrypt.hash(input.newPassword, 12);
+      return prisma.customer.update({
+        where: { id: ctx.customer.id },
+        data: { passwordHash },
+      });
+    }),
+
   addAddress: customerProcedure.input(createAddressSchema).mutation(async ({ ctx, input }) => {
     return prisma.$transaction(async (tx) => {
       if (input.isDefault) {

@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { router, adminProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
 import { z } from 'zod';
@@ -41,9 +42,10 @@ export const categoryAdminRouter = router({
   delete: adminProcedure.input(z.object({ id: z.string() })).mutation(async ({ input }) => {
     const productCount = await prisma.product.count({ where: { categoryId: input.id } });
     if (productCount > 0) {
-      throw new Error(
-        `Cannot delete category with ${productCount} products. Reassign products first.`,
-      );
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: `Cannot delete category with ${productCount} products. Reassign products first.`,
+      });
     }
     return prisma.category.delete({ where: { id: input.id } });
   }),

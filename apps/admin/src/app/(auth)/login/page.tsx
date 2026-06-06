@@ -15,7 +15,6 @@ export default function LoginPage() {
 
   const loginMutation = trpc.admin.auth.login.useMutation({
     onSuccess: (data) => {
-      localStorage.setItem('hotzy-admin-token', data.token);
       setAuth(data.token, data.user);
       router.push('/admin');
     },
@@ -42,7 +41,10 @@ export default function LoginPage() {
           <p className="text-body-md text-on-surface-variant">Admin Panel</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-surface-container p-6 space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-xl border border-surface-container p-6 space-y-4"
+        >
           {error && (
             <div className="p-3 rounded-lg bg-error/10 text-error text-label-sm">{error}</div>
           )}
