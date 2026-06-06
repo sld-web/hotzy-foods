@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { router, publicProcedure, customerProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
 import { z } from 'zod';
@@ -16,7 +17,7 @@ export const customerOrderRouter = router({
       where: { id: input.id, customerId: ctx.customer.id },
       include: { items: { include: { product: { include: { images: true } } } } },
     });
-    if (!order) throw new Error('Order not found');
+    if (!order) throw new TRPCError({ code: 'NOT_FOUND', message: 'Order not found' });
     return order;
   }),
 

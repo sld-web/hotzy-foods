@@ -30,8 +30,13 @@ function getClientIp(req: Request): string {
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 
 function checkRateLimit(req: Request): void {
-  const ip = getClientIp(req);
   const now = Date.now();
+  if (rateLimitMap.size > 1000) {
+    for (const [ip, entry] of rateLimitMap) {
+      if (now > entry.resetAt) rateLimitMap.delete(ip);
+    }
+  }
+  const ip = getClientIp(req);
   const entry = rateLimitMap.get(ip);
   if (!entry || now > entry.resetAt) {
     rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });

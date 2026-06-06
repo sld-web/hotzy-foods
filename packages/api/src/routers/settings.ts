@@ -19,20 +19,6 @@ const settingsSchema = z.object({
   address: z.string().optional().nullable(),
 });
 
-const publicSettingsSchema = z.object({
-  brandName: z.string(),
-  tagline: z.string(),
-  logoUrl: z.string().nullable(),
-  faviconUrl: z.string().nullable(),
-  currency: z.string(),
-  currencySymbol: z.string(),
-  freeShippingThreshold: z.number().nullable(),
-  contactEmail: z.string().nullable(),
-  contactPhone: z.string().nullable(),
-  contactWhatsApp: z.string().nullable(),
-  address: z.string().nullable(),
-});
-
 export const settingsRouter = router({
   get: adminProcedure.query(async () => {
     return prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
@@ -41,7 +27,21 @@ export const settingsRouter = router({
   getPublic: publicProcedure.query(async () => {
     const settings = await prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
     if (!settings) return null;
-    return publicSettingsSchema.parse(settings);
+    return {
+      brandName: settings.brandName,
+      tagline: settings.tagline,
+      logoUrl: settings.logoUrl,
+      faviconUrl: settings.faviconUrl,
+      currency: settings.currency,
+      currencySymbol: settings.currencySymbol,
+      freeShippingThreshold: settings.freeShippingThreshold
+        ? Number(settings.freeShippingThreshold)
+        : null,
+      contactEmail: settings.contactEmail,
+      contactPhone: settings.contactPhone,
+      contactWhatsApp: settings.contactWhatsApp,
+      address: settings.address,
+    };
   }),
 
   update: adminProcedure.input(settingsSchema).mutation(async ({ input }) => {
