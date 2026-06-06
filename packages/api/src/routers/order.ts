@@ -14,8 +14,16 @@ function generateOrderNumber(): string {
 }
 
 export const orderRouter = router({
-  create: publicProcedure.input(createOrderSchema).mutation(async ({ input }) => {
+  create: publicProcedure.input(createOrderSchema).mutation(async ({ input, ctx }) => {
     const { items, promoCode, customerEmail, customerName, ...shipping } = input;
+
+    // H-07: If authenticated, order email must match their account
+    if (ctx.customer && customerEmail && customerEmail !== ctx.customer.email) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: 'Email must match your account email',
+      });
+    }
 
     // M-12: Validate max quantity
     for (const item of items) {

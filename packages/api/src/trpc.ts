@@ -21,7 +21,23 @@ export interface CustomerUser {
   name: string | null;
 }
 
+const ALLOWED_ORIGINS = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  process.env.NEXT_PUBLIC_SITE_URL,
+  process.env.NEXT_PUBLIC_ADMIN_URL,
+].filter(Boolean) as string[];
+
 export async function createTRPCContext(req: Request) {
+  const origin = req.headers.get('origin');
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    const referer = req.headers.get('referer');
+    const allowedReferer = ALLOWED_ORIGINS.some((o) => referer?.startsWith(o));
+    if (!allowedReferer) {
+      throw new Error(`Origin not allowed: ${origin}`);
+    }
+  }
+
   const authHeader = req.headers.get('authorization');
   const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
 

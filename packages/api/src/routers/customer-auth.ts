@@ -16,8 +16,39 @@ if (!JWT_SECRET) {
   throw new Error('JWT_SECRET environment variable is required');
 }
 
+const RATE_LIMIT_WINDOW = 60_000;
+const RATE_LIMIT_MAX = 10;
+
+function getClientIp(req: Request): string {
+  return (
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    req.headers.get('x-real-ip') ||
+    'unknown'
+  );
+}
+
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(req: Request): void {
+  const ip = getClientIp(req);
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
+    return;
+  }
+  if (entry.count >= RATE_LIMIT_MAX) {
+    throw new TRPCError({
+      code: 'TOO_MANY_REQUESTS',
+      message: 'Too many attempts. Please try again later.',
+    });
+  }
+  entry.count++;
+}
+
 export const customerAuthRouter = router({
-  register: publicProcedure.input(customerRegisterSchema).mutation(async ({ input }) => {
+  register: publicProcedure.input(customerRegisterSchema).mutation(async ({ input, ctx }) => {
+    checkRateLimit(ctx.req);
     const existing = await prisma.customer.findUnique({ where: { email: input.email } });
     if (existing) {
       throw new TRPCError({ code: 'CONFLICT', message: 'Email already registered' });
@@ -44,7 +75,8 @@ export const customerAuthRouter = router({
     return { token, customer: { id: customer.id, email: customer.email, name: customer.name } };
   }),
 
-  login: publicProcedure.input(customerLoginSchema).mutation(async ({ input }) => {
+  login: publicProcedure.input(customerLoginSchema).mutation(async ({ input, ctx }) => {
+    checkRateLimit(ctx.req);
     const customer = await prisma.customer.findUnique({ where: { email: input.email } });
     if (!customer || !customer.passwordHash) {
       throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid email or password' });
