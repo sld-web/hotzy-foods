@@ -1,9 +1,15 @@
-import { router, publicProcedure } from '../trpc';
+import { router, publicProcedure, customerProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
-import { customerRegisterSchema, customerLoginSchema } from '@hotzy/validators';
+import {
+  customerRegisterSchema,
+  customerLoginSchema,
+  createAddressSchema,
+  updateAddressSchema,
+} from '@hotzy/validators';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-jwt-secret';
 
@@ -24,9 +30,13 @@ export const customerAuthRouter = router({
       },
     });
 
-    const token = jwt.sign({ id: customer.id, email: customer.email, type: 'customer' }, JWT_SECRET, {
-      expiresIn: '30d',
-    });
+    const token = jwt.sign(
+      { id: customer.id, email: customer.email, type: 'customer' },
+      JWT_SECRET,
+      {
+        expiresIn: '30d',
+      },
+    );
 
     return { token, customer: { id: customer.id, email: customer.email, name: customer.name } };
   }),
@@ -42,9 +52,13 @@ export const customerAuthRouter = router({
       throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ id: customer.id, email: customer.email, type: 'customer' }, JWT_SECRET, {
-      expiresIn: '30d',
-    });
+    const token = jwt.sign(
+      { id: customer.id, email: customer.email, type: 'customer' },
+      JWT_SECRET,
+      {
+        expiresIn: '30d',
+      },
+    );
 
     return { token, customer: { id: customer.id, email: customer.email, name: customer.name } };
   }),
@@ -56,4 +70,50 @@ export const customerAuthRouter = router({
       include: { addresses: true },
     });
   }),
+
+  updateProfile: customerProcedure
+    .input(z.object({ name: z.string().min(1).optional(), phone: z.string().optional() }))
+    .mutation(async ({ ctx, input }) => {
+      return prisma.customer.update({
+        where: { id: ctx.customer.id },
+        data: input,
+      });
+    }),
+
+  addAddress: customerProcedure.input(createAddressSchema).mutation(async ({ ctx, input }) => {
+    if (input.isDefault) {
+      await prisma.address.updateMany({
+        where: { customerId: ctx.customer.id },
+        data: { isDefault: false },
+      });
+    }
+    return prisma.address.create({
+      data: { ...input, customerId: ctx.customer.id },
+    });
+  }),
+
+  updateAddress: customerProcedure
+    .input(updateAddressSchema.extend({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { id, ...data } = input;
+      const addr = await prisma.address.findFirst({ where: { id, customerId: ctx.customer.id } });
+      if (!addr) throw new TRPCError({ code: 'NOT_FOUND', message: 'Address not found' });
+      if (data.isDefault) {
+        await prisma.address.updateMany({
+          where: { customerId: ctx.customer.id },
+          data: { isDefault: false },
+        });
+      }
+      return prisma.address.update({ where: { id }, data });
+    }),
+
+  deleteAddress: customerProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const addr = await prisma.address.findFirst({
+        where: { id: input.id, customerId: ctx.customer.id },
+      });
+      if (!addr) throw new TRPCError({ code: 'NOT_FOUND', message: 'Address not found' });
+      return prisma.address.delete({ where: { id: input.id } });
+    }),
 });
