@@ -39,7 +39,6 @@ export default function HomePage() {
   const { data: settings } = trpc.settings.get.useQuery();
   const addItem = useCart((s) => s.addItem);
 
-  const heroCampaign = campaigns?.find((c: any) => c.placement === 'hero');
   const dealCampaign = campaigns?.find((c: any) => c.placement === 'deals');
 
   return (
@@ -48,28 +47,31 @@ export default function HomePage() {
       <section className="relative w-full h-[80vh] min-h-[500px] flex items-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/heros/h1.webp')" }}
+          style={{
+            backgroundImage: `url(${settings?.heroImageUrl || '/heros/h1.webp'})`,
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-10" />
         <div className="relative z-20 text-white px-4 md:px-margin-desktop max-w-2xl">
-          {heroCampaign && (
+          {settings?.heroTitle && (
             <span className="inline-block px-3 py-1 mb-4 rounded-full bg-primary text-white text-label-sm uppercase tracking-wider">
-              {heroCampaign.title}
+              {settings.heroTitle}
             </span>
           )}
           <h1 className="text-display-mobile md:text-display-lg mb-4 leading-tight">
-            {settings?.tagline || SITE_TAGLINE}
+            {settings?.heroDescription || settings?.tagline || SITE_TAGLINE}
           </h1>
           <p className="text-body-lg mb-8 text-white/80 max-w-xl">
-            {heroCampaign?.description ||
-              'Sri Lanka most flavorful hot sauce brand. Crafted with premium Scotch Bonnet peppers.'}
+            {settings?.heroDescription
+              ? 'Experience the heat. Discover our handcrafted sauces and jams made with premium ingredients.'
+              : 'Sri Lanka most flavorful hot sauce brand. Crafted with premium Scotch Bonnet peppers.'}
           </p>
           <div className="flex gap-4">
             <Link
-              href="/products"
+              href={settings?.heroCtaUrl || '/products'}
               className="inline-flex items-center px-7 py-3.5 rounded-lg bg-primary text-white text-label-md font-semibold hover:bg-[#92001f] transition-colors shadow-md"
             >
-              Order Now
+              {settings?.heroCtaText || 'Shop Now'}
             </Link>
             <Link
               href="/products"

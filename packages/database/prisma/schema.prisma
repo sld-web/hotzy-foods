@@ -249,6 +249,11 @@ model SiteSettings {
   taxRate              Decimal @default(0)
   shippingBase         Decimal @default(0)
   freeShippingThreshold Decimal?
+  heroImageUrl         String?
+  heroTitle            String?
+  heroDescription      String?
+  heroCtaText          String?
+  heroCtaUrl           String?
   socialLinks          Json?
   contactEmail         String?
   contactPhone         String?

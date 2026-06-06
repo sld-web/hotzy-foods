@@ -1,8 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { trpc } from '@/lib/trpc';
 import { Button, Input, Modal, ConfirmDialog } from '@hotzy/ui';
+
+const PLACEMENT_GUIDES: Record<string, { size: string; note: string }> = {
+  hero: { size: '1920×600px', note: 'Max 500KB · JPG, WebP, PNG' },
+  'featured-1': { size: '600×600px square', note: 'Max 200KB · JPG, WebP' },
+  'featured-2': { size: '600×600px square', note: 'Max 200KB · JPG, WebP' },
+  deals: { size: '1200×400px', note: 'Max 300KB · JPG, WebP, PNG' },
+};
 
 const PLACEMENTS = [
   { value: 'hero', label: 'Hero Banner' },
@@ -52,6 +59,30 @@ export default function WebsitePage() {
   });
 
   const [brandForm, setBrandForm] = useState<Record<string, string>>({});
+  const [heroForm, setHeroForm] = useState<Record<string, string>>({});
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleHeroUpload = async (file: File) => {
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('http://localhost:3000/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.url) setHeroForm((f) => ({ ...f, heroImageUrl: data.url }));
+    } catch {
+      alert('Upload failed');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const openFilePicker = () => fileInputRef.current?.click();
+
   const [campaignModal, setCampaignModal] = useState(false);
   const [editCampaign, setEditCampaign] = useState<any>(null);
   const [campaignForm, setCampaignForm] = useState({
@@ -91,8 +122,23 @@ export default function WebsitePage() {
     }
   };
 
+  const loadHero = () => {
+    if (settings) {
+      setHeroForm({
+        heroImageUrl: settings.heroImageUrl ?? '',
+        heroTitle: settings.heroTitle ?? '',
+        heroDescription: settings.heroDescription ?? '',
+        heroCtaText: settings.heroCtaText ?? '',
+        heroCtaUrl: settings.heroCtaUrl ?? '',
+      });
+    }
+  };
+
   useEffect(() => {
-    if (settings) loadBrand();
+    if (settings) {
+      loadBrand();
+      loadHero();
+    }
   }, [settings]);
 
   const saveBrand = () => {
@@ -110,6 +156,16 @@ export default function WebsitePage() {
         ? Number(brandForm.freeShippingThreshold)
         : undefined,
       taxRate: Number(brandForm.taxRate) || 0,
+    });
+  };
+
+  const saveHero = () => {
+    updateSettings.mutate({
+      heroImageUrl: heroForm.heroImageUrl || undefined,
+      heroTitle: heroForm.heroTitle || undefined,
+      heroDescription: heroForm.heroDescription || undefined,
+      heroCtaText: heroForm.heroCtaText || undefined,
+      heroCtaUrl: heroForm.heroCtaUrl || undefined,
     });
   };
 
@@ -280,6 +336,112 @@ export default function WebsitePage() {
           </div>
         </div>
 
+        {/* Hero Section */}
+        <div className="bg-white rounded-xl border border-surface-container p-6">
+          <h2 className="text-headline-md text-on-surface mb-4">Hero Section</h2>
+          <p className="text-body-md text-on-surface-variant mb-4">
+            Customize the main hero banner displayed at the top of your homepage.
+          </p>
+
+          <div className="mb-4">
+            <label className="block text-label-sm text-on-surface-variant mb-1">
+              Hero Background Image
+            </label>
+            <span className="inline-block mb-2 px-2 py-0.5 rounded bg-blue-50 text-blue-800 text-[11px] font-medium">
+              1920×600px recommended · Max 500KB · JPG, WebP, PNG
+            </span>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                className="flex-1 px-3 py-2 rounded-lg border border-outline-variant text-body-md focus:border-primary outline-none"
+                value={heroForm.heroImageUrl ?? ''}
+                onChange={(e) => setHeroForm({ ...heroForm, heroImageUrl: e.target.value })}
+                placeholder="https://... or /uploads/filename.webp"
+              />
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                className="hidden"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) handleHeroUpload(f);
+                }}
+              />
+              <Button variant="outline" onClick={openFilePicker} loading={uploading}>
+                Upload
+              </Button>
+            </div>
+            {heroForm.heroImageUrl && (
+              <div className="mt-2 w-full h-32 rounded-lg overflow-hidden bg-surface-gray border border-surface-container">
+                <img
+                  src={heroForm.heroImageUrl}
+                  alt="Hero preview"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-label-sm text-on-surface-variant mb-1">
+                Hero Title <span className="text-on-surface-variant/60">(optional badge)</span>
+              </label>
+              <input
+                className="w-full px-3 py-2 rounded-lg border border-outline-variant text-body-md focus:border-primary outline-none"
+                value={heroForm.heroTitle ?? ''}
+                onChange={(e) => setHeroForm({ ...heroForm, heroTitle: e.target.value })}
+                placeholder="e.g. Summer Heat Collection"
+              />
+            </div>
+            <div>
+              <label className="block text-label-sm text-on-surface-variant mb-1">
+                CTA Button Text
+              </label>
+              <input
+                className="w-full px-3 py-2 rounded-lg border border-outline-variant text-body-md focus:border-primary outline-none"
+                value={heroForm.heroCtaText ?? ''}
+                onChange={(e) => setHeroForm({ ...heroForm, heroCtaText: e.target.value })}
+                placeholder="Shop Now"
+              />
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <label className="block text-label-sm text-on-surface-variant mb-1">
+              Hero Description{' '}
+              <span className="text-on-surface-variant/60">(fallback: tagline)</span>
+            </label>
+            <textarea
+              className="w-full px-3 py-2 rounded-lg border border-outline-variant text-body-md focus:border-primary outline-none"
+              rows={2}
+              value={heroForm.heroDescription ?? ''}
+              onChange={(e) => setHeroForm({ ...heroForm, heroDescription: e.target.value })}
+              placeholder="Bold Flavor. Zero Limits."
+            />
+          </div>
+
+          <div className="mt-4">
+            <label className="block text-label-sm text-on-surface-variant mb-1">CTA Link URL</label>
+            <input
+              className="w-full px-3 py-2 rounded-lg border border-outline-variant text-body-md focus:border-primary outline-none"
+              value={heroForm.heroCtaUrl ?? ''}
+              onChange={(e) => setHeroForm({ ...heroForm, heroCtaUrl: e.target.value })}
+              placeholder="/products"
+            />
+          </div>
+
+          <div className="mt-4">
+            <Button onClick={saveHero} loading={updateSettings.isPending}>
+              Save Hero Section
+            </Button>
+          </div>
+        </div>
+
         {/* Homepage Banners / Campaigns */}
         <div className="bg-white rounded-xl border border-surface-container p-6">
           <div className="flex items-center justify-between mb-4">
@@ -414,12 +576,30 @@ export default function WebsitePage() {
           </div>
           <div>
             <label className="block text-label-sm text-on-surface-variant mb-1">Image URL</label>
+            {PLACEMENT_GUIDES[campaignForm.placement] && (
+              <span className="inline-block mb-2 px-2 py-0.5 rounded bg-blue-50 text-blue-800 text-[11px] font-medium">
+                {PLACEMENT_GUIDES[campaignForm.placement].size} ·{' '}
+                {PLACEMENT_GUIDES[campaignForm.placement].note}
+              </span>
+            )}
             <input
               className="w-full px-3 py-2 rounded-lg border border-outline-variant text-body-md focus:border-primary outline-none"
               value={campaignForm.imageUrl}
               onChange={(e) => setCampaignForm({ ...campaignForm, imageUrl: e.target.value })}
               placeholder="https://..."
             />
+            {campaignForm.imageUrl && (
+              <div className="mt-2 w-full h-24 rounded-lg overflow-hidden bg-surface-gray border border-surface-container">
+                <img
+                  src={campaignForm.imageUrl}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
           </div>
           <div>
             <label className="block text-label-sm text-on-surface-variant mb-1">Link URL</label>

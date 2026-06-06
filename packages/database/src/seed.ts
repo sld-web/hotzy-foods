@@ -316,10 +316,19 @@ async function main() {
   // ─── Site Settings ───
   await prisma.siteSettings.upsert({
     where: { id: 'singleton' },
-    update: {},
+    update: {
+      heroTitle: 'Summer Heat Collection',
+      heroDescription: 'Bold Flavor. Zero Limits.',
+      heroCtaText: 'Shop Now',
+      heroCtaUrl: '/products',
+    },
     create: {
       brandName: 'Hotzy Foods',
       tagline: 'Bold Flavor. Zero Limits.',
+      heroTitle: 'Summer Heat Collection',
+      heroDescription: 'Bold Flavor. Zero Limits.',
+      heroCtaText: 'Shop Now',
+      heroCtaUrl: '/products',
       currency: 'LKR',
       currencySymbol: 'Rs.',
       taxRate: 0,
