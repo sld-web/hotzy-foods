@@ -4,13 +4,9 @@ import { Suspense, useState, useMemo, useCallback, useRef, useEffect } from 'rea
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { trpc } from '@/lib/trpc';
 import { useCart } from '@/lib/cart-store';
-import { CURRENCY } from '@/lib/constants';
+import { formatPrice } from '@/lib/constants';
 import Link from 'next/link';
 import { Card, Badge, SpiceMeter, Button } from '@hotzy/ui';
-
-function formatPrice(price: number) {
-  return `${CURRENCY} ${price.toLocaleString('en-LK')}`;
-}
 
 const heatLevelMap: Record<string, 1 | 2 | 3 | 4 | undefined> = {
   MILD: 1,

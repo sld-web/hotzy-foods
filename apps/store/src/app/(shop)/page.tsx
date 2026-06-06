@@ -2,13 +2,9 @@
 
 import { trpc } from '@/lib/trpc';
 import { useCart } from '@/lib/cart-store';
-import { SITE_TAGLINE, CURRENCY } from '@/lib/constants';
+import { SITE_TAGLINE, formatPrice } from '@/lib/constants';
 import Link from 'next/link';
 import { Card, Badge, SpiceMeter, Button } from '@hotzy/ui';
-
-function formatPrice(price: number) {
-  return `${CURRENCY} ${price.toLocaleString('en-LK')}`;
-}
 
 function getBadges(product: {
   isBestseller: boolean;

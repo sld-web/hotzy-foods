@@ -3,14 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { trpc } from '@/lib/trpc';
 import { useCustomerAuth } from '@/lib/customer-auth-store';
-import { CURRENCY } from '@/lib/constants';
+import { formatPrice } from '@/lib/constants';
 import { Spinner, StatusBadge } from '@hotzy/ui';
 import Link from 'next/link';
 import { useEffect } from 'react';
-
-function formatPrice(price: number) {
-  return `${CURRENCY} ${price.toLocaleString('en-LK')}`;
-}
 
 function formatDate(date: Date | string) {
   return new Date(date).toLocaleDateString('en-LK', {

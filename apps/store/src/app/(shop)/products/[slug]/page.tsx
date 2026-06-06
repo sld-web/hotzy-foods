@@ -3,14 +3,10 @@
 import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
 import { useCart } from '@/lib/cart-store';
-import { CURRENCY } from '@/lib/constants';
+import { CURRENCY, formatPrice } from '@/lib/constants';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button, SpiceMeter, Badge, Accordion } from '@hotzy/ui';
-
-function formatPrice(price: number) {
-  return `${CURRENCY} ${price.toLocaleString('en-LK')}`;
-}
 
 const heatLevelMap: Record<string, 1 | 2 | 3 | 4 | undefined> = {
   MILD: 1,

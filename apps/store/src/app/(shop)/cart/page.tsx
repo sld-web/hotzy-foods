@@ -3,14 +3,10 @@
 import { useState } from 'react';
 import { useCart } from '@/lib/cart-store';
 import { trpc } from '@/lib/trpc';
-import { CURRENCY, FREE_SHIPPING_THRESHOLD, SHIPPING_COST } from '@/lib/constants';
+import { formatPrice, FREE_SHIPPING_THRESHOLD, SHIPPING_COST } from '@/lib/constants';
 import { Button, Input } from '@hotzy/ui';
 import Link from 'next/link';
 import { useToast } from '@hotzy/ui';
-
-function formatPrice(price: number) {
-  return `${CURRENCY} ${price.toLocaleString('en-LK')}`;
-}
 
 export default function CartPage() {
   const { items, promoCode, updateQuantity, removeItem, clearCart, setPromoCode } = useCart();
