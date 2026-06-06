@@ -1,82 +1,221 @@
-import { SITE_NAME, SITE_TAGLINE } from '@/lib/constants';
+'use client';
+
+import { trpc } from '@/lib/trpc';
+import { useCart } from '@/lib/cart-store';
+import { SITE_TAGLINE, CURRENCY } from '@/lib/constants';
+import Link from 'next/link';
+import { Card, Badge, SpiceMeter, Button } from '@hotzy/ui';
+
+function formatPrice(price: number) {
+  return `${CURRENCY} ${price.toLocaleString('en-LK')}`;
+}
+
+function getBadges(product: {
+  isBestseller: boolean;
+  isNew: boolean;
+  dietaryTags: string[];
+  heatLevel: string | null;
+}) {
+  const badges: Array<{
+    variant: 'bestseller' | 'new' | 'vegan' | 'gluten-free' | 'no-msg';
+    label: string;
+  }> = [];
+  if (product.isBestseller) badges.push({ variant: 'bestseller', label: 'Bestseller' });
+  if (product.isNew) badges.push({ variant: 'new', label: 'New' });
+  if (product.dietaryTags?.includes('vegan')) badges.push({ variant: 'vegan', label: 'Vegan' });
+  if (product.dietaryTags?.includes('gluten-free'))
+    badges.push({ variant: 'gluten-free', label: 'Gluten Free' });
+  if (product.dietaryTags?.includes('no-msg')) badges.push({ variant: 'no-msg', label: 'No MSG' });
+  return badges;
+}
+
+const heatLevelMap: Record<string, 1 | 2 | 3 | 4 | undefined> = {
+  MILD: 1,
+  MEDIUM: 2,
+  HOT: 3,
+  XTREME: 4,
+};
 
 export default function HomePage() {
+  const { data: featured, isLoading: featuredLoading } = trpc.product.featured.useQuery();
+  const { data: categories } = trpc.category.list.useQuery();
+  const { data: campaigns } = trpc.campaign.active.useQuery();
+  const { data: settings } = trpc.settings.get.useQuery();
+  const addItem = useCart((s) => s.addItem);
+
+  const heroCampaign = campaigns?.find((c: any) => c.placement === 'hero');
+  const dealCampaign = campaigns?.find((c: any) => c.placement === 'deals');
+
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center justify-center bg-primary overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary/40 z-10" />
-        <div className="relative z-20 text-center text-white px-4 max-w-3xl mx-auto">
-          <p className="text-label-sm uppercase tracking-widest mb-4">New Arrival</p>
-          <h1 className="text-display-mobile md:text-display-lg mb-4">{SITE_TAGLINE}</h1>
-          <p className="text-body-lg mb-8 text-white/80">
-            Sri Lanka most flavorful hot sauce brand. Crafted with premium Scotch Bonnet peppers.
+      <section className="relative w-full h-[80vh] min-h-[500px] flex items-center overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/heros/h1.webp')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-10" />
+        <div className="relative z-20 text-white px-4 md:px-margin-desktop max-w-2xl">
+          {heroCampaign && (
+            <span className="inline-block px-3 py-1 mb-4 rounded-full bg-primary text-white text-label-sm uppercase tracking-wider">
+              {heroCampaign.title}
+            </span>
+          )}
+          <h1 className="text-display-mobile md:text-display-lg mb-4 leading-tight">
+            {settings?.tagline || SITE_TAGLINE}
+          </h1>
+          <p className="text-body-lg mb-8 text-white/80 max-w-xl">
+            {heroCampaign?.description ||
+              'Sri Lanka most flavorful hot sauce brand. Crafted with premium Scotch Bonnet peppers.'}
           </p>
-          <div className="flex gap-4 justify-center">
-            <a
+          <div className="flex gap-4">
+            <Link
               href="/products"
-              className="inline-flex items-center px-7 py-3.5 rounded-lg bg-white text-primary text-label-md font-semibold hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center px-7 py-3.5 rounded-lg bg-primary text-white text-label-md font-semibold hover:bg-[#92001f] transition-colors shadow-md"
             >
               Order Now
-            </a>
-            <a
+            </Link>
+            <Link
               href="/products"
-              className="inline-flex items-center px-7 py-3.5 rounded-lg border-2 border-white text-white text-label-md font-semibold hover:bg-white/10 transition-colors"
+              className="inline-flex items-center px-7 py-3.5 rounded-lg border border-white/30 text-white text-label-md font-semibold hover:bg-white/10 transition-colors backdrop-blur-sm"
             >
               View Menu
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Featured Categories */}
-      <section className="max-w-container mx-auto px-4 md:px-margin-desktop py-stack-lg">
-        <h2 className="text-headline-lg text-on-surface mb-6">Shop by Category</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { name: 'Hot Sauces', icon: 'local_fire_department', slug: 'hot-sauces' },
-            { name: 'Asian Sauces', icon: 'ramen_dining', slug: 'asian-inspired-sauces' },
-            { name: 'Jams', icon: 'breakfast_dining', slug: 'jams' },
-            { name: 'Bundle Offers', icon: 'inventory_2', slug: 'bundle-offers' },
-          ].map((cat) => (
-            <a
-              key={cat.slug}
-              href={`/products?category=${cat.slug}`}
-              className="flex flex-col items-center gap-3 p-6 bg-white rounded-xl border border-surface-container hover:shadow-md hover:-translate-y-0.5 transition-all"
-            >
-              <span className="material-symbols-outlined text-4xl text-primary">{cat.icon}</span>
-              <span className="text-label-md font-semibold text-on-surface">{cat.name}</span>
-            </a>
-          ))}
-        </div>
-      </section>
+      {categories && categories.length > 0 && (
+        <section className="max-w-container mx-auto px-4 md:px-margin-desktop py-stack-lg">
+          <h2 className="text-headline-lg text-on-surface mb-6">Shop by Category</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {categories.map((cat: any) => (
+              <Link
+                key={cat.id}
+                href={`/products?category=${cat.slug}`}
+                className="flex flex-col items-center gap-3 p-6 bg-white rounded-xl border border-surface-container hover:shadow-md hover:-translate-y-0.5 transition-all"
+              >
+                <span className="material-symbols-outlined text-4xl text-primary">
+                  {cat.icon || 'category'}
+                </span>
+                <span className="text-label-md font-semibold text-on-surface">{cat.name}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
-      {/* Hot Deals Bento Grid — placeholder */}
-      <section className="bg-surface-gray py-stack-lg">
-        <div className="max-w-container mx-auto px-4 md:px-margin-desktop">
-          <h2 className="text-headline-lg text-on-surface mb-6">Hot Deals</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="md:col-span-2 bg-white rounded-xl border border-surface-container p-6 flex items-center justify-center h-48 text-on-surface-variant">
-              Deal banners coming soon
-            </div>
-            <div className="bg-white rounded-xl border border-surface-container p-6 flex items-center justify-center h-48 text-on-surface-variant">
-              Combo offer coming soon
+      {/* Hot Deals */}
+      {dealCampaign && (
+        <section className="bg-surface-gray py-stack-lg">
+          <div className="max-w-container mx-auto px-4 md:px-margin-desktop">
+            <h2 className="text-headline-lg text-on-surface mb-6">{dealCampaign.title}</h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div
+                className="md:col-span-2 bg-white rounded-xl border border-surface-container p-6 flex items-end h-48 bg-cover bg-center relative overflow-hidden"
+                style={
+                  dealCampaign.imageUrl
+                    ? { backgroundImage: `url(${dealCampaign.imageUrl})` }
+                    : undefined
+                }
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="relative z-10 text-white">
+                  <h3 className="text-headline-md mb-1">{dealCampaign.title}</h3>
+                  {dealCampaign.description && (
+                    <p className="text-body-md text-white/80">{dealCampaign.description}</p>
+                  )}
+                </div>
+              </div>
+              <div className="bg-white rounded-xl border border-surface-container p-6 flex items-center justify-center h-48 text-on-surface-variant">
+                {dealCampaign.linkUrl ? (
+                  <Link
+                    href={dealCampaign.linkUrl}
+                    className="text-primary font-semibold hover:underline"
+                  >
+                    View Offer →
+                  </Link>
+                ) : (
+                  'Limited time offer'
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* Featured Products — placeholder */}
+      {/* Featured Products */}
       <section className="max-w-container mx-auto px-4 md:px-margin-desktop py-stack-lg">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-headline-lg text-on-surface">Featured Products</h2>
-          <a href="/products" className="text-label-md text-primary font-semibold hover:underline">
+          <Link
+            href="/products"
+            className="text-label-md text-primary font-semibold hover:underline"
+          >
             View All →
-          </a>
+          </Link>
         </div>
-        <div className="text-center py-12 text-on-surface-variant">
-          Product grid will render here from tRPC
-        </div>
+        {featuredLoading ? (
+          <div className="text-center py-12 text-on-surface-variant">Loading...</div>
+        ) : featured && featured.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {featured.map((product: any) => (
+              <Card key={product.id} hover className="overflow-hidden">
+                <Link href={`/products/${product.slug}`}>
+                  <div className="aspect-square bg-surface-gray flex items-center justify-center overflow-hidden">
+                    {product.images?.[0] ? (
+                      <img
+                        src={product.images[0].url}
+                        alt={product.images[0].alt || product.name}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <span className="material-symbols-outlined text-4xl text-on-surface-variant">
+                        image
+                      </span>
+                    )}
+                  </div>
+                </Link>
+                <div className="p-4 space-y-2">
+                  <div className="flex gap-1 flex-wrap">
+                    {getBadges(product).map((badge) => (
+                      <Badge key={badge.variant} variant={badge.variant} />
+                    ))}
+                  </div>
+                  <Link href={`/products/${product.slug}`}>
+                    <h3 className="text-body-md font-semibold text-on-surface hover:text-primary transition-colors">
+                      {product.name}
+                    </h3>
+                  </Link>
+                  {product.heatLevel && <SpiceMeter level={heatLevelMap[product.heatLevel] || 1} />}
+                  <div className="flex items-center justify-between pt-2">
+                    <span className="text-headline-md text-primary">
+                      {formatPrice(Number(product.price))}
+                    </span>
+                    <Button
+                      size="sm"
+                      onClick={() =>
+                        addItem({
+                          productId: product.id,
+                          name: product.name,
+                          slug: product.slug,
+                          price: Number(product.price),
+                          image: product.images?.[0]?.url || '',
+                          heatLevel: product.heatLevel,
+                        })
+                      }
+                    >
+                      Add to Cart
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12 text-on-surface-variant">No featured products yet.</div>
+        )}
       </section>
 
       {/* Values Section */}
@@ -92,7 +231,9 @@ export default function HomePage() {
               { icon: 'restaurant', label: 'Crafted with Authentic Recipes' },
             ].map((item) => (
               <div key={item.label} className="text-center">
-                <span className="material-symbols-outlined text-3xl text-primary mb-2">{item.icon}</span>
+                <span className="material-symbols-outlined text-3xl text-primary mb-2">
+                  {item.icon}
+                </span>
                 <p className="text-label-sm text-on-surface-variant">{item.label}</p>
               </div>
             ))}

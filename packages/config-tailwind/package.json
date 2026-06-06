@@ -7,6 +7,6 @@
   },
   "devDependencies": {
     "@hotzy/tsconfig": "workspace:*",
-    "tailwindcss": "^3.4.0"
+    "tailwindcss": "^4.3.0"
   }
 }

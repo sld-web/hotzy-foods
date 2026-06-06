@@ -1,5 +1,6 @@
-import { router } from './trpc';
+import { router, publicProcedure } from './trpc';
 export { createTRPCContext } from './trpc';
+import { prisma } from '@hotzy/database';
 import { productRouter } from './routers/product';
 import { categoryRouter } from './routers/category';
 import { orderRouter } from './routers/order';
@@ -14,6 +15,7 @@ import { productAdminRouter } from './routers/product-admin';
 import { orderAdminRouter } from './routers/order-admin';
 import { settingsRouter, teamRouter } from './routers/settings';
 import { categoryAdminRouter } from './routers/category-admin';
+import { z } from 'zod';
 
 export const appRouter = router({
   product: productRouter,
@@ -21,6 +23,51 @@ export const appRouter = router({
   order: orderRouter,
   customerAuth: customerAuthRouter,
   customerOrder: customerOrderRouter,
+  promoValidate: publicProcedure
+    .input(z.object({ code: z.string(), subtotal: z.number() }))
+    .query(async ({ input }) => {
+      const promo = await prisma.promoCode.findUnique({
+        where: { code: input.code.toUpperCase() },
+      });
+      if (!promo || promo.status !== 'ACTIVE') return { valid: false, discountAmount: 0 };
+      const now = new Date();
+      if (promo.startsAt && promo.startsAt > now) return { valid: false, discountAmount: 0 };
+      if (promo.expiresAt && promo.expiresAt < now) return { valid: false, discountAmount: 0 };
+      if (promo.maxUses && promo.currentUses >= promo.maxUses)
+        return { valid: false, discountAmount: 0 };
+      if (promo.minOrderAmount && input.subtotal < Number(promo.minOrderAmount))
+        return { valid: false, discountAmount: 0 };
+
+      let discountAmount = 0;
+      if (promo.type === 'PERCENTAGE') {
+        discountAmount = (input.subtotal * Number(promo.value)) / 100;
+      } else if (promo.type === 'FIXED_AMOUNT') {
+        discountAmount = Number(promo.value);
+      }
+
+      return { valid: true, discountAmount, code: promo.code };
+    }),
+  campaign: router({
+    active: publicProcedure.query(async () => {
+      return prisma.campaign.findMany({
+        where: { status: 'LIVE' },
+        orderBy: { sortOrder: 'asc' },
+      });
+    }),
+  }),
+  team: router({
+    list: publicProcedure.query(async () => {
+      return prisma.teamMember.findMany({
+        where: { isActive: true },
+        orderBy: { sortOrder: 'asc' },
+      });
+    }),
+  }),
+  settings: router({
+    get: publicProcedure.query(async () => {
+      return prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
+    }),
+  }),
   admin: router({
     auth: authRouter,
     dashboard: dashboardRouter,

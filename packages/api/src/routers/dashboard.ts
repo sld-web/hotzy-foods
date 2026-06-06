@@ -55,14 +55,14 @@ export const dashboardRouter = router({
       take: 10,
     });
 
-    const productIds = items.map((i) => i.productId);
+    const productIds = items.map((i: any) => i.productId);
     const products = await prisma.product.findMany({
       where: { id: { in: productIds } },
       include: { images: { take: 1 } },
     });
 
-    return items.map((item) => {
-      const product = products.find((p) => p.id === item.productId);
+    return items.map((item: any) => {
+      const product = products.find((p: any) => p.id === item.productId);
       return {
         product,
         totalSold: item._sum.quantity || 0,

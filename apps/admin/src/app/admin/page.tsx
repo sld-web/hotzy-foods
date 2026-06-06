@@ -91,7 +91,7 @@ export default function AdminDashboardPage() {
                     border: '1px solid #eee',
                     fontSize: '14px',
                   }}
-                  formatter={(value: number) => [formatCurrency(value), 'Sales']}
+                  formatter={(value: any) => [formatCurrency(Number(value) || 0), 'Sales']}
                 />
                 <Line
                   type="monotone"
@@ -126,9 +126,7 @@ export default function AdminDashboardPage() {
                       <p className="text-body-md text-on-surface">
                         {item.product?.name ?? 'Unknown Product'}
                       </p>
-                      <p className="text-label-sm text-on-surface-variant">
-                        {item.totalSold} sold
-                      </p>
+                      <p className="text-label-sm text-on-surface-variant">{item.totalSold} sold</p>
                     </div>
                   </div>
                   <span className="text-label-sm text-on-surface-variant">
@@ -153,16 +151,29 @@ export default function AdminDashboardPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-surface-container">
-                  <th className="text-left px-4 py-3 text-label-sm text-on-surface-variant">Order</th>
-                  <th className="text-left px-4 py-3 text-label-sm text-on-surface-variant">Customer</th>
-                  <th className="text-left px-4 py-3 text-label-sm text-on-surface-variant">Status</th>
-                  <th className="text-left px-4 py-3 text-label-sm text-on-surface-variant">Date</th>
-                  <th className="text-right px-4 py-3 text-label-sm text-on-surface-variant">Total</th>
+                  <th className="text-left px-4 py-3 text-label-sm text-on-surface-variant">
+                    Order
+                  </th>
+                  <th className="text-left px-4 py-3 text-label-sm text-on-surface-variant">
+                    Customer
+                  </th>
+                  <th className="text-left px-4 py-3 text-label-sm text-on-surface-variant">
+                    Status
+                  </th>
+                  <th className="text-left px-4 py-3 text-label-sm text-on-surface-variant">
+                    Date
+                  </th>
+                  <th className="text-right px-4 py-3 text-label-sm text-on-surface-variant">
+                    Total
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {recentOrders.map((order) => (
-                  <tr key={order.id} className="border-b border-surface-container/50 hover:bg-surface-container/20">
+                  <tr
+                    key={order.id}
+                    className="border-b border-surface-container/50 hover:bg-surface-container/20"
+                  >
                     <td className="px-4 py-3 text-body-md text-on-surface font-medium">
                       {order.orderNumber}
                     </td>

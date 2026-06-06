@@ -1,15 +1,76 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Work+Sans:wght@400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
-body {
-  font-family: 'Work Sans', sans-serif;
-  @apply bg-surface text-on-surface;
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #b20028;
+  --color-primary-container: #d7263d;
+  --color-on-primary: #ffffff;
+  --color-secondary: #745b00;
+  --color-secondary-container: #fecb00;
+  --color-tertiary: #006539;
+  --color-tertiary-container: #008149;
+  --color-chili-red: #d7263d;
+  --color-golden-glaze: #ffcc00;
+  --color-fresh-mint: #3cb371;
+  --color-surface: #f9f9f9;
+  --color-surface-dim: #dadada;
+  --color-surface-container: #eeeeee;
+  --color-surface-gray: #f8f8f8;
+  --color-on-surface: #1b1b1b;
+  --color-error: #ba1a1a;
+  --font-family-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-family-body: 'Work Sans', sans-serif;
+  --font-size-display-lg: 48px;
+  --font-size-display-lg--line-height: 56px;
+  --font-size-display-lg--font-weight: 800;
+  --font-size-display-lg--letter-spacing: -0.02em;
+  --font-size-display-mobile: 36px;
+  --font-size-display-mobile--line-height: 42px;
+  --font-size-display-mobile--font-weight: 800;
+  --font-size-display-mobile--letter-spacing: -0.02em;
+  --font-size-headline-lg: 32px;
+  --font-size-headline-lg--line-height: 40px;
+  --font-size-headline-lg--font-weight: 700;
+  --font-size-headline-md: 24px;
+  --font-size-headline-md--line-height: 32px;
+  --font-size-headline-md--font-weight: 700;
+  --font-size-body-lg: 18px;
+  --font-size-body-lg--line-height: 28px;
+  --font-size-body-md: 16px;
+  --font-size-body-md--line-height: 24px;
+  --font-size-label-md: 14px;
+  --font-size-label-md--line-height: 20px;
+  --font-size-label-md--font-weight: 600;
+  --font-size-label-md--letter-spacing: 0.02em;
+  --font-size-label-sm: 12px;
+  --font-size-label-sm--line-height: 16px;
+  --font-size-label-sm--font-weight: 700;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --spacing-margin-desktop: 40px;
+  --spacing-margin-mobile: 16px;
+  --spacing-gutter: 24px;
+  --spacing-stack-sm: 4px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 32px;
+  --container-container: 1200px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+body {
+  font-family: 'Work Sans', sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }

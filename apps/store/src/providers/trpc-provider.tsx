@@ -21,7 +21,13 @@ export function TRPCProvider({ children }: { children: React.ReactNode }) {
           url: `${getBaseUrl()}/api/trpc`,
           transformer: superjson,
           headers() {
-            const token = typeof window !== 'undefined' ? localStorage.getItem('hotzy-customer-token') : null;
+            let token: string | null = null;
+            if (typeof window !== 'undefined') {
+              try {
+                const stored = JSON.parse(localStorage.getItem('hotzy-customer-auth') || '{}');
+                token = stored?.state?.token || null;
+              } catch {}
+            }
             return token ? { Authorization: `Bearer ${token}` } : {};
           },
         }),

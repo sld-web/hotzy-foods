@@ -1,4 +1,4 @@
-import { router, adminProcedure } from '../trpc';
+import { router, publicProcedure, adminProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
 import { z } from 'zod';
 
@@ -17,6 +17,13 @@ const campaignInput = z.object({
 export const campaignRouter = router({
   list: adminProcedure.query(async () => {
     return prisma.campaign.findMany({ orderBy: { sortOrder: 'asc' } });
+  }),
+
+  active: publicProcedure.query(async () => {
+    return prisma.campaign.findMany({
+      where: { status: 'LIVE' },
+      orderBy: { sortOrder: 'asc' },
+    });
   }),
 
   create: adminProcedure.input(campaignInput).mutation(async ({ input }) => {

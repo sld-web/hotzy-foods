@@ -105,7 +105,13 @@ async function main() {
         dietaryTags: ['vegan', 'gluten-free', 'no-msg'],
         categoryId: hotSaucesId,
         images: {
-          create: [{ url: '/images/products/snake-bite.jpg', alt: 'Snake Bite Hot Sauce bottle', sortOrder: 1 }],
+          create: [
+            {
+              url: '/products/product-1.webp',
+              alt: 'Snake Bite Hot Sauce bottle',
+              sortOrder: 1,
+            },
+          ],
         },
       },
     }),
@@ -125,7 +131,13 @@ async function main() {
         dietaryTags: ['vegan', 'gluten-free', 'no-msg'],
         categoryId: hotSaucesId,
         images: {
-          create: [{ url: '/images/products/scorpion-sting.jpg', alt: 'Scorpion Sting Hot Sauce bottle', sortOrder: 1 }],
+          create: [
+            {
+              url: '/products/product-2.webp',
+              alt: 'Scorpion Sting Hot Sauce bottle',
+              sortOrder: 1,
+            },
+          ],
         },
       },
     }),
@@ -146,7 +158,13 @@ async function main() {
         dietaryTags: ['vegan', 'gluten-free', 'no-msg'],
         categoryId: hotSaucesId,
         images: {
-          create: [{ url: '/images/products/dragons-fury.jpg', alt: "Dragon's Fury Hot Sauce bottle", sortOrder: 1 }],
+          create: [
+            {
+              url: '/products/product-3.webp',
+              alt: "Dragon's Fury Hot Sauce bottle",
+              sortOrder: 1,
+            },
+          ],
         },
       },
     }),
@@ -166,7 +184,13 @@ async function main() {
         dietaryTags: ['vegan', 'no-msg'],
         categoryId: asianId,
         images: {
-          create: [{ url: '/images/products/samurai-teriyaki.jpg', alt: 'Savvy Samurai Teriyaki Sauce bottle', sortOrder: 1 }],
+          create: [
+            {
+              url: '/products/product-4.webp',
+              alt: 'Savvy Samurai Teriyaki Sauce bottle',
+              sortOrder: 1,
+            },
+          ],
         },
       },
     }),
@@ -186,7 +210,13 @@ async function main() {
         dietaryTags: ['vegan', 'gluten-free', 'no-msg'],
         categoryId: asianId,
         images: {
-          create: [{ url: '/images/products/nak-muay.jpg', alt: 'Nak Muay Thai Sweet Chili Sauce bottle', sortOrder: 1 }],
+          create: [
+            {
+              url: '/products/product-5.webp',
+              alt: 'Nak Muay Thai Sweet Chili Sauce bottle',
+              sortOrder: 1,
+            },
+          ],
         },
       },
     }),
@@ -204,7 +234,13 @@ async function main() {
         dietaryTags: ['vegan', 'gluten-free', 'no-msg'],
         categoryId: jamsId,
         images: {
-          create: [{ url: '/images/products/mango-tango.jpg', alt: 'Mango Tango Jam jar', sortOrder: 1 }],
+          create: [
+            {
+              url: '/products/product-6.webp',
+              alt: 'Mango Tango Jam jar',
+              sortOrder: 1,
+            },
+          ],
         },
       },
     }),
@@ -221,7 +257,13 @@ async function main() {
         dietaryTags: ['vegan', 'gluten-free', 'no-msg'],
         categoryId: jamsId,
         images: {
-          create: [{ url: '/images/products/pineapple-bliss.jpg', alt: 'Pineapple Bliss Jam jar', sortOrder: 1 }],
+          create: [
+            {
+              url: '/products/product-7.webp',
+              alt: 'Pineapple Bliss Jam jar',
+              sortOrder: 1,
+            },
+          ],
         },
       },
     }),
@@ -237,7 +279,13 @@ async function main() {
         dietaryTags: ['vegan', 'gluten-free', 'no-msg'],
         categoryId: jamsId,
         images: {
-          create: [{ url: '/images/products/passion-fashion.jpg', alt: 'Passion Fashion Jam jar', sortOrder: 1 }],
+          create: [
+            {
+              url: '/products/product-8.webp',
+              alt: 'Passion Fashion Jam jar',
+              sortOrder: 1,
+            },
+          ],
         },
       },
     }),
@@ -246,14 +294,19 @@ async function main() {
         name: 'Papaya Twist Jam',
         slug: 'papaya-twist-jam',
         sku: 'HZ-PT-009',
-        description:
-          'A unique papaya jam with a twist of tropical spices. An island classic.',
+        description: 'A unique papaya jam with a twist of tropical spices. An island classic.',
         price: 990,
         stockLevel: 55,
         dietaryTags: ['vegan', 'gluten-free', 'no-msg'],
         categoryId: jamsId,
         images: {
-          create: [{ url: '/images/products/papaya-twist.jpg', alt: 'Papaya Twist Jam jar', sortOrder: 1 }],
+          create: [
+            {
+              url: '/products/product-9.webp',
+              alt: 'Papaya Twist Jam jar',
+              sortOrder: 1,
+            },
+          ],
         },
       },
     }),

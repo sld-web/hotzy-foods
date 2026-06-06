@@ -1,9 +1,13 @@
-import { router, adminProcedure } from '../trpc';
+import { router, publicProcedure, adminProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
 import { z } from 'zod';
 
 export const settingsRouter = router({
   get: adminProcedure.query(async () => {
+    return prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
+  }),
+
+  getPublic: publicProcedure.query(async () => {
     return prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
   }),
 
@@ -18,6 +22,13 @@ export const settingsRouter = router({
 export const teamRouter = router({
   list: adminProcedure.query(async () => {
     return prisma.teamMember.findMany({ orderBy: { sortOrder: 'asc' } });
+  }),
+
+  listPublic: publicProcedure.query(async () => {
+    return prisma.teamMember.findMany({
+      where: { isActive: true },
+      orderBy: { sortOrder: 'asc' },
+    });
   }),
 
   create: adminProcedure

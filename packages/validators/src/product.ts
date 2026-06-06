@@ -47,6 +47,6 @@ export const productFilterSchema = z.object({
   limit: z.number().int().min(1).max(100).default(12),
 });
 
-export type CreateProductInput = z.infer<typeof createProductSchema>;
-export type UpdateProductInput = z.infer<typeof updateProductSchema>;
-export type ProductFilterInput = z.infer<typeof productFilterSchema>;
+export type CreateProductInput = z.input<typeof createProductSchema>;
+export type UpdateProductInput = z.input<typeof updateProductSchema>;
+export type ProductFilterInput = z.input<typeof productFilterSchema>;
