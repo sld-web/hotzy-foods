@@ -49,11 +49,9 @@ export default function LoginPage() {
             <div className="p-3 rounded-lg bg-error/10 text-error text-label-sm">{error}</div>
           )}
 
-          {loginMutation.isSuccess && (
-            <div className="p-3 rounded-lg bg-fresh-mint/10 text-tertiary text-label-sm">
-              Login successful! Redirecting...
-            </div>
-          )}
+          <div className="p-3 rounded-lg bg-surface-container text-label-sm text-on-surface-variant text-center border border-outline-variant">
+            Demo: <strong>admin.hotsy@cnl.com</strong> / <strong>admin123</strong>
+          </div>
 
           <div>
             <label className="block text-label-sm text-on-surface-variant mb-1">Email</label>
@@ -74,7 +72,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2.5 rounded-lg border border-outline-variant bg-white text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none"
-              placeholder="••••••••"
+              placeholder="admin123"
               required
             />
           </div>
