@@ -234,7 +234,7 @@ export default function InventoryPage() {
                       {product.sku}
                     </td>
                     <td className="px-4 py-4">
-                      <CategoryBadge name={product.category.name} />
+                      <CategoryBadge name={product.category?.name ?? 'Uncategorized'} />
                     </td>
                     <td className="px-4 py-4 text-body-md text-on-surface">
                       {formatPrice(product.price)}
