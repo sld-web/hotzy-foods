@@ -41,7 +41,7 @@ export const orderRouter = router({
       where: { id: { in: productIds } },
     });
 
-    const productMap = new Map(dbProducts.map((p: any) => [p.id, p]));
+    const productMap = new Map<string, any>(dbProducts.map((p: any) => [p.id, p]));
 
     let subtotal = 0;
     for (const item of items) {
