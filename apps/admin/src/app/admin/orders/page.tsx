@@ -4,6 +4,17 @@ import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
 import { SearchBar } from '@hotzy/ui';
 
+interface OrderItem {
+  id: string;
+  orderNumber: string;
+  customer: { name: string | null } | null;
+  shippingName: string;
+  items: { id: string }[];
+  createdAt: string;
+  total: number;
+  status: string;
+}
+
 const STATUS_TABS = [
   { value: undefined, label: 'All Orders' },
   { value: 'PENDING', label: 'Pending' },
@@ -123,7 +134,7 @@ export default function OrdersPage() {
                   </td>
                 </tr>
               ) : (
-                data.items.map((order) => (
+                data.items.map((order: OrderItem) => (
                   <tr key={order.id} className="hover:bg-surface-container/20 transition-colors">
                     <td className="px-4 py-3 text-body-md text-on-surface font-medium">
                       {order.orderNumber}
