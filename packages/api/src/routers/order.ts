@@ -30,7 +30,7 @@ export const orderRouter = router({
     }
 
     // C-02: Fetch products from DB to verify prices and check stock
-    const productIds = [...new Set(items.map((i) => i.productId))];
+    const productIds = [...new Set(items.map((i: any) => i.productId))];
     if (productIds.length !== items.length) {
       throw new TRPCError({
         code: 'BAD_REQUEST',
@@ -41,7 +41,7 @@ export const orderRouter = router({
       where: { id: { in: productIds } },
     });
 
-    const productMap = new Map(dbProducts.map((p) => [p.id, p]));
+    const productMap = new Map(dbProducts.map((p: any) => [p.id, p]));
 
     let subtotal = 0;
     for (const item of items) {
