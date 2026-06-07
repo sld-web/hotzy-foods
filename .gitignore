@@ -10,3 +10,4 @@ turbo/
 *.log
 .DS_Store
 coverage/
+.vercel

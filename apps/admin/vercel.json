@@ -1,7 +1,5 @@
 {
   "framework": "nextjs",
-  "buildCommand": "cd ../.. && pnpm install --no-frozen-lockfile && pnpm build",
-  "outputDirectory": ".next",
-  "installCommand": "cd ../.. && pnpm install --no-frozen-lockfile",
-  "rootDirectory": "apps/admin"
+  "buildCommand": "pnpm -F @hotzy/admin build",
+  "installCommand": "pnpm install --no-frozen-lockfile"
 }
