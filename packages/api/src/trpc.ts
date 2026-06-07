@@ -3,10 +3,7 @@ import superjson from 'superjson';
 import { prisma } from '@hotzy/database';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET;
-if (!JWT_SECRET) {
-  throw new Error('JWT_SECRET environment variable is required');
-}
+const JWT_SECRET = process.env.JWT_SECRET || '';
 
 export interface AdminUser {
   id: string;
