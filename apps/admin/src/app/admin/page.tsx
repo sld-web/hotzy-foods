@@ -206,7 +206,7 @@ export default function AdminDashboardPage() {
                 </tr>
               </thead>
               <tbody>
-                {recentOrders.map((order) => (
+                {recentOrders.map((order: any) => (
                   <tr
                     key={order.id}
                     className="border-b border-surface-container/50 hover:bg-surface-container/20"
