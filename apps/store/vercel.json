@@ -1,5 +1,0 @@
-{
-  "framework": "nextjs",
-  "buildCommand": "pnpm -F @hotzy/store build",
-  "installCommand": "pnpm install --no-frozen-lockfile"
-}
