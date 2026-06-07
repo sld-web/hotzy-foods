@@ -165,7 +165,10 @@ export default function ProductDetailPage() {
                 setQuantity(1);
               }}
             >
-              Add to Cart
+              <span className="hidden md:inline">Add to Cart</span>
+              <span className="material-symbols-outlined inline md:hidden text-[20px]">
+                shopping_cart
+              </span>
             </Button>
           </div>
 
