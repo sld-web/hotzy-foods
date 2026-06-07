@@ -13,6 +13,9 @@ interface InventoryItem {
   stockLevel: number;
   isActive: boolean;
   heatLevel: number;
+  lowStockThreshold: number;
+  shuMin: number | null;
+  shuMax: number | null;
   images: { url: string; alt: string | null }[];
   category: { name: string } | null;
   createdAt: string;
