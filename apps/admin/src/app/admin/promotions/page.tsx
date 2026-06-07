@@ -117,7 +117,7 @@ export default function PromotionsPage() {
                   </td>
                 </tr>
               ) : (
-                promos.map((promo) => (
+                promos.map((promo: any) => (
                   <tr key={promo.id} className="hover:bg-surface-container/20 transition-colors">
                     <td className="px-4 py-3 text-body-md text-on-surface font-semibold">
                       {promo.code}

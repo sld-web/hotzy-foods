@@ -81,7 +81,7 @@ export default function EditProductPage() {
         metaTitle: product.metaTitle ?? undefined,
         metaDesc: product.metaDesc ?? undefined,
         categoryId: product.categoryId,
-        images: product.images.map((img) => ({
+        images: product.images.map((img: any) => ({
           url: img.url,
           alt: img.alt ?? undefined,
           sortOrder: img.sortOrder,
@@ -89,7 +89,7 @@ export default function EditProductPage() {
       });
 
       setDietaryTags(product.dietaryTags);
-      setImageUrls(product.images.map((img) => img.url));
+      setImageUrls(product.images.map((img: any) => img.url));
 
       if (product.heatLevel) {
         const idx = HEAT_LEVELS.findIndex((h) => h.value === product.heatLevel);

@@ -480,7 +480,7 @@ export default function WebsitePage() {
                 No banners yet. Create your first one.
               </p>
             ) : (
-              campaigns.map((c) => (
+              campaigns.map((c: any) => (
                 <div
                   key={c.id}
                   className="flex items-center justify-between p-4 rounded-lg border border-surface-container"
@@ -542,7 +542,7 @@ export default function WebsitePage() {
                 No team members yet.
               </p>
             ) : (
-              team.map((m) => (
+              team.map((m: any) => (
                 <div
                   key={m.id}
                   className="flex items-center gap-4 p-4 rounded-lg border border-surface-container"
