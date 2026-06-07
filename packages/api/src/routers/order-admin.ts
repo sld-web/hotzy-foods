@@ -1,6 +1,6 @@
 import { TRPCError } from '@trpc/server';
 import { router, adminProcedure } from '../trpc';
-import { prisma } from '@hotzy/database';
+import { prisma, Prisma } from '@hotzy/database';
 import { orderFilterSchema, updateOrderStatusSchema } from '@hotzy/validators';
 import { z } from 'zod';
 
@@ -54,7 +54,7 @@ export const orderAdminRouter = router({
   }),
 
   updateStatus: adminProcedure.input(updateOrderStatusSchema).mutation(async ({ input }) => {
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       const current = await tx.order.findUnique({
         where: { id: input.id },
         select: { status: true },

@@ -1,5 +1,5 @@
 import { router, publicProcedure, customerProcedure } from '../trpc';
-import { prisma } from '@hotzy/database';
+import { prisma, Prisma } from '@hotzy/database';
 import {
   customerRegisterSchema,
   customerLoginSchema,
@@ -147,7 +147,7 @@ export const customerAuthRouter = router({
     }),
 
   addAddress: customerProcedure.input(createAddressSchema).mutation(async ({ ctx, input }) => {
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       if (input.isDefault) {
         await tx.address.updateMany({
           where: { customerId: ctx.customer.id },
@@ -166,7 +166,7 @@ export const customerAuthRouter = router({
       const { id, ...data } = input;
       const addr = await prisma.address.findFirst({ where: { id, customerId: ctx.customer.id } });
       if (!addr) throw new TRPCError({ code: 'NOT_FOUND', message: 'Address not found' });
-      return prisma.$transaction(async (tx) => {
+      return prisma.$transaction(async (tx: Prisma.TransactionClient) => {
         if (data.isDefault) {
           await tx.address.updateMany({
             where: { customerId: ctx.customer.id },

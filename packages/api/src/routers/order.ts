@@ -1,6 +1,6 @@
 import { TRPCError } from '@trpc/server';
 import { router, publicProcedure } from '../trpc';
-import { prisma } from '@hotzy/database';
+import { prisma, Prisma } from '@hotzy/database';
 import { createOrderSchema } from '@hotzy/validators';
 
 const MAX_QUANTITY = 99;
@@ -134,7 +134,7 @@ export const orderRouter = router({
     for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
       try {
         const order = await prisma.$transaction(
-          async (tx) => {
+          async (tx: Prisma.TransactionClient) => {
             // Decrement stock
             for (const item of items) {
               await tx.product.update({

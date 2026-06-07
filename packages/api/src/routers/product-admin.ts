@@ -1,6 +1,6 @@
 import { TRPCError } from '@trpc/server';
 import { router, adminProcedure } from '../trpc';
-import { prisma } from '@hotzy/database';
+import { prisma, Prisma } from '@hotzy/database';
 import { productFilterSchema, createProductSchema, updateProductSchema } from '@hotzy/validators';
 import { z } from 'zod';
 
@@ -114,7 +114,7 @@ export const productAdminRouter = router({
         message: `Cannot delete product with ${orderItemCount} order history. Archive it instead.`,
       });
     }
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       await tx.productImage.deleteMany({ where: { productId: input.id } });
       return tx.product.delete({ where: { id: input.id } });
     });
