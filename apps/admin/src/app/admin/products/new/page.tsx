@@ -193,7 +193,7 @@ export default function AddProductPage() {
                 error={errors.categoryId?.message}
                 placeholder="Select category"
                 {...register('categoryId')}
-                options={categories?.map((c) => ({ value: c.id, label: c.name })) ?? []}
+                options={categories?.map((c: any) => ({ value: c.id, label: c.name })) ?? []}
               />
 
               <div>
