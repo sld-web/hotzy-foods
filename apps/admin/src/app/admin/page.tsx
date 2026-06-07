@@ -148,7 +148,7 @@ export default function AdminDashboardPage() {
             </div>
           ) : topProducts && topProducts.length > 0 ? (
             <div className="space-y-3">
-              {topProducts.map((item: any, i) => (
+              {topProducts.map((item: any, i: number) => (
                 <div
                   key={item.product?.id ?? i}
                   className="flex items-center justify-between py-2 border-b border-surface-container/50 last:border-0"
