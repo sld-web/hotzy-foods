@@ -5,22 +5,6 @@ import { useRouter } from 'next/navigation';
 import { trpc } from '@/lib/trpc';
 import { Button, SearchBar, ConfirmDialog } from '@hotzy/ui';
 
-interface InventoryItem {
-  id: string;
-  name: string;
-  sku: string;
-  price: number;
-  stockLevel: number;
-  isActive: boolean;
-  heatLevel: number;
-  lowStockThreshold: number;
-  shuMin: number | null;
-  shuMax: number | null;
-  images: { url: string; alt: string | null }[];
-  category: { name: string } | null;
-  createdAt: string;
-}
-
 const HEAT_ICONS = [
   'local_fire_department',
   'local_fire_department',
@@ -217,7 +201,7 @@ export default function InventoryPage() {
                   </td>
                 </tr>
               ) : (
-                data.items.map((product: InventoryItem) => (
+                data.items.map((product: any) => (
                   <tr key={product.id} className="hover:bg-surface-container/20 transition-colors">
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-4">

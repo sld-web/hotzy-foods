@@ -4,20 +4,6 @@ import { useState, useEffect } from 'react';
 import { trpc } from '@/lib/trpc';
 import { SearchBar } from '@hotzy/ui';
 
-interface CustomerItem {
-  id: string;
-  email: string;
-  name: string | null;
-  phone: string | null;
-  isGuest: boolean;
-  totalOrders: number;
-  totalSpent: number;
-  segment: string;
-  loyaltyPoints: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export default function CustomersPage() {
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
@@ -124,7 +110,7 @@ export default function CustomersPage() {
                   </td>
                 </tr>
               ) : (
-                data.items.map((customer: CustomerItem) => (
+                data.items.map((customer: any) => (
                   <tr key={customer.id} className="hover:bg-surface-container/20 transition-colors">
                     <td className="px-4 py-3 text-body-md text-on-surface font-medium">
                       {customer.name ?? '—'}
