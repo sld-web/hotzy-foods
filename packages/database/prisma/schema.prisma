@@ -71,6 +71,7 @@ model Customer {
   updatedAt     DateTime  @updatedAt
   addresses     Address[]
   orders        Order[]
+  pageViews     PageView[]
 }
 
 model Address {
@@ -166,6 +167,7 @@ model Order {
   shippingProvince String?
   shippingCountry  String      @default("Sri Lanka")
   notes            String?
+  userAgent        String?
   paidAt           DateTime?
   shippedAt        DateTime?
   createdAt        DateTime    @default(now())
@@ -176,6 +178,19 @@ model Order {
   @@index([orderNumber])
   @@index([status])
   @@index([promoCodeId])
+}
+
+model PageView {
+  id         String    @id @default(cuid())
+  path       String
+  customerId String?
+  customer   Customer? @relation(fields: [customerId], references: [id])
+  referrer   String?
+  userAgent  String?
+  createdAt  DateTime  @default(now())
+
+  @@index([createdAt])
+  @@index([path])
 }
 
 model OrderItem {

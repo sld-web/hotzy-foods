@@ -27,12 +27,15 @@ export default function OrdersPage() {
   const [page, setPage] = useState(1);
   const limit = 15;
 
-  const { data, isLoading, refetch } = trpc.admin.order.list.useQuery({
-    status: statusFilter as any,
-    search: search || undefined,
-    page,
-    limit,
-  });
+  const { data, isLoading, refetch } = trpc.admin.order.list.useQuery(
+    {
+      status: statusFilter as any,
+      search: search || undefined,
+      page,
+      limit,
+    },
+    { staleTime: 30_000 },
+  );
 
   const updateStatus = trpc.admin.order.updateStatus.useMutation({
     onSuccess: () => refetch(),
@@ -45,7 +48,7 @@ export default function OrdersPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <h1 className="text-headline-lg text-on-surface">Order Fulfillment</h1>
       </div>
 

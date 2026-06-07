@@ -32,7 +32,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-surface-container pt-4 text-center text-label-sm text-on-surface-variant">
-          <p>2025, ZEST LANKA INTERNATIONAL (PRIVATE) LIMITED</p>
+          <p>2026, ZEST LANKA INTERNATIONAL (PRIVATE) LIMITED</p>
         </div>
       </div>
     </footer>

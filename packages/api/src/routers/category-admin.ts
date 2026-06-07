@@ -19,7 +19,19 @@ export const categoryAdminRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
-      return prisma.category.create({ data: input });
+      try {
+        return await prisma.category.create({ data: input });
+      } catch (error: unknown) {
+        const prismaError = error as { code?: string; meta?: { target?: string[] } };
+        if (prismaError.code === 'P2002') {
+          const fields = prismaError.meta?.target?.join(', ') || 'fields';
+          throw new TRPCError({
+            code: 'CONFLICT',
+            message: `A category with this ${fields} already exists`,
+          });
+        }
+        throw error;
+      }
     }),
 
   update: adminProcedure
@@ -36,7 +48,19 @@ export const categoryAdminRouter = router({
     )
     .mutation(async ({ input }) => {
       const { id, ...data } = input;
-      return prisma.category.update({ where: { id }, data });
+      try {
+        return await prisma.category.update({ where: { id }, data });
+      } catch (error: unknown) {
+        const prismaError = error as { code?: string; meta?: { target?: string[] } };
+        if (prismaError.code === 'P2002') {
+          const fields = prismaError.meta?.target?.join(', ') || 'fields';
+          throw new TRPCError({
+            code: 'CONFLICT',
+            message: `A category with this ${fields} already exists`,
+          });
+        }
+        throw error;
+      }
     }),
 
   delete: adminProcedure.input(z.object({ id: z.string() })).mutation(async ({ input }) => {

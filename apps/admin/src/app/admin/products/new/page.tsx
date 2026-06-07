@@ -25,8 +25,7 @@ export default function AddProductPage() {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [imageInput, setImageInput] = useState('');
 
-  const { data: categories } = trpc.admin.category.list.useQuery();
-
+  const { data: categories } = trpc.admin.category.list.useQuery(undefined, { staleTime: 60_000 });
   const createMutation = trpc.admin.product.create.useMutation({
     onSuccess: () => {
       router.push('/admin/inventory');
@@ -387,11 +386,7 @@ export default function AddProductPage() {
               </div>
             </div>
 
-            <Button
-              className="w-full"
-              onClick={handleSubmit(onSubmit)}
-              loading={createMutation.isPending}
-            >
+            <Button className="w-full" loading={createMutation.isPending}>
               Save Product
             </Button>
           </div>

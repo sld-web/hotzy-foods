@@ -22,7 +22,11 @@ export default function PromotionsPage() {
   const [showCreate, setShowCreate] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  const { data: promos, isLoading, refetch } = trpc.admin.promo.list.useQuery();
+  const {
+    data: promos,
+    isLoading,
+    refetch,
+  } = trpc.admin.promo.list.useQuery(undefined, { staleTime: 30_000 });
   const createMutation = trpc.admin.promo.create.useMutation({
     onSuccess: () => {
       setShowCreate(false);
@@ -66,9 +70,12 @@ export default function PromotionsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <h1 className="text-headline-lg text-on-surface">Promotions</h1>
-        <Button onClick={openCreate}>Create New Promo</Button>
+        <Button onClick={openCreate} className="w-full sm:w-auto">
+          <span className="material-symbols-outlined text-lg">add</span>
+          Create New Promo
+        </Button>
       </div>
 
       <div className="bg-white rounded-xl border border-surface-container overflow-hidden">

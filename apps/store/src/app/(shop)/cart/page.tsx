@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useCart } from '@/lib/cart-store';
+import { useCustomerAuth } from '@/lib/customer-auth-store';
 import { trpc } from '@/lib/trpc';
 import { formatPrice, FREE_SHIPPING_THRESHOLD, SHIPPING_COST } from '@/lib/constants';
 import { Button, Input } from '@hotzy/ui';
@@ -11,6 +12,7 @@ import { useToast } from '@hotzy/ui';
 export default function CartPage() {
   const { items, promoCode, updateQuantity, removeItem, clearCart, setPromoCode } = useCart();
   const { toast } = useToast();
+  const { customer: authCustomer } = useCustomerAuth();
   const [promoInput, setPromoInput] = useState('');
   const [showCheckout, setShowCheckout] = useState(false);
   const [lastOrder, setLastOrder] = useState<{ orderNumber: string; email: string } | null>(null);
@@ -34,7 +36,10 @@ export default function CartPage() {
 
   const createOrder = trpc.order.create.useMutation({
     onSuccess: (order) => {
-      setLastOrder({ orderNumber: order.orderNumber, email: customerEmail });
+      setLastOrder({
+        orderNumber: order.orderNumber,
+        email: customerEmail || authCustomer?.email || '',
+      });
       clearCart();
       setShowCheckout(false);
     },
@@ -57,6 +62,10 @@ export default function CartPage() {
     if (items.length === 0) return;
     if (!shippingName || !shippingAddress || !shippingCity) {
       toast('Please fill in all required shipping fields', 'error');
+      return;
+    }
+    if (!authCustomer && !customerEmail) {
+      toast('Please provide an email for order tracking', 'error');
       return;
     }
 
@@ -98,9 +107,11 @@ export default function CartPage() {
             <Link href="/products">
               <Button>Continue Shopping</Button>
             </Link>
-            <Link href="/orders">
-              <Button variant="outline">View My Orders</Button>
-            </Link>
+            {authCustomer && (
+              <Link href="/orders">
+                <Button variant="outline">View My Orders</Button>
+              </Link>
+            )}
           </div>
         </div>
       );
@@ -187,6 +198,9 @@ export default function CartPage() {
           {/* Order Summary */}
           <div className="bg-white rounded-xl border border-surface-container p-6 h-fit space-y-4">
             <h2 className="text-headline-md text-on-surface">Order Summary</h2>
+            <p className="text-label-sm text-on-surface-variant">
+              Prices confirmed at checkout based on current product prices.
+            </p>
             <div className="space-y-2">
               <div className="flex justify-between text-body-md text-on-surface-variant">
                 <span>Subtotal ({items.length} items)</span>

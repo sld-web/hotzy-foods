@@ -45,28 +45,78 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <section className="relative w-full h-[80vh] min-h-[500px] flex items-center overflow-hidden">
+        <style>{`
+          @keyframes ken-burns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+          }
+          @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(24px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-12px) translateX(6px); }
+            50% { transform: translateY(-6px) translateX(-4px); }
+            75% { transform: translateY(-18px) translateX(8px); }
+          }
+          @keyframes float-delayed {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-8px) translateX(-5px); }
+            50% { transform: translateY(-14px) translateX(3px); }
+            75% { transform: translateY(-22px) translateX(-6px); }
+          }
+          .hero-bg {
+            animation: ken-burns 20s ease-in-out forwards;
+          }
+          .hero-fade {
+            opacity: 0;
+            animation: fade-in-up 0.7s ease-out forwards;
+          }
+          .hero-float {
+            animation: float 6s ease-in-out infinite;
+          }
+          .hero-float-delayed {
+            animation: float-delayed 8s ease-in-out infinite;
+          }
+        `}</style>
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center hero-bg"
           style={{
             backgroundImage: `url(${settings?.heroImageUrl || '/heros/h1.webp'})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-10" />
+        {/* Floating particles */}
+        <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
+          <div className="absolute w-2 h-2 rounded-full bg-primary/30 top-[15%] left-[10%] hero-float" />
+          <div className="absolute w-1.5 h-1.5 rounded-full bg-golden-glaze/25 top-[25%] right-[15%] hero-float-delayed" />
+          <div className="absolute w-2.5 h-2.5 rounded-full bg-primary/20 bottom-[30%] left-[20%] hero-float-delayed" />
+          <div className="absolute w-1 h-1 rounded-full bg-golden-glaze/30 top-[60%] right-[25%] hero-float" />
+        </div>
         <div className="relative z-20 text-white px-4 md:px-margin-desktop max-w-2xl">
           {settings?.heroTitle && (
-            <span className="inline-block px-3 py-1 mb-4 rounded-full bg-primary text-white text-label-sm uppercase tracking-wider">
+            <span
+              className="inline-block px-3 py-1 mb-4 rounded-full bg-primary text-white text-label-sm uppercase tracking-wider hero-fade"
+              style={{ animationDelay: '0s' }}
+            >
               {settings.heroTitle}
             </span>
           )}
-          <h1 className="text-display-mobile md:text-display-lg mb-4 leading-tight">
-            {settings?.heroDescription || settings?.tagline || SITE_TAGLINE}
+          <h1
+            className="text-display-mobile md:text-display-lg mb-4 leading-tight hero-fade"
+            style={{ animationDelay: '0.15s' }}
+          >
+            {settings?.tagline || SITE_TAGLINE}
           </h1>
-          <p className="text-body-lg mb-8 text-white/80 max-w-xl">
-            {settings?.heroDescription
-              ? 'Experience the heat. Discover our handcrafted sauces and jams made with premium ingredients.'
-              : 'Sri Lanka most flavorful hot sauce brand. Crafted with premium Scotch Bonnet peppers.'}
+          <p
+            className="text-body-lg mb-8 text-white/80 max-w-xl hero-fade"
+            style={{ animationDelay: '0.3s' }}
+          >
+            {settings?.heroDescription ||
+              'Sri Lanka\u2019s most flavorful hot sauce brand. Crafted with premium Scotch Bonnet peppers.'}
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 hero-fade" style={{ animationDelay: '0.45s' }}>
             <Link
               href={settings?.heroCtaUrl || '/products'}
               className="inline-flex items-center px-7 py-3.5 rounded-lg bg-primary text-white text-label-md font-semibold hover:bg-[#92001f] transition-colors shadow-md"
@@ -241,13 +291,32 @@ export default function HomePage() {
 
       {/* Awards */}
       <section className="bg-surface-gray py-stack-lg">
-        <div className="max-w-container mx-auto px-4 md:px-margin-desktop text-center">
-          <p className="text-body-md text-on-surface-variant">
-            Best National Industry Brand 2024 — Small Scale, Food & Beverage Sector
-          </p>
-          <p className="text-body-md text-on-surface-variant mt-2">
-            Bronze Award — Small Scale Category, NEDA 2024
-          </p>
+        <div className="max-w-container mx-auto px-4 md:px-margin-desktop">
+          <h2 className="text-headline-lg text-on-surface text-center mb-8">Recognition</h2>
+          <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            <div className="bg-white rounded-xl border border-surface-container p-6 flex items-center gap-4">
+              <span className="material-symbols-outlined text-4xl text-golden-glaze">stars</span>
+              <div>
+                <p className="text-body-md font-semibold text-on-surface">
+                  Best National Industry Brand 2024
+                </p>
+                <p className="text-label-sm text-on-surface-variant">
+                  Small Scale, Food & Beverage Sector
+                </p>
+              </div>
+            </div>
+            <div className="bg-white rounded-xl border border-surface-container p-6 flex items-center gap-4">
+              <span className="material-symbols-outlined text-4xl text-chili-red">
+                emoji_events
+              </span>
+              <div>
+                <p className="text-body-md font-semibold text-on-surface">
+                  Bronze Award — NEDA 2024
+                </p>
+                <p className="text-label-sm text-on-surface-variant">Small Scale Category</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

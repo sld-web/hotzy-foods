@@ -49,7 +49,8 @@ function checkRateLimit(req: Request): void {
 export const authRouter = router({
   login: publicProcedure.input(loginSchema).mutation(async ({ input, ctx }) => {
     checkRateLimit(ctx.req);
-    const user = await prisma.user.findUnique({ where: { email: input.email } });
+    const email = input.email.toLowerCase();
+    const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid email or password' });
     }

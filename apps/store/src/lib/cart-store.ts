@@ -28,7 +28,6 @@ export const useCart = create<CartState>()(
     (set, get) => ({
       items: [],
       promoCode: '',
-      discountAmount: 0,
       addItem: (item, quantity) => {
         const qty = quantity ?? 1;
         const existing = get().items.find((i) => i.productId === item.productId);

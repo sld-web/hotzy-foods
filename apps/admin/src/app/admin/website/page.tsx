@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { trpc } from '@/lib/trpc';
-import { Button, Input, Modal, ConfirmDialog } from '@hotzy/ui';
+import { useAuthStore } from '@/lib/auth-store';
+import { Button, Input, Modal, ConfirmDialog, useToast } from '@hotzy/ui';
 
 const PLACEMENT_GUIDES: Record<string, { size: string; note: string }> = {
   hero: { size: '1920×600px', note: 'Max 500KB · JPG, WebP, PNG' },
@@ -19,43 +20,62 @@ const PLACEMENTS = [
 ];
 
 export default function WebsitePage() {
-  const { data: settings, refetch: refetchSettings } = trpc.admin.settings.get.useQuery();
-  const updateSettings = trpc.admin.settings.update.useMutation({
-    onSuccess: () => refetchSettings(),
+  const { toast } = useToast();
+  const { data: settings, refetch: refetchSettings } = trpc.admin.settings.get.useQuery(undefined, {
+    staleTime: 30_000,
   });
-
-  const { data: campaigns, refetch: refetchCampaigns } = trpc.admin.campaign.list.useQuery();
+  const { data: campaigns, refetch: refetchCampaigns } = trpc.admin.campaign.list.useQuery(
+    undefined,
+    { staleTime: 30_000 },
+  );
+  const { data: team, refetch: refetchTeam } = trpc.admin.team.list.useQuery(undefined, {
+    staleTime: 30_000,
+  });
+  const updateSettings = trpc.admin.settings.update.useMutation({
+    onSuccess: () => {
+      refetchSettings();
+      toast('Settings saved', 'success');
+    },
+    onError: (err) => toast(err.message || 'Failed to save settings', 'error'),
+  });
   const createCampaign = trpc.admin.campaign.create.useMutation({
     onSuccess: () => {
       setCampaignModal(false);
       refetchCampaigns();
+      toast('Banner created', 'success');
     },
+    onError: (err) => toast(err.message || 'Failed to create banner', 'error'),
   });
   const updateCampaign = trpc.admin.campaign.update.useMutation({
     onSuccess: () => {
       setCampaignModal(false);
       refetchCampaigns();
+      toast('Banner updated', 'success');
     },
+    onError: (err) => toast(err.message || 'Failed to update banner', 'error'),
   });
   const deleteCampaign = trpc.admin.campaign.delete.useMutation({
     onSuccess: () => {
       setDeleteId(null);
       refetchCampaigns();
+      toast('Banner deleted', 'success');
     },
+    onError: (err) => toast(err.message || 'Failed to delete banner', 'error'),
   });
-
-  const { data: team, refetch: refetchTeam } = trpc.admin.team.list.useQuery();
   const createTeam = trpc.admin.team.create.useMutation({
     onSuccess: () => {
       setTeamModal(false);
       refetchTeam();
+      toast('Team member added', 'success');
     },
+    onError: (err) => toast(err.message || 'Failed to add team member', 'error'),
   });
   const deleteTeam = trpc.admin.team.delete.useMutation({
     onSuccess: () => {
       setDeleteId(null);
       refetchTeam();
     },
+    onError: (err) => toast(err.message || 'Failed to delete team member', 'error'),
   });
 
   const [brandForm, setBrandForm] = useState<Record<string, string>>({});
@@ -66,10 +86,12 @@ export default function WebsitePage() {
   const handleHeroUpload = async (file: File) => {
     setUploading(true);
     try {
+      const token = useAuthStore.getState().token;
       const formData = new FormData();
       formData.append('file', file);
-      const res = await fetch('http://localhost:3000/api/upload', {
+      const res = await fetch(`${window.location.origin}/api/upload`, {
         method: 'POST',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formData,
       });
       const data = await res.json();
@@ -145,16 +167,20 @@ export default function WebsitePage() {
     updateSettings.mutate({
       brandName: brandForm.brandName,
       tagline: brandForm.tagline,
-      logoUrl: brandForm.logoUrl || undefined,
-      faviconUrl: brandForm.faviconUrl || undefined,
-      contactEmail: brandForm.contactEmail || undefined,
-      contactPhone: brandForm.contactPhone || undefined,
-      contactWhatsApp: brandForm.contactWhatsApp || undefined,
-      address: brandForm.address || undefined,
+      logoUrl: brandForm.logoUrl === '' ? null : brandForm.logoUrl || undefined,
+      faviconUrl: brandForm.faviconUrl === '' ? null : brandForm.faviconUrl || undefined,
+      contactEmail: brandForm.contactEmail === '' ? null : brandForm.contactEmail || undefined,
+      contactPhone: brandForm.contactPhone === '' ? null : brandForm.contactPhone || undefined,
+      contactWhatsApp:
+        brandForm.contactWhatsApp === '' ? null : brandForm.contactWhatsApp || undefined,
+      address: brandForm.address === '' ? null : brandForm.address || undefined,
       shippingBase: Number(brandForm.shippingBase) || 0,
-      freeShippingThreshold: brandForm.freeShippingThreshold
-        ? Number(brandForm.freeShippingThreshold)
-        : undefined,
+      freeShippingThreshold:
+        brandForm.freeShippingThreshold === ''
+          ? null
+          : brandForm.freeShippingThreshold
+            ? Number(brandForm.freeShippingThreshold)
+            : undefined,
       taxRate: Number(brandForm.taxRate) || 0,
     });
   };

@@ -5,8 +5,8 @@ import { z } from 'zod';
 const settingsSchema = z.object({
   brandName: z.string().min(1).optional(),
   tagline: z.string().optional(),
-  logoUrl: z.string().optional(),
-  faviconUrl: z.string().optional(),
+  logoUrl: z.string().optional().nullable(),
+  faviconUrl: z.string().optional().nullable(),
   heroImageUrl: z.string().optional(),
   heroTitle: z.string().optional(),
   heroDescription: z.string().optional(),
@@ -16,7 +16,7 @@ const settingsSchema = z.object({
   currencySymbol: z.string().optional(),
   taxRate: z.number().min(0).optional(),
   shippingBase: z.number().min(0).optional(),
-  freeShippingThreshold: z.number().min(0).optional(),
+  freeShippingThreshold: z.number().min(0).optional().nullable(),
   socialLinks: z.any().optional(),
   contactEmail: z.string().email().optional().nullable(),
   contactPhone: z.string().optional().nullable(),
@@ -86,6 +86,22 @@ export const teamRouter = router({
     )
     .mutation(async ({ input }) => {
       return prisma.teamMember.create({ data: input });
+    }),
+
+  update: adminProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        name: z.string().min(1).optional(),
+        role: z.string().min(1).optional(),
+        photoUrl: z.string().optional(),
+        bio: z.string().optional(),
+        sortOrder: z.number().int().optional(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const { id, ...data } = input;
+      return prisma.teamMember.update({ where: { id }, data });
     }),
 
   delete: adminProcedure.input(z.object({ id: z.string() })).mutation(async ({ input }) => {

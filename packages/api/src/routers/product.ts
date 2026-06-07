@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { router, publicProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
 import { productFilterSchema } from '@hotzy/validators';
@@ -15,13 +16,26 @@ export const productRouter = router({
 
     const orderBy: any = {};
     switch (sort) {
-      case 'name_asc': orderBy.name = 'asc'; break;
-      case 'name_desc': orderBy.name = 'desc'; break;
-      case 'price_asc': orderBy.price = 'asc'; break;
-      case 'price_desc': orderBy.price = 'desc'; break;
-      case 'newest': orderBy.createdAt = 'desc'; break;
-      case 'oldest': orderBy.createdAt = 'asc'; break;
-      default: orderBy.createdAt = 'desc';
+      case 'name_asc':
+        orderBy.name = 'asc';
+        break;
+      case 'name_desc':
+        orderBy.name = 'desc';
+        break;
+      case 'price_asc':
+        orderBy.price = 'asc';
+        break;
+      case 'price_desc':
+        orderBy.price = 'desc';
+        break;
+      case 'newest':
+        orderBy.createdAt = 'desc';
+        break;
+      case 'oldest':
+        orderBy.createdAt = 'asc';
+        break;
+      default:
+        orderBy.createdAt = 'desc';
     }
 
     const [items, total] = await Promise.all([
@@ -46,7 +60,7 @@ export const productRouter = router({
         category: true,
       },
     });
-    if (!product) throw new Error('Product not found');
+    if (!product) throw new TRPCError({ code: 'NOT_FOUND', message: 'Product not found' });
     return product;
   }),
 

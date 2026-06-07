@@ -28,7 +28,7 @@ export default function EditProductPage() {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [imageInput, setImageInput] = useState('');
 
-  const { data: categories } = trpc.admin.category.list.useQuery();
+  const { data: categories } = trpc.admin.category.list.useQuery(undefined, { staleTime: 60_000 });
   const { data: product, isLoading: productLoading } = trpc.admin.product.byId.useQuery({ id });
 
   const updateMutation = trpc.admin.product.update.useMutation({
@@ -448,11 +448,7 @@ export default function EditProductPage() {
               </div>
             </div>
 
-            <Button
-              className="w-full"
-              onClick={handleSubmit(onSubmit)}
-              loading={updateMutation.isPending}
-            >
+            <Button className="w-full" loading={updateMutation.isPending}>
               Save Changes
             </Button>
           </div>

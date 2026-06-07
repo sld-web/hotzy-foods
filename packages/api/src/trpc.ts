@@ -34,7 +34,10 @@ export async function createTRPCContext(req: Request) {
     const referer = req.headers.get('referer');
     const allowedReferer = ALLOWED_ORIGINS.some((o) => referer?.startsWith(o));
     if (!allowedReferer) {
-      throw new Error(`Origin not allowed: ${origin}`);
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+        message: `Origin not allowed: ${origin}`,
+      });
     }
   }
 

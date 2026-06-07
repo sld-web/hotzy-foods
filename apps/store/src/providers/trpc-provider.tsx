@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
 import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
+import { useCustomerAuth } from '@/lib/customer-auth-store';
 import superjson from 'superjson';
 
 function getBaseUrl() {
@@ -21,13 +22,7 @@ export function TRPCProvider({ children }: { children: React.ReactNode }) {
           url: `${getBaseUrl()}/api/trpc`,
           transformer: superjson,
           headers() {
-            let token: string | null = null;
-            if (typeof window !== 'undefined') {
-              try {
-                const stored = JSON.parse(localStorage.getItem('hotzy-customer-auth') || '{}');
-                token = stored?.state?.token || null;
-              } catch {}
-            }
+            const token = useCustomerAuth.getState().token;
             return token ? { Authorization: `Bearer ${token}` } : {};
           },
         }),

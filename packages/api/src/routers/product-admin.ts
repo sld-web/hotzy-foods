@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { router, adminProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
 import { productFilterSchema, createProductSchema, updateProductSchema } from '@hotzy/validators';
@@ -58,13 +59,25 @@ export const productAdminRouter = router({
 
   create: adminProcedure.input(createProductSchema).mutation(async ({ input }) => {
     const { images, ...data } = input;
-    return prisma.product.create({
-      data: {
-        ...data,
-        images: { create: images },
-      },
-      include: { images: true, category: true },
-    });
+    try {
+      return await prisma.product.create({
+        data: {
+          ...data,
+          images: { create: images },
+        },
+        include: { images: true, category: true },
+      });
+    } catch (error: unknown) {
+      const prismaError = error as { code?: string; meta?: { target?: string[] } };
+      if (prismaError.code === 'P2002') {
+        const fields = prismaError.meta?.target?.join(', ') || 'fields';
+        throw new TRPCError({
+          code: 'CONFLICT',
+          message: `A product with this ${fields} already exists`,
+        });
+      }
+      throw error;
+    }
   }),
 
   update: adminProcedure
@@ -94,7 +107,16 @@ export const productAdminRouter = router({
   }),
 
   delete: adminProcedure.input(z.object({ id: z.string() })).mutation(async ({ input }) => {
-    await prisma.productImage.deleteMany({ where: { productId: input.id } });
-    return prisma.product.delete({ where: { id: input.id } });
+    const orderItemCount = await prisma.orderItem.count({ where: { productId: input.id } });
+    if (orderItemCount > 0) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: `Cannot delete product with ${orderItemCount} order history. Archive it instead.`,
+      });
+    }
+    return prisma.$transaction(async (tx) => {
+      await tx.productImage.deleteMany({ where: { productId: input.id } });
+      return tx.product.delete({ where: { id: input.id } });
+    });
   }),
 });

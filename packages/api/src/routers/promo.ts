@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { router, adminProcedure } from '../trpc';
 import { prisma } from '@hotzy/database';
 import { createPromoSchema, updatePromoSchema } from '@hotzy/validators';
@@ -9,13 +10,24 @@ export const promoRouter = router({
   }),
 
   create: adminProcedure.input(createPromoSchema).mutation(async ({ input }) => {
-    return prisma.promoCode.create({
-      data: {
-        ...input,
-        startsAt: input.startsAt ? new Date(input.startsAt) : null,
-        expiresAt: input.expiresAt ? new Date(input.expiresAt) : null,
-      },
-    });
+    try {
+      return await prisma.promoCode.create({
+        data: {
+          ...input,
+          startsAt: input.startsAt ? new Date(input.startsAt) : null,
+          expiresAt: input.expiresAt ? new Date(input.expiresAt) : null,
+        },
+      });
+    } catch (error: unknown) {
+      const prismaError = error as { code?: string };
+      if (prismaError.code === 'P2002') {
+        throw new TRPCError({
+          code: 'CONFLICT',
+          message: 'A promo code with this code already exists',
+        });
+      }
+      throw error;
+    }
   }),
 
   update: adminProcedure

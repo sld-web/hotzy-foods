@@ -20,12 +20,15 @@ export default function CustomersPage() {
     setPage(1);
   }, [debouncedSearch, segment]);
 
-  const { data, isLoading } = trpc.admin.customer.list.useQuery({
-    search: debouncedSearch || undefined,
-    segment,
-    page,
-    limit,
-  });
+  const { data, isLoading } = trpc.admin.customer.list.useQuery(
+    {
+      search: debouncedSearch || undefined,
+      segment,
+      page,
+      limit,
+    },
+    { staleTime: 30_000 },
+  );
 
   const formatCurrency = (value: unknown) => {
     if (value == null) return 'Rs. 0';
@@ -36,9 +39,9 @@ export default function CustomersPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <h1 className="text-headline-lg text-on-surface">Customer Insights</h1>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {segments.map((s) => (
             <button
               key={s}
@@ -46,7 +49,7 @@ export default function CustomersPage() {
                 setSegment(segment === s ? undefined : s);
                 setPage(1);
               }}
-              className={`px-3 py-1.5 rounded-full text-label-sm transition-colors ${
+              className={`px-3 py-1.5 rounded-full text-label-sm transition-colors whitespace-nowrap ${
                 segment === s
                   ? 'bg-primary text-white'
                   : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'

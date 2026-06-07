@@ -15,8 +15,10 @@ export default function ProfilePage() {
   const { data: me, isLoading } = trpc.customerAuth.me.useQuery(undefined, {
     enabled: isAuthenticated,
   });
+  const utils = trpc.useUtils();
   const updateProfile = trpc.customerAuth.updateProfile.useMutation({
     onSuccess: () => {
+      utils.customerAuth.me.invalidate();
       toast('Profile updated!', 'success');
     },
     onError: (err) => {

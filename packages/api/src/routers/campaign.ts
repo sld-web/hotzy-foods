@@ -10,8 +10,8 @@ const campaignInput = z.object({
   placement: z.string().min(1),
   linkUrl: z.string().optional(),
   sortOrder: z.number().int().default(0),
-  startsAt: z.string().datetime().optional(),
-  endsAt: z.string().datetime().optional(),
+  startsAt: z.string().optional(),
+  endsAt: z.string().optional(),
 });
 
 export const campaignRouter = router({

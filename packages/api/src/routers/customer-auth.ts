@@ -54,7 +54,8 @@ function checkRateLimit(req: Request): void {
 export const customerAuthRouter = router({
   register: publicProcedure.input(customerRegisterSchema).mutation(async ({ input, ctx }) => {
     checkRateLimit(ctx.req);
-    const existing = await prisma.customer.findUnique({ where: { email: input.email } });
+    const email = input.email.toLowerCase();
+    const existing = await prisma.customer.findUnique({ where: { email } });
     if (existing) {
       throw new TRPCError({ code: 'CONFLICT', message: 'Email already registered' });
     }
@@ -62,7 +63,7 @@ export const customerAuthRouter = router({
     const passwordHash = await bcrypt.hash(input.password, 12);
     const customer = await prisma.customer.create({
       data: {
-        email: input.email,
+        email,
         name: input.name,
         passwordHash,
         isGuest: false,
@@ -82,7 +83,8 @@ export const customerAuthRouter = router({
 
   login: publicProcedure.input(customerLoginSchema).mutation(async ({ input, ctx }) => {
     checkRateLimit(ctx.req);
-    const customer = await prisma.customer.findUnique({ where: { email: input.email } });
+    const email = input.email.toLowerCase();
+    const customer = await prisma.customer.findUnique({ where: { email } });
     if (!customer || !customer.passwordHash) {
       throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid email or password' });
     }
@@ -108,6 +110,7 @@ export const customerAuthRouter = router({
     return prisma.customer.findUnique({
       where: { id: ctx.customer.id },
       include: { addresses: true },
+      omit: { passwordHash: true },
     });
   }),
 
@@ -117,6 +120,7 @@ export const customerAuthRouter = router({
       return prisma.customer.update({
         where: { id: ctx.customer.id },
         data: input,
+        omit: { passwordHash: true },
       });
     }),
 
@@ -138,6 +142,7 @@ export const customerAuthRouter = router({
       return prisma.customer.update({
         where: { id: ctx.customer.id },
         data: { passwordHash },
+        omit: { passwordHash: true },
       });
     }),
 

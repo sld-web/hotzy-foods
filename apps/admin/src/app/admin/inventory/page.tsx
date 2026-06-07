@@ -13,6 +13,33 @@ const HEAT_ICONS = [
   'local_fire_department',
 ] as const;
 
+function ProductImage({
+  url,
+  alt,
+  name,
+}: {
+  url?: string | null;
+  alt?: string | null;
+  name: string;
+}) {
+  const [error, setError] = useState(false);
+  if (!url || error) {
+    return (
+      <div className="w-full h-full flex items-center justify-center text-on-surface-variant">
+        <span className="material-symbols-outlined text-xl">image</span>
+      </div>
+    );
+  }
+  return (
+    <img
+      src={url}
+      alt={alt ?? name}
+      className="w-full h-full object-cover"
+      onError={() => setError(true)}
+    />
+  );
+}
+
 function StockDot({ level }: { level: number }) {
   if (level <= 0) return <span className="w-2 h-2 rounded-full bg-error shrink-0" />;
   if (level <= 10) return <span className="w-2 h-2 rounded-full bg-golden-glaze shrink-0" />;
@@ -77,12 +104,15 @@ export default function InventoryPage() {
     setPage(1);
   }, [debouncedSearch]);
 
-  const { data, isLoading, refetch } = trpc.admin.product.list.useQuery({
-    search: debouncedSearch || undefined,
-    sort: sort as any,
-    page,
-    limit,
-  });
+  const { data, isLoading, error, refetch } = trpc.admin.product.list.useQuery(
+    {
+      search: debouncedSearch || undefined,
+      sort: sort as any,
+      page,
+      limit,
+    },
+    { staleTime: 30_000 },
+  );
 
   const deleteMutation = trpc.admin.product.delete.useMutation({
     onSuccess: () => {
@@ -98,17 +128,19 @@ export default function InventoryPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface">Inventory Management</h1>
           <p className="text-body-md text-on-surface-variant">
             Manage your hot sauce catalog, track stock levels, and update pricing.
           </p>
         </div>
-        <Button onClick={() => router.push('/admin/products/new')}>Add New Product</Button>
+        <Button onClick={() => router.push('/admin/products/new')} className="px-8 py-4">
+          <span className="text-white">New Product</span>
+        </Button>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 max-w-sm">
         <SearchBar placeholder="Search inventory..." value={search} onChange={setSearch} />
       </div>
 
@@ -144,7 +176,22 @@ export default function InventoryPage() {
               {isLoading ? (
                 <tr>
                   <td colSpan={7} className="text-center py-12 text-on-surface-variant">
-                    Loading...
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                      Loading products...
+                    </div>
+                  </td>
+                </tr>
+              ) : error ? (
+                <tr>
+                  <td colSpan={7} className="text-center py-12">
+                    <p className="text-error text-body-md">Failed to load products</p>
+                    <button
+                      onClick={() => refetch()}
+                      className="mt-2 text-label-sm text-primary hover:underline"
+                    >
+                      Try again
+                    </button>
                   </td>
                 </tr>
               ) : !data || data.items.length === 0 ? (
@@ -159,17 +206,11 @@ export default function InventoryPage() {
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden shrink-0">
-                          {product.images[0] ? (
-                            <img
-                              src={product.images[0].url}
-                              alt={product.images[0].alt ?? product.name}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center text-on-surface-variant">
-                              <span className="material-symbols-outlined text-xl">image</span>
-                            </div>
-                          )}
+                          <ProductImage
+                            url={product.images[0]?.url}
+                            alt={product.images[0]?.alt}
+                            name={product.name}
+                          />
                         </div>
                         <span className="text-body-md text-on-surface font-medium">
                           {product.name}

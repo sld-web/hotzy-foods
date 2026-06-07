@@ -30,9 +30,13 @@ export const customerOrderRouter = router({
           items: { include: { product: { include: { images: true } } } },
         },
       });
-      if (!order || !order.customerId) throw new Error('Order not found');
+      if (!order || !order.customerId) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Order not found' });
+      }
       const customer = await prisma.customer.findUnique({ where: { id: order.customerId } });
-      if (!customer || customer.email !== input.email) throw new Error('Order not found');
+      if (!customer || customer.email !== input.email.toLowerCase()) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Order not found' });
+      }
       return order;
     }),
 });

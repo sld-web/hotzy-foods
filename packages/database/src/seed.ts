@@ -7,6 +7,7 @@ async function main() {
   console.log('🌱 Seeding database...');
 
   // ─── Clear existing data (idempotent) ───
+  await prisma.pageView.deleteMany();
   await prisma.orderItem.deleteMany();
   await prisma.order.deleteMany();
   await prisma.productImage.deleteMany();
@@ -318,7 +319,8 @@ async function main() {
     where: { id: 'singleton' },
     update: {
       heroTitle: 'Summer Heat Collection',
-      heroDescription: 'Bold Flavor. Zero Limits.',
+      heroDescription:
+        "Sri Lanka's most flavorful hot sauce brand. Crafted with premium Scotch Bonnet peppers.",
       heroCtaText: 'Shop Now',
       heroCtaUrl: '/products',
     },
@@ -326,7 +328,8 @@ async function main() {
       brandName: 'Hotzy Foods',
       tagline: 'Bold Flavor. Zero Limits.',
       heroTitle: 'Summer Heat Collection',
-      heroDescription: 'Bold Flavor. Zero Limits.',
+      heroDescription:
+        "Sri Lanka's most flavorful hot sauce brand. Crafted with premium Scotch Bonnet peppers.",
       heroCtaText: 'Shop Now',
       heroCtaUrl: '/products',
       currency: 'LKR',
@@ -368,50 +371,416 @@ async function main() {
   ]);
   console.log('  ✓ Team members created');
 
-  // ─── Sample Orders ───
-  const customer = await prisma.customer.upsert({
-    where: { email: 'sarah@example.com' },
-    update: {},
-    create: {
+  // ─── Sample Customers ───
+  const customerPassword = await bcrypt.hash('password123', 12);
+
+  interface CustomerSeed {
+    email: string;
+    name: string;
+    phone: string;
+    city: string;
+    province: string;
+    segment: string;
+    totalOrders: number;
+  }
+
+  const customerSeeds: CustomerSeed[] = [
+    {
       email: 'sarah@example.com',
       name: 'Sarah Jenkins',
       phone: '+94 77 123 4567',
-      isGuest: false,
-      totalOrders: 3,
-      totalSpent: 5550,
+      city: 'Colombo',
+      province: 'Western',
       segment: 'VIP - High Spender',
-      loyaltyPoints: 2340,
+      totalOrders: 8,
     },
-  });
+    {
+      email: 'ruwan@example.com',
+      name: 'Ruwan Perera',
+      phone: '+94 71 234 5678',
+      city: 'Kandy',
+      province: 'Central',
+      segment: 'VIP - High Spender',
+      totalOrders: 6,
+    },
+    {
+      email: 'priya@example.com',
+      name: 'Priya Sharma',
+      phone: '+94 72 345 6789',
+      city: 'Colombo',
+      province: 'Western',
+      segment: 'Regular',
+      totalOrders: 4,
+    },
+    {
+      email: 'kamal@example.com',
+      name: 'Kamal Fernando',
+      phone: '+94 76 456 7890',
+      city: 'Galle',
+      province: 'Southern',
+      segment: 'Regular',
+      totalOrders: 3,
+    },
+    {
+      email: 'nimal@example.com',
+      name: 'Nimal Silva',
+      phone: '+94 70 567 8901',
+      city: 'Jaffna',
+      province: 'Northern',
+      segment: 'Regular',
+      totalOrders: 3,
+    },
+    {
+      email: 'amaya@example.com',
+      name: 'Amaya Dissanayake',
+      phone: '+94 75 678 9012',
+      city: 'Negombo',
+      province: 'Western',
+      segment: 'New',
+      totalOrders: 1,
+    },
+    {
+      email: 'chathura@example.com',
+      name: 'Chathura Bandara',
+      phone: '+94 77 789 0123',
+      city: 'Batticaloa',
+      province: 'Eastern',
+      segment: 'New',
+      totalOrders: 1,
+    },
+    {
+      email: 'dilani@example.com',
+      name: 'Dilani Jayawardena',
+      phone: '+94 71 890 1234',
+      city: 'Kurunegala',
+      province: 'North Western',
+      segment: 'Regular',
+      totalOrders: 5,
+    },
+    {
+      email: 'eranga@example.com',
+      name: 'Eranga Wickramasinghe',
+      phone: '+94 72 901 2345',
+      city: 'Anuradhapura',
+      province: 'North Central',
+      segment: 'Regular',
+      totalOrders: 2,
+    },
+    {
+      email: 'fathima@example.com',
+      name: 'Fathima Hassan',
+      phone: '+94 76 012 3456',
+      city: 'Colombo',
+      province: 'Western',
+      segment: 'VIP - High Spender',
+      totalOrders: 7,
+    },
+    {
+      email: 'gayan@example.com',
+      name: 'Gayan Rathnayake',
+      phone: '+94 70 111 2222',
+      city: 'Kandy',
+      province: 'Central',
+      segment: 'At Risk',
+      totalOrders: 2,
+    },
+    {
+      email: 'harsha@example.com',
+      name: 'Harsha de Silva',
+      phone: '+94 75 222 3333',
+      city: 'Galle',
+      province: 'Southern',
+      segment: 'At Risk',
+      totalOrders: 1,
+    },
+    {
+      email: 'indika@example.com',
+      name: 'Indika Weerasinghe',
+      phone: '+94 77 333 4444',
+      city: 'Jaffna',
+      province: 'Northern',
+      segment: 'New',
+      totalOrders: 1,
+    },
+    {
+      email: 'jagath@example.com',
+      name: 'Jagath Kumara',
+      phone: '+94 71 444 5555',
+      city: 'Negombo',
+      province: 'Western',
+      segment: 'Regular',
+      totalOrders: 3,
+    },
+    {
+      email: 'kavindi@example.com',
+      name: 'Kavindi Senanayake',
+      phone: '+94 72 555 6666',
+      city: 'Colombo',
+      province: 'Western',
+      segment: 'Regular',
+      totalOrders: 4,
+    },
+    {
+      email: 'lasantha@example.com',
+      name: 'Lasantha Perera',
+      phone: '+94 76 666 7777',
+      city: 'Batticaloa',
+      province: 'Eastern',
+      segment: 'Unassigned',
+      totalOrders: 0,
+    },
+    {
+      email: 'madhuka@example.com',
+      name: 'Madhuka Liyanage',
+      phone: '+94 70 777 8888',
+      city: 'Kurunegala',
+      province: 'North Western',
+      segment: 'Unassigned',
+      totalOrders: 0,
+    },
+    {
+      email: 'nadeeka@example.com',
+      name: 'Nadeeka Rathnayake',
+      phone: '+94 75 888 9999',
+      city: 'Colombo',
+      province: 'Western',
+      segment: 'New',
+      totalOrders: 1,
+    },
+  ];
 
-  const order = await prisma.order.create({
-    data: {
-      orderNumber: 'HZ-8892',
-      customerId: customer.id,
-      status: 'COMPLETED',
-      subtotal: 2800,
-      shippingCost: 350,
-      tax: 0,
-      total: 3150,
-      shippingName: 'Sarah Jenkins',
-      shippingPhone: '+94 77 123 4567',
-      shippingAddress: '42 Galle Road, Colombo 03',
-      shippingCity: 'Colombo',
-      shippingProvince: 'Western',
-      paidAt: new Date('2024-10-24'),
-      items: {
-        create: [
-          {
-            productId: products[0].id,
-            quantity: 2,
-            unitPrice: 1850,
-            subtotal: 3700,
-          },
-        ],
+  const customers = await Promise.all(
+    customerSeeds.map((s) =>
+      prisma.customer.upsert({
+        where: { email: s.email },
+        update: {},
+        create: {
+          email: s.email,
+          name: s.name,
+          phone: s.phone,
+          passwordHash: customerPassword,
+          isGuest: false,
+          totalOrders: s.totalOrders,
+          totalSpent: s.totalOrders * (Math.floor(Math.random() * 2000) + 1000),
+          segment: s.segment,
+          loyaltyPoints: s.totalOrders * (Math.floor(Math.random() * 200) + 100),
+        },
+      }),
+    ),
+  );
+  console.log(`  ✓ ${customers.length} customers created`);
+
+  // ─── Sample Orders ───
+  const cityProvinceMap: Record<string, string> = {
+    Colombo: 'Western',
+    Kandy: 'Central',
+    Galle: 'Southern',
+    Jaffna: 'Northern',
+    Negombo: 'Western',
+    Batticaloa: 'Eastern',
+    Kurunegala: 'North Western',
+    Anuradhapura: 'North Central',
+  };
+  const cities = Object.keys(cityProvinceMap);
+
+  const orderUserAgents = [
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148',
+    'Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/118.0.5993.80 Mobile Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/118.0.5993.88 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Safari/605.1.15',
+    'Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148',
+    'Mozilla/5.0 (Linux; Android 13; SM-T870) AppleWebKit/537.36 Chrome/118.0.5993.80 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Firefox/118.0',
+    'Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 Chrome/117.0.5938.140 Mobile Safari/537.36',
+  ];
+
+  const orderData: {
+    customerId: string;
+    customerName: string;
+    subtotal: number;
+    shippingCost: number;
+    total: number;
+    city: string;
+    province: string;
+    userAgent: string;
+    paidAt: Date;
+    productIds: string[];
+  }[] = [];
+
+  const now = new Date();
+  for (let dayOffset = 29; dayOffset >= 0; dayOffset--) {
+    const dayStart = new Date(now);
+    dayStart.setDate(dayStart.getDate() - dayOffset);
+    dayStart.setHours(0, 0, 0, 0);
+
+    // 1-4 orders per day
+    const ordersToday = Math.floor(Math.random() * 4) + 1;
+    for (let o = 0; o < ordersToday; o++) {
+      const customer = customers[Math.floor(Math.random() * customers.length)];
+      const city = cities[Math.floor(Math.random() * cities.length)];
+      const province = cityProvinceMap[city];
+      const hour = Math.floor(Math.random() * 24);
+      const minute = Math.floor(Math.random() * 60);
+      const dt = new Date(dayStart);
+      dt.setHours(hour, minute);
+
+      const numItems = Math.floor(Math.random() * 3) + 1;
+      const selectedIds: string[] = [];
+      let subtotal = 0;
+      for (let i = 0; i < numItems; i++) {
+        const prod = products[Math.floor(Math.random() * products.length)];
+        selectedIds.push(prod.id);
+        const qty = Math.floor(Math.random() * 3) + 1;
+        subtotal += Number(prod.price) * qty;
+      }
+
+      const shippingCost = subtotal >= 5000 ? 0 : 350;
+      const total = subtotal + shippingCost;
+
+      orderData.push({
+        customerId: customer.id,
+        customerName: customer.name || 'Customer',
+        subtotal,
+        shippingCost,
+        total,
+        city,
+        province,
+        userAgent: orderUserAgents[Math.floor(Math.random() * orderUserAgents.length)],
+        paidAt: dt,
+        productIds: selectedIds,
+      });
+    }
+  }
+
+  // Bulk create orders with items
+  for (const od of orderData) {
+    await prisma.order.create({
+      data: {
+        orderNumber: `HZ-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`,
+        customerId: od.customerId,
+        status: Math.random() > 0.15 ? 'COMPLETED' : 'CANCELLED',
+        subtotal: od.subtotal,
+        shippingCost: od.shippingCost,
+        tax: 0,
+        total: od.total,
+        shippingName: od.customerName,
+        shippingPhone:
+          '+94 7' +
+          Math.floor(Math.random() * 10000000)
+            .toString()
+            .padStart(7, '0'),
+        shippingAddress: `${Math.floor(Math.random() * 500) + 1} ${['Main St', 'Park Rd', 'Lake Rd', 'Temple Rd', 'Beach Rd'][Math.floor(Math.random() * 5)]}`,
+        shippingCity: od.city,
+        shippingProvince: od.province,
+        userAgent: od.userAgent,
+        paidAt: od.paidAt,
+        items: {
+          create: od.productIds.map((pid) => {
+            const prod = products.find((p) => p.id === pid)!;
+            const qty = Math.floor(Math.random() * 3) + 1;
+            return {
+              productId: pid,
+              quantity: qty,
+              unitPrice: Number(prod.price),
+              subtotal: Number(prod.price) * qty,
+            };
+          }),
+        },
       },
-    },
-  });
-  console.log(`  ✓ Sample order created: ${order.orderNumber}`);
+    });
+  }
+  console.log(`  ✓ ${orderData.length} sample orders created`);
+
+  // ─── Sample PageView Data ───
+  const paths = [
+    '/',
+    '/products',
+    '/products/snake-bite-hot-sauce',
+    '/products/scorpion-sting-hot-sauce',
+    '/cart',
+    '/about',
+    '/orders',
+    '/login',
+  ];
+  const referrers = [
+    '',
+    'https://google.com',
+    'https://facebook.com',
+    'https://instagram.com',
+    'https://twitter.com',
+  ];
+  const userAgents = [
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148',
+    'Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/118.0.5993.80 Mobile Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/118.0.5993.88 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Safari/605.1.15',
+    'Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148',
+    'Mozilla/5.0 (Linux; Android 13; SM-T870) AppleWebKit/537.36 Chrome/118.0.5993.80 Safari/537.36',
+  ];
+
+  const pageViewData: {
+    path: string;
+    referrer: string | null;
+    userAgent: string;
+    createdAt: Date;
+  }[] = [];
+
+  for (let dayOffset = 30; dayOffset >= 0; dayOffset--) {
+    const dayStart = new Date(now);
+    dayStart.setDate(dayStart.getDate() - dayOffset);
+    dayStart.setHours(0, 0, 0, 0);
+
+    // Morning visits (6am-11am) — medium traffic
+    const morningCount = Math.floor(Math.random() * 8) + 3;
+    for (let i = 0; i < morningCount; i++) {
+      const hour = Math.floor(Math.random() * 6) + 6;
+      const minute = Math.floor(Math.random() * 60);
+      const dt = new Date(dayStart);
+      dt.setHours(hour, minute);
+      pageViewData.push({
+        path: paths[Math.floor(Math.random() * paths.length)],
+        referrer:
+          Math.random() > 0.7 ? referrers[Math.floor(Math.random() * referrers.length)] : null,
+        userAgent: userAgents[Math.floor(Math.random() * userAgents.length)],
+        createdAt: dt,
+      });
+    }
+
+    // Afternoon visits (12pm-5pm) — highest traffic
+    const afternoonCount = Math.floor(Math.random() * 12) + 5;
+    for (let i = 0; i < afternoonCount; i++) {
+      const hour = Math.floor(Math.random() * 6) + 12;
+      const minute = Math.floor(Math.random() * 60);
+      const dt = new Date(dayStart);
+      dt.setHours(hour, minute);
+      pageViewData.push({
+        path: paths[Math.floor(Math.random() * paths.length)],
+        referrer:
+          Math.random() > 0.7 ? referrers[Math.floor(Math.random() * referrers.length)] : null,
+        userAgent: userAgents[Math.floor(Math.random() * userAgents.length)],
+        createdAt: dt,
+      });
+    }
+
+    // Evening visits (6pm-11pm) — medium traffic
+    const eveningCount = Math.floor(Math.random() * 6) + 2;
+    for (let i = 0; i < eveningCount; i++) {
+      const hour = Math.floor(Math.random() * 6) + 18;
+      const minute = Math.floor(Math.random() * 60);
+      const dt = new Date(dayStart);
+      dt.setHours(hour, minute);
+      pageViewData.push({
+        path: paths[Math.floor(Math.random() * paths.length)],
+        referrer:
+          Math.random() > 0.7 ? referrers[Math.floor(Math.random() * referrers.length)] : null,
+        userAgent: userAgents[Math.floor(Math.random() * userAgents.length)],
+        createdAt: dt,
+      });
+    }
+  }
+
+  await prisma.pageView.createMany({ data: pageViewData });
+  console.log(`  ✓ ${pageViewData.length} sample page views created`);
 
   console.log('\n✅ Database seeded successfully!');
 }

@@ -16,10 +16,26 @@ import { useAuthStore } from '@/lib/auth-store';
 export default function AdminDashboardPage() {
   const user = useAuthStore((s) => s.user);
 
-  const { data: stats } = trpc.admin.dashboard.stats.useQuery({ period: '30d' });
-  const { data: salesChart } = trpc.admin.dashboard.salesChart.useQuery({ days: 30 });
-  const { data: topProducts } = trpc.admin.dashboard.topProducts.useQuery();
-  const { data: recentOrders } = trpc.admin.dashboard.recentOrders.useQuery();
+  const {
+    data: stats,
+    isLoading: statsLoading,
+    isFetching: statsFetching,
+  } = trpc.admin.dashboard.stats.useQuery({ period: '30d' }, { staleTime: 30_000 });
+  const {
+    data: salesChart,
+    isLoading: salesLoading,
+    isFetching: salesFetching,
+  } = trpc.admin.dashboard.salesChart.useQuery({ days: 30 }, { staleTime: 30_000 });
+  const {
+    data: topProducts,
+    isLoading: topLoading,
+    isFetching: topFetching,
+  } = trpc.admin.dashboard.topProducts.useQuery(undefined, { staleTime: 30_000 });
+  const {
+    data: recentOrders,
+    isLoading: ordersLoading,
+    isFetching: ordersFetching,
+  } = trpc.admin.dashboard.recentOrders.useQuery(undefined, { staleTime: 30_000 });
 
   const formatCurrency = (value: unknown) => {
     if (value == null) return 'Rs. 0';
@@ -27,41 +43,50 @@ export default function AdminDashboardPage() {
     return `Rs. ${num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   };
 
+  const isLoading = statsLoading || salesLoading || topLoading || ordersLoading;
+  const isRefetching = statsFetching || salesFetching || topFetching || ordersFetching;
+
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface">Dashboard</h1>
           {user && (
             <p className="text-body-md text-on-surface-variant">Welcome back, {user.name}</p>
           )}
         </div>
+        {isRefetching && (
+          <span className="inline-flex items-center gap-1.5 text-label-sm text-on-surface-variant">
+            <span className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+            Refreshing...
+          </span>
+        )}
       </div>
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <KpiCard
           title="Total Sales"
-          value={formatCurrency(stats?.totalSales)}
+          value={statsLoading ? '-' : formatCurrency(stats?.totalSales)}
           trend={{ value: '+14.5%', positive: true }}
           icon="trending_up"
         />
         <KpiCard
           title="Orders"
-          value={stats?.orders ?? 0}
+          value={statsLoading ? '-' : (stats?.orders ?? 0)}
           trend={{ value: '+8.2%', positive: true }}
           icon="shopping_cart"
         />
         <KpiCard
           title="New Customers"
-          value={stats?.newCustomers ?? 0}
+          value={statsLoading ? '-' : (stats?.newCustomers ?? 0)}
           trend={{ value: '+12.3%', positive: true }}
           icon="person_add"
         />
         <KpiCard
           title="Avg Order Value"
-          value={formatCurrency(stats?.avgOrderValue)}
+          value={statsLoading ? '-' : formatCurrency(stats?.avgOrderValue)}
           trend={{ value: '-2.1%', positive: false }}
           icon="account_balance"
         />
@@ -72,7 +97,11 @@ export default function AdminDashboardPage() {
         {/* Sales Chart */}
         <div className="bg-white rounded-xl border border-surface-container p-6">
           <h2 className="text-headline-md text-on-surface mb-4">Sales Overview</h2>
-          {salesChart && salesChart.length > 0 ? (
+          {salesLoading ? (
+            <div className="h-[300px] flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : salesChart && salesChart.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={salesChart}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
@@ -105,7 +134,7 @@ export default function AdminDashboardPage() {
             </ResponsiveContainer>
           ) : (
             <div className="h-[300px] flex items-center justify-center text-on-surface-variant">
-              {salesChart ? 'No sales data yet' : 'Loading...'}
+              No sales data yet
             </div>
           )}
         </div>
@@ -113,7 +142,11 @@ export default function AdminDashboardPage() {
         {/* Top Products */}
         <div className="bg-white rounded-xl border border-surface-container p-6">
           <h2 className="text-headline-md text-on-surface mb-4">Top Products</h2>
-          {topProducts && topProducts.length > 0 ? (
+          {topLoading ? (
+            <div className="h-[300px] flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : topProducts && topProducts.length > 0 ? (
             <div className="space-y-3">
               {topProducts.map((item, i) => (
                 <div
@@ -137,7 +170,7 @@ export default function AdminDashboardPage() {
             </div>
           ) : (
             <div className="h-[300px] flex items-center justify-center text-on-surface-variant">
-              {topProducts ? 'No products sold yet' : 'Loading...'}
+              No products sold yet
             </div>
           )}
         </div>
@@ -146,7 +179,11 @@ export default function AdminDashboardPage() {
       {/* Recent Orders */}
       <div className="bg-white rounded-xl border border-surface-container p-6">
         <h2 className="text-headline-md text-on-surface mb-4">Recent Orders</h2>
-        {recentOrders && recentOrders.length > 0 ? (
+        {ordersLoading ? (
+          <div className="py-12 flex items-center justify-center">
+            <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : recentOrders && recentOrders.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -209,9 +246,7 @@ export default function AdminDashboardPage() {
             </table>
           </div>
         ) : (
-          <div className="py-12 text-center text-on-surface-variant">
-            {recentOrders ? 'No orders yet' : 'Loading...'}
-          </div>
+          <div className="py-12 text-center text-on-surface-variant">No orders yet</div>
         )}
       </div>
     </div>

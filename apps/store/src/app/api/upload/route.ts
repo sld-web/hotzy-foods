@@ -1,11 +1,35 @@
 import { NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
+import jwt from 'jsonwebtoken';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 const MAX_SIZE = 5 * 1024 * 1024;
 
+function getJwtSecret(): string {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('JWT_SECRET environment variable is required');
+  }
+  return secret;
+}
+
 export async function POST(request: Request) {
+  const JWT_SECRET = getJwtSecret();
+  const authHeader = request.headers.get('authorization');
+  const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
+  if (!token) {
+    return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+  }
+  try {
+    const payload = jwt.verify(token, JWT_SECRET) as { type?: string };
+    if (payload.type !== 'admin') {
+      return NextResponse.json({ error: 'Admin authentication required' }, { status: 403 });
+    }
+  } catch {
+    return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+  }
+
   const formData = await request.formData();
   const file = formData.get('file') as File | null;
 

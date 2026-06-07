@@ -4,15 +4,19 @@ export const promoTypeEnum = z.enum(['PERCENTAGE', 'FREE_SHIPPING', 'FIXED_AMOUN
 export const promoStatusEnum = z.enum(['ACTIVE', 'SCHEDULED', 'EXPIRED']);
 
 export const createPromoSchema = z.object({
-  code: z.string().min(1).max(50).transform((v) => v.toUpperCase()),
+  code: z
+    .string()
+    .min(1)
+    .max(50)
+    .transform((v) => v.toUpperCase()),
   type: promoTypeEnum,
   value: z.number().positive(),
   minOrderAmount: z.number().min(0).default(0),
   maxUses: z.number().int().positive().optional(),
   maxPerUser: z.number().int().positive().default(1),
   status: promoStatusEnum.default('ACTIVE'),
-  startsAt: z.string().datetime().optional(),
-  expiresAt: z.string().datetime().optional(),
+  startsAt: z.string().optional(),
+  expiresAt: z.string().optional(),
   description: z.string().optional(),
 });
 

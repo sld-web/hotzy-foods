@@ -4,26 +4,20 @@ import { prisma } from '@hotzy/database';
 import { createOrderSchema } from '@hotzy/validators';
 
 const MAX_QUANTITY = 99;
-const FREE_SHIPPING_THRESHOLD = 5000;
-const STANDARD_SHIPPING_COST = 350;
 
 function generateOrderNumber(): string {
   const ts = Date.now().toString(36).toUpperCase();
-  const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+  const rand = crypto.randomUUID().substring(0, 8).toUpperCase();
   return `HZ-${ts}-${rand}`;
 }
 
 export const orderRouter = router({
   create: publicProcedure.input(createOrderSchema).mutation(async ({ input, ctx }) => {
     const { items, promoCode, customerEmail, customerName, ...shipping } = input;
+    const userAgent = ctx.req?.headers?.get('user-agent') || null;
 
-    // H-07: If authenticated, order email must match their account
-    if (ctx.customer && customerEmail && customerEmail !== ctx.customer.email) {
-      throw new TRPCError({
-        code: 'BAD_REQUEST',
-        message: 'Email must match your account email',
-      });
-    }
+    // H-07: If authenticated, force their email
+    const effectiveEmail = ctx.customer ? ctx.customer.email : customerEmail?.toLowerCase();
 
     // M-12: Validate max quantity
     for (const item of items) {
@@ -37,6 +31,12 @@ export const orderRouter = router({
 
     // C-02: Fetch products from DB to verify prices and check stock
     const productIds = [...new Set(items.map((i) => i.productId))];
+    if (productIds.length !== items.length) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: 'Duplicate products in order',
+      });
+    }
     const dbProducts = await prisma.product.findMany({
       where: { id: { in: productIds } },
     });
@@ -70,7 +70,15 @@ export const orderRouter = router({
       subtotal += dbPrice * item.quantity;
     }
 
-    const shippingCost = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : STANDARD_SHIPPING_COST;
+    // Read shipping config from DB settings (live config, not hardcoded)
+    const siteSettings = await prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
+    const freeShippingThreshold = siteSettings?.freeShippingThreshold
+      ? Number(siteSettings.freeShippingThreshold)
+      : 5000;
+    const standardShippingCost = siteSettings?.shippingBase
+      ? Number(siteSettings.shippingBase)
+      : 350;
+    const shippingCost = subtotal >= freeShippingThreshold ? 0 : standardShippingCost;
     let discountAmount = 0;
     let freeShipping = false;
     let promoCodeId: string | undefined;
@@ -110,9 +118,9 @@ export const orderRouter = router({
 
       promoCodeId = promo.id;
       if (promo.type === 'PERCENTAGE') {
-        discountAmount = (subtotal * Number(promo.value)) / 100;
+        discountAmount = Math.min((subtotal * Number(promo.value)) / 100, subtotal);
       } else if (promo.type === 'FIXED_AMOUNT') {
-        discountAmount = Number(promo.value);
+        discountAmount = Math.min(Number(promo.value), subtotal);
       } else if (promo.type === 'FREE_SHIPPING') {
         freeShipping = true;
       }
@@ -121,80 +129,125 @@ export const orderRouter = router({
     const finalShippingCost = freeShipping ? 0 : shippingCost;
     const total = subtotal - discountAmount + finalShippingCost;
 
-    // C-05: Wrap everything in a transaction
-    const order = await prisma.$transaction(async (tx) => {
-      // Decrement stock
-      for (const item of items) {
-        await tx.product.update({
-          where: { id: item.productId },
-          data: { stockLevel: { decrement: item.quantity } },
-        });
-      }
+    // C-05: Wrap everything in a serializable transaction with retry for collisions
+    const MAX_RETRIES = 3;
+    for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+      try {
+        const order = await prisma.$transaction(
+          async (tx) => {
+            // Decrement stock
+            for (const item of items) {
+              await tx.product.update({
+                where: { id: item.productId },
+                data: { stockLevel: { decrement: item.quantity } },
+              });
+            }
 
-      // Increment promo usage
-      if (promoCodeId) {
-        await tx.promoCode.update({
-          where: { id: promoCodeId },
-          data: { currentUses: { increment: 1 } },
-        });
-      }
+            // Customer upsert (need customerId before promo checks)
+            let customerId: string | undefined;
+            if (ctx.customer) {
+              customerId = ctx.customer.id;
+            } else if (effectiveEmail) {
+              const customer = await tx.customer.upsert({
+                where: { email: effectiveEmail },
+                update: {},
+                create: {
+                  email: effectiveEmail,
+                  name: customerName || null,
+                  isGuest: true,
+                },
+              });
+              customerId = customer.id;
+            }
 
-      // Customer upsert
-      let customerId: string | undefined;
-      if (customerEmail) {
-        const customer = await tx.customer.upsert({
-          where: { email: customerEmail },
-          update: {},
-          create: {
-            email: customerEmail,
-            name: customerName || null,
-            isGuest: !input.customerName,
+            // Promo usage validation and increment (inside tx for race condition safety)
+            if (promoCodeId) {
+              const currentPromo = await tx.promoCode.findUnique({ where: { id: promoCodeId } });
+              if (!currentPromo) {
+                throw new TRPCError({ code: 'BAD_REQUEST', message: 'Promo code not found' });
+              }
+              if (
+                currentPromo.maxUses !== null &&
+                currentPromo.currentUses >= currentPromo.maxUses
+              ) {
+                throw new TRPCError({
+                  code: 'BAD_REQUEST',
+                  message: 'Promo code has reached maximum uses',
+                });
+              }
+              if (currentPromo.maxPerUser !== null && customerId) {
+                const existingUsage = await tx.order.count({
+                  where: { promoCodeId, customerId },
+                });
+                if (existingUsage >= currentPromo.maxPerUser) {
+                  throw new TRPCError({
+                    code: 'BAD_REQUEST',
+                    message: 'You have already used this promo code',
+                  });
+                }
+              }
+              await tx.promoCode.update({
+                where: { id: promoCodeId },
+                data: { currentUses: { increment: 1 } },
+              });
+            }
+
+            // Create order
+            const order = await tx.order.create({
+              data: {
+                orderNumber: generateOrderNumber(),
+                customerId,
+                subtotal,
+                shippingCost: finalShippingCost,
+                tax: 0,
+                total,
+                promoCodeId,
+                discountAmount,
+                userAgent,
+                ...shipping,
+                items: {
+                  create: items.map((item) => {
+                    const dbPrice = Number(productMap.get(item.productId)!.price);
+                    return {
+                      productId: item.productId,
+                      quantity: item.quantity,
+                      unitPrice: dbPrice,
+                      subtotal: dbPrice * item.quantity,
+                    };
+                  }),
+                },
+              },
+              include: { items: { include: { product: true } } },
+            });
+
+            // Update customer totals
+            if (customerId) {
+              await tx.customer.update({
+                where: { id: customerId },
+                data: {
+                  totalOrders: { increment: 1 },
+                  totalSpent: { increment: total },
+                },
+              });
+            }
+
+            return order;
           },
-        });
-        customerId = customer.id;
+          { isolationLevel: 'Serializable' },
+        );
+
+        return order;
+      } catch (error: unknown) {
+        const prismaError = error as { code?: string };
+        if (prismaError.code === 'P2002' || prismaError.code === 'P2034') {
+          if (attempt < MAX_RETRIES - 1) continue;
+        }
+        throw error;
       }
-
-      // Create order
-      const order = await tx.order.create({
-        data: {
-          orderNumber: generateOrderNumber(),
-          customerId,
-          subtotal,
-          shippingCost: finalShippingCost,
-          tax: 0,
-          total,
-          promoCodeId,
-          discountAmount,
-          ...shipping,
-          items: {
-            create: items.map((item) => {
-              const dbPrice = Number(productMap.get(item.productId)!.price);
-              return {
-                productId: item.productId,
-                quantity: item.quantity,
-                unitPrice: dbPrice,
-                subtotal: dbPrice * item.quantity,
-              };
-            }),
-          },
-        },
-        include: { items: { include: { product: true } } },
-      });
-
-      // Update customer totals
-      if (customerId) {
-        await tx.customer.update({
-          where: { id: customerId },
-          data: {
-            totalOrders: { increment: 1 },
-            totalSpent: { increment: total },
-          },
-        });
-      }
-
-      return order;
+    }
+    throw new TRPCError({
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Order could not be processed. Please try again.',
     });
-
-    return order;
   }),
 });
