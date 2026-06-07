@@ -16,6 +16,7 @@ async function main() {
   await prisma.teamMember.deleteMany();
   await prisma.address.deleteMany();
   await prisma.customer.deleteMany();
+  await prisma.user.deleteMany();
   console.log('  ✓ Cleared existing data');
 
   // ─── Admin User ───
@@ -25,7 +26,7 @@ async function main() {
     update: {},
     create: {
       name: 'Admin',
-      email: 'admin@hotzyfoods.com',
+      email: 'admin.hotsy@cnl.com',
       passwordHash: adminPassword,
       role: 'SUPER_ADMIN',
     },

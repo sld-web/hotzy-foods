@@ -17,7 +17,8 @@
   "devDependencies": {
     "prettier": "^3.8.3",
     "turbo": "^2.9.16",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vercel": "^54.9.1"
   },
   "packageManager": "pnpm@9.1.0",
   "engines": {
